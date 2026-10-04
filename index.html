@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3R5 ProMaster - Streaming, Cámaras & Eventos</title>
     <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, organización de eventos e itinerarios y asistencia técnica.">
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
-        body { background-color: #0f172a; color: #f8fafc; }
+        body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
         .bg-solid-card { background-color: #1e293b; border: 1px solid #334155; }
         .bg-solid-card-hover:hover {
             background-color: #334155;
@@ -23,6 +26,32 @@
             border-top: 1px solid #334155;
         }
         .cookie-banner.show { transform: translateY(0); }
+        
+        /* Pulse Animation for Live Indicator */
+        @keyframes pulse-live {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 231, 1, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 231, 1, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 231, 1, 0); }
+        }
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #00e701;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-live 1.8s infinite;
+        }
+        
+        /* Telemetry Card Glow Effect */
+        .metric-card {
+            background-color: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+        .metric-card:hover {
+            border-color: rgba(0, 231, 1, 0.4);
+            box-shadow: 0 0 12px rgba(0, 231, 1, 0.1);
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased">
@@ -48,7 +77,7 @@
                     <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
                 </div>
 
-                <button id="mobile-menu-btn" class="lg:hidden text-slate-400 hover:text-white p-2">
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-400 hover:text-white p-2" aria-label="Abrir menú">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -236,28 +265,183 @@
     <!-- 5. MONITOREO KICK IRL -->
     <section id="monitoreo-irl" class="py-16 bg-[#0b0e14] border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col items-center mb-8">
-                <h2 class="text-3xl font-bold text-[#00e701] tracking-widest uppercase mb-2">3R5 Pro Master - Canal IRL</h2>
-                <p class="text-slate-400 text-sm">Transmisión en vivo de adrianozendejas32</p>
+            <div class="flex flex-col items-center mb-8 text-center">
+                <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+                    <i class="fas fa-tower-cell"></i>
+                    <span>Telemetría de Señal en Directo</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#00e701] tracking-wider uppercase mb-2">3R5 Pro Master - Canal IRL</h2>
+                <p class="text-slate-400 text-sm md:text-base">Monitoreo de señal, calidad e infraestructura en tiempo real • <span class="text-slate-200 font-semibold">adrianozendejas32</span></p>
             </div>
             
-            <div class="grid lg:grid-cols-[1fr_340px] gap-6">
-                <!-- Reproductor de Kick -->
-                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800">
-                    <iframe 
-                        src="https://player.kick.com/adrianozendejas32" 
-                        allowfullscreen="true"
-                        class="w-full h-full border-none">
-                    </iframe>
+            <div class="grid lg:grid-cols-[1fr_340px] gap-6 items-start">
+                
+                <!-- Columna Izquierda: Telemetría de Calidad + Reproductor Kick -->
+                <div class="flex flex-col space-y-4 w-full">
+
+                    <!-- PANEL DE CALIDAD DE VIDEO Y METRICAS EN TIEMPO REAL -->
+                    <div class="bg-[#141824] border border-slate-800 rounded-xl p-4 md:p-5 shadow-2xl shadow-emerald-950/20">
+                        
+                        <!-- Header del Panel -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-800">
+                            <div class="flex items-center space-x-3">
+                                <!-- Badge EN VIVO -->
+                                <div class="flex items-center space-x-2 bg-emerald-950/80 border border-[#00e701]/40 px-3 py-1 rounded-md">
+                                    <span class="live-dot"></span>
+                                    <span class="text-xs font-bold text-[#00e701] tracking-wide">EN VIVO</span>
+                                </div>
+                                <span class="text-sm font-semibold text-white tracking-wide">Panel de Calidad y Telemetría</span>
+                            </div>
+                            
+                            <!-- Badges de tecnología rápida -->
+                            <div class="flex items-center space-x-2 text-xs">
+                                <span class="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-2.5 py-1 rounded-md font-mono">
+                                    <i class="fas fa-server text-xs mr-1"></i>SRT Ultra Low Latency
+                                </span>
+                                <span class="hidden sm:inline-block bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-md font-mono">
+                                    Server: Primary-MX1
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Grid de Métrica de Calidad -->
+                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            
+                            <!-- 1. Estado y Servidor -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Estado / Servidor</span>
+                                    <i class="fas fa-signal text-[#00e701]"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white flex items-center gap-1.5">
+                                        <span class="text-[#00e701]">EN VIVO</span>
+                                        <span class="text-slate-500 text-xs font-normal">(1.1s)</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-400 truncate">SRT Ultra baja latencia</p>
+                                </div>
+                            </div>
+
+                            <!-- 2. Resolución y Calidad -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Resolución</span>
+                                    <i class="fas fa-tv text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white">1080p60</div>
+                                    <p class="text-[11px] text-blue-400 font-medium">Full HD Alta Definición</p>
+                                </div>
+                            </div>
+
+                            <!-- 3. Bitrate Variable -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Tasa de Bits</span>
+                                    <i class="fas fa-tachometer-alt text-[#00e701]"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white font-mono flex items-center gap-1">
+                                        <span id="live-bitrate">6,500</span> <span class="text-xs text-slate-400">Kbps</span>
+                                    </div>
+                                    <p class="text-[11px] text-emerald-400">Bitrate Variable / Estable</p>
+                                </div>
+                            </div>
+
+                            <!-- 4. Tasa de Cuadros -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Tasa de Cuadros</span>
+                                    <i class="fas fa-film text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white font-mono flex items-center gap-1">
+                                        <span id="live-fps">60.0</span> <span class="text-xs text-slate-400">FPS</span>
+                                    </div>
+                                    <p class="text-[11px] text-purple-300">Fluidez 0% Caídas</p>
+                                </div>
+                            </div>
+
+                            <!-- 5. Códec y Procesamiento -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Códec Video</span>
+                                    <i class="fas fa-microchip text-amber-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white">H.264</div>
+                                    <p class="text-[11px] text-amber-300">NVENC Hardware Encod.</p>
+                                </div>
+                            </div>
+
+                            <!-- 6. Latencia Medida -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Latencia Transmisión</span>
+                                    <i class="fas fa-clock text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white font-mono flex items-center gap-1">
+                                        <span id="live-latency">1.10</span> <span class="text-xs text-slate-400">seg</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-400">Sincronía SRT Directa</p>
+                                </div>
+                            </div>
+
+                            <!-- 7. Conexión de Red -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Conexión / Red</span>
+                                    <i class="fas fa-network-wired text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-cyan-400">Bonding Multi-SIM</div>
+                                    <p class="text-[11px] text-slate-300">Redundancia 4G/5G Activa</p>
+                                </div>
+                            </div>
+
+                            <!-- 8. Audio Stream -->
+                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
+                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+                                    <span class="font-medium">Códec Audio</span>
+                                    <i class="fas fa-volume-up text-pink-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white">Stereo 48 kHz</div>
+                                    <p class="text-[11px] text-pink-300">320 kbps High Fidelity</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Reproductor de Kick -->
+                    <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800 relative">
+                        <iframe 
+                            src="https://player.kick.com/adrianozendejas32" 
+                            allowfullscreen="true"
+                            title="Reproductor en vivo de Kick - adrianozendejas32"
+                            class="w-full h-full border-none">
+                        </iframe>
+                    </div>
+
                 </div>
 
                 <!-- Chat en vivo de Kick -->
-                <div class="w-full min-h-[480px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800">
+                <div class="w-full h-[520px] lg:h-[650px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800 shadow-xl">
+                    <div class="bg-[#1a2030] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                            <i class="fas fa-[#00e701] fa-comments text-[#00e701]"></i> Chat en Vivo Kick
+                        </span>
+                        <span class="text-[10px] bg-[#00e701]/20 text-[#00e701] border border-[#00e701]/30 px-2 py-0.5 rounded font-mono">Oficial</span>
+                    </div>
                     <iframe 
                         src="https://kick.com/popout/adrianozendejas32/chat"
-                        class="w-full h-full border-none">
+                        title="Chat en vivo de Kick - adrianozendejas32"
+                        class="w-full h-[calc(100%-45px)] border-none">
                     </iframe>
                 </div>
+
             </div>
         </div>
     </section>
@@ -319,9 +503,12 @@
     </div>
 
     <script>
+        // Mobile menu toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
+
+        // Smooth scroll handler
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if(el) {
@@ -329,12 +516,15 @@
                 document.getElementById('mobile-menu').classList.add('hidden');
             }
         }
+
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 scrollToSection(this.getAttribute('href').substring(1));
             });
         });
+
+        // Form submission demo
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const msg = document.getElementById('form-msg');
@@ -342,17 +532,46 @@
             this.reset();
             setTimeout(() => msg.classList.add('hidden'), 4000);
         });
+
+        // Cookie management
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
             document.getElementById('cookie-banner').classList.remove('show');
         }
+
         function rejectCookies() {
             localStorage.setItem('cookieConsent', 'rejected');
             document.getElementById('cookie-banner').classList.remove('show');
         }
+
         if (!localStorage.getItem('cookieConsent')) {
             setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
         }
+
+        // Telemetry Micro-fluctuations Simulation (Bitrate, Latency & FPS live telemetry feed)
+        setInterval(() => {
+            const bitrateEl = document.getElementById('live-bitrate');
+            const fpsEl = document.getElementById('live-fps');
+            const latencyEl = document.getElementById('live-latency');
+
+            if (bitrateEl) {
+                // Bitrate fluctuation around 6,500 Kbps (6,440 - 6,560)
+                const randomBitrate = Math.floor(6500 + (Math.random() * 120 - 60));
+                bitrateEl.textContent = randomBitrate.toLocaleString();
+            }
+
+            if (fpsEl) {
+                // Slight FPS variance 59.8 - 60.0
+                const randomFps = (59.8 + Math.random() * 0.2).toFixed(1);
+                fpsEl.textContent = randomFps;
+            }
+
+            if (latencyEl) {
+                // Latency variance 1.05s - 1.15s
+                const randomLatency = (1.08 + (Math.random() * 0.08 - 0.04)).toFixed(2);
+                latencyEl.textContent = randomLatency;
+            }
+        }, 2000);
     </script>
 </body>
 </html>
