@@ -41,6 +41,14 @@
             display: inline-block;
             animation: pulse-live 1.8s infinite;
         }
+
+        .offline-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #64748b;
+            border-radius: 50%;
+            display: inline-block;
+        }
         
         /* Telemetry Card Glow Effect */
         .metric-card {
@@ -51,6 +59,17 @@
         .metric-card:hover {
             border-color: rgba(0, 231, 1, 0.4);
             box-shadow: 0 0 12px rgba(0, 231, 1, 0.1);
+        }
+
+        /* Streamer Card Active State */
+        .streamer-card {
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .streamer-card.active {
+            border-color: #00e701 !important;
+            background-color: #162032 !important;
+            box-shadow: 0 0 18px rgba(0, 231, 1, 0.2);
         }
     </style>
 </head>
@@ -268,10 +287,15 @@
             <div class="flex flex-col items-center mb-8 text-center">
                 <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
                     <i class="fas fa-tower-cell"></i>
-                    <span>Telemetría de Señal en Directo</span>
+                    <span>TELEMETRÍA DE SEÑAL EN DIRECTO</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#00e701] tracking-wider uppercase mb-2">3R5 Pro Master - Canal IRL</h2>
-                <p class="text-slate-400 text-sm md:text-base">Monitoreo de señal, calidad e infraestructura en tiempo real • <span class="text-slate-200 font-semibold">adrianozendejas32</span></p>
+                <!-- TITULO ACTUALIZADO -->
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#00e701] tracking-wide uppercase mb-2">
+                    Monitoreo de señal DE ADRIANOZENDEJAS32 POR 3R5 PROMASTER.SITE
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base">
+                    Monitoreo de señal, calidad e infraestructura en tiempo real • <span id="active-streamer-display" class="text-slate-200 font-semibold">adrianozendejas32</span>
+                </p>
             </div>
             
             <div class="grid lg:grid-cols-[1fr_340px] gap-6 items-start">
@@ -285,10 +309,10 @@
                         <!-- Header del Panel -->
                         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-800">
                             <div class="flex items-center space-x-3">
-                                <!-- Badge EN VIVO -->
-                                <div class="flex items-center space-x-2 bg-emerald-950/80 border border-[#00e701]/40 px-3 py-1 rounded-md">
-                                    <span class="live-dot"></span>
-                                    <span class="text-xs font-bold text-[#00e701] tracking-wide">EN VIVO</span>
+                                <!-- Badge EN VIVO / ESTADO -->
+                                <div id="live-status-badge" class="flex items-center space-x-2 bg-emerald-950/80 border border-[#00e701]/40 px-3 py-1 rounded-md">
+                                    <span id="live-status-dot" class="live-dot"></span>
+                                    <span id="live-status-text" class="text-xs font-bold text-[#00e701] tracking-wide">EN VIVO</span>
                                 </div>
                                 <span class="text-sm font-semibold text-white tracking-wide">Panel de Calidad y Telemetría</span>
                             </div>
@@ -315,7 +339,7 @@
                                 </div>
                                 <div>
                                     <div class="text-sm font-bold text-white flex items-center gap-1.5">
-                                        <span class="text-[#00e701]">EN VIVO</span>
+                                        <span id="metric-status-val" class="text-[#00e701]">EN VIVO</span>
                                         <span class="text-slate-500 text-xs font-normal">(1.1s)</span>
                                     </div>
                                     <p class="text-[11px] text-slate-400 truncate">SRT Ultra baja latencia</p>
@@ -329,7 +353,7 @@
                                     <i class="fas fa-tv text-blue-400"></i>
                                 </div>
                                 <div>
-                                    <div class="text-sm font-bold text-white">1080p60</div>
+                                    <div id="metric-res-val" class="text-sm font-bold text-white">1080p60</div>
                                     <p class="text-[11px] text-blue-400 font-medium">Full HD Alta Definición</p>
                                 </div>
                             </div>
@@ -418,9 +442,10 @@
                     <!-- Reproductor de Kick -->
                     <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800 relative">
                         <iframe 
+                            id="kick-player-iframe"
                             src="https://player.kick.com/adrianozendejas32" 
                             allowfullscreen="true"
-                            title="Reproductor en vivo de Kick - adrianozendejas32"
+                            title="Reproductor en vivo de Kick"
                             class="w-full h-full border-none">
                         </iframe>
                     </div>
@@ -431,25 +456,136 @@
                 <div class="w-full h-[520px] lg:h-[650px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800 shadow-xl">
                     <div class="bg-[#1a2030] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
                         <span class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fas fa-[#00e701] fa-comments text-[#00e701]"></i> Chat en Vivo Kick
+                            <i class="fas fa-comments text-[#00e701]"></i> Chat en Vivo: <span id="chat-streamer-name" class="text-[#00e701]">adrianozendejas32</span>
                         </span>
                         <span class="text-[10px] bg-[#00e701]/20 text-[#00e701] border border-[#00e701]/30 px-2 py-0.5 rounded font-mono">Oficial</span>
                     </div>
                     <iframe 
+                        id="kick-chat-iframe"
                         src="https://kick.com/popout/adrianozendejas32/chat"
-                        title="Chat en vivo de Kick - adrianozendejas32"
+                        title="Chat en vivo de Kick"
                         class="w-full h-[calc(100%-45px)] border-none">
                     </iframe>
                 </div>
 
             </div>
+
+            <!-- NUEVA SECCIÓN: MÁS STREAMERS / CANALES DE MONITOREO (AGREGACIONES) -->
+            <div class="mt-12 pt-8 border-t border-slate-800/80">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-[#00e701] fa-users text-[#00e701]"></i>
+                            <h3 class="text-xl font-bold text-white">Más Streamers & Canales de Monitoreo</h3>
+                        </div>
+                        <p class="text-slate-400 text-xs md:text-sm mt-1">Selecciona una señal para cambiar la transmisión activa o solicita la integración de un nuevo canal.</p>
+                    </div>
+                    <button onclick="requestNewStreamer()" class="bg-[#00e701] hover:bg-[#00c401] text-black font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg transition flex items-center space-x-2 shadow-lg shadow-[#00e701]/20">
+                        <i class="fas fa-plus"></i>
+                        <span>Solicitar Integración de Canal</span>
+                    </button>
+                </div>
+
+                <!-- Grid de Tarjetas de Streamers y Canales -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    
+                    <!-- 1. Streamer Principal: Adriano Zendejas (Activo) -->
+                    <div id="card-adrianozendejas32" onclick="switchStreamer('adrianozendejas32', 'Adriano Zendejas', true, '1080p60')" class="streamer-card active bg-[#141824] border border-slate-700 p-4 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-[#00e701]/20 text-[#00e701] border border-[#00e701]/30 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5">
+                                    <span class="live-dot"></span> EN VIVO
+                                </span>
+                                <span class="text-[11px] text-slate-400 font-mono"><i class="fas fa-video text-blue-400 mr-1"></i>IRL Mochila</span>
+                            </div>
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-[#00e701] flex items-center justify-center text-[#00e701] font-bold text-lg">
+                                    A
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 class="font-bold text-white text-sm truncate">adrianozendejas32</h4>
+                                    <p class="text-xs text-slate-400 truncate">Canal Principal IRL</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span>Res: <strong class="text-slate-200">1080p60</strong></span>
+                            <span class="text-[#00e701] font-medium flex items-center gap-1"><i class="fas fa-circle-check"></i> Activo</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Canal Secundario Demostración / Cámara IRL 2 -->
+                    <div id="card-canal2_irl" onclick="switchStreamer('kick_irl_cam2', 'Cámara Respaldo Evento', false, '720p60')" class="streamer-card bg-[#141824] border border-slate-800 p-4 rounded-xl flex flex-col justify-between hover:border-slate-600">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-slate-800 text-slate-400 border border-slate-700 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5">
+                                    <span class="offline-dot"></span> STANDBY
+                                </span>
+                                <span class="text-[11px] text-slate-400 font-mono"><i class="fas fa-camera text-purple-400 mr-1"></i>Cam Backstage</span>
+                            </div>
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-purple-400 font-bold text-lg">
+                                    <i class="fas fa-camera-rotate text-sm"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 class="font-bold text-white text-sm truncate">Cámara #2 - Eventos</h4>
+                                    <p class="text-xs text-slate-400 truncate">Señal Multicámara 3R5</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span>Res: <strong class="text-slate-200">1080p</strong></span>
+                            <span class="text-slate-500">Haz clic para probar</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Reserva Próximo Streamer Integrado -->
+                    <div id="card-next_streamer" onclick="switchStreamer('promaster_stream3', 'Canal Reservado Pro', false, '1080p60')" class="streamer-card bg-[#141824] border border-slate-800 p-4 rounded-xl flex flex-col justify-between hover:border-slate-600">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-950/80 text-blue-400 border border-blue-800/40 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5">
+                                    <i class="fas fa-clock text-[9px]"></i> PRÓXIMO
+                                </span>
+                                <span class="text-[11px] text-slate-400 font-mono"><i class="fas fa-shield text-blue-400 mr-1"></i>3R5 Partner</span>
+                            </div>
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 font-bold text-lg">
+                                    <i class="fas fa-user-plus text-sm"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 class="font-bold text-white text-sm truncate">Próximo Streamer</h4>
+                                    <p class="text-xs text-slate-400 truncate">Espacio Disponible</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span>Mochila: <strong class="text-slate-200">Belabox 5G</strong></span>
+                            <span class="text-blue-400">Reservar slot</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Tarjeta Botón "Añadir Nuevo Streamer / Canal" -->
+                    <div onclick="requestNewStreamer()" class="streamer-card bg-slate-900/60 border border-dashed border-[#00e701]/40 p-4 rounded-xl flex flex-col justify-center items-center text-center hover:bg-[#00e701]/5 hover:border-[#00e701] transition group cursor-pointer">
+                        <div class="w-12 h-12 rounded-full bg-[#00e701]/10 text-[#00e701] border border-[#00e701]/30 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                            <i class="fas fa-plus text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-sm mb-1">¿Eres Streamer IRL?</h4>
+                        <p class="text-slate-400 text-xs mb-3">Integra tu canal en el panel de telemetría de 3R5 PROMASTER</p>
+                        <span class="text-xs text-[#00e701] font-semibold underline underline-offset-4">Solicitar enlace aquí &rarr;</span>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- Contacto -->
     <section id="contacto" class="py-16 bg-slate-900">
         <div class="max-w-4xl mx-auto px-4">
-            <h3 class="text-3xl font-bold text-center mb-10 text-white">Contacto y Solicitudes</h3>
+            <h3 class="text-3xl font-bold text-center mb-2 text-white">Contacto y Solicitudes</h3>
+            <p class="text-center text-slate-400 text-sm mb-10">Solicita soporte técnico, cotizaciones para eventos o añade tu canal al panel de monitoreo.</p>
+            
             <form id="contact-form" class="space-y-4 max-w-xl mx-auto">
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Nombre</label>
@@ -461,20 +597,20 @@
                 </div>
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Servicio Requerido</label>
-                    <select class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                    <select id="contact-service-select" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
                         <option>Streaming IRL</option>
                         <option>Grabación y Cámaras</option>
                         <option>Organización y Eventos</option>
                         <option>Asistencia Técnica / PC</option>
-                        <option>Monitoreo Kick</option>
+                        <option value="Monitoreo Kick / Multi-Streamer">Monitoreo Kick / Integración de Streamer</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-slate-300 text-sm mb-1">Mensaje</label>
-                    <textarea required rows="4" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                    <label class="block text-slate-300 text-sm mb-1">Mensaje o Nombre de Usuario Kick</label>
+                    <textarea id="contact-message-input" required rows="4" placeholder="Indica los detalles de tu transmisión o el nombre de tu canal de Kick..." class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
-                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente.</div>
+                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente. Nos pondremos en contacto pronto.</div>
             </form>
         </div>
     </section>
@@ -546,6 +682,83 @@
 
         if (!localStorage.getItem('cookieConsent')) {
             setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
+        }
+
+        // Dynamic Streamer Switcher function
+        function switchStreamer(username, displayName, isLive = true, resolution = '1080p60') {
+            const playerIframe = document.getElementById('kick-player-iframe');
+            const chatIframe = document.getElementById('kick-chat-iframe');
+            const displayUsername = document.getElementById('active-streamer-display');
+            const chatStreamerName = document.getElementById('chat-streamer-name');
+            const resVal = document.getElementById('metric-res-val');
+            
+            // Status Badges
+            const liveBadge = document.getElementById('live-status-badge');
+            const liveDot = document.getElementById('live-status-dot');
+            const liveText = document.getElementById('live-status-text');
+            const metricStatusVal = document.getElementById('metric-status-val');
+
+            // Update IFrames
+            if (playerIframe) {
+                playerIframe.src = `https://player.kick.com/${username}`;
+            }
+            if (chatIframe) {
+                chatIframe.src = `https://kick.com/popout/${username}/chat`;
+            }
+
+            // Update Labels
+            if (displayUsername) displayUsername.textContent = username;
+            if (chatStreamerName) chatStreamerName.textContent = username;
+            if (resVal) resVal.textContent = resolution;
+
+            // Update Live UI status
+            if (isLive) {
+                if (liveBadge) liveBadge.className = "flex items-center space-x-2 bg-emerald-950/80 border border-[#00e701]/40 px-3 py-1 rounded-md";
+                if (liveDot) liveDot.className = "live-dot";
+                if (liveText) {
+                    liveText.textContent = "EN VIVO";
+                    liveText.className = "text-xs font-bold text-[#00e701] tracking-wide";
+                }
+                if (metricStatusVal) {
+                    metricStatusVal.textContent = "EN VIVO";
+                    metricStatusVal.className = "text-[#00e701]";
+                }
+            } else {
+                if (liveBadge) liveBadge.className = "flex items-center space-x-2 bg-slate-800 border border-slate-700 px-3 py-1 rounded-md";
+                if (liveDot) liveDot.className = "offline-dot";
+                if (liveText) {
+                    liveText.textContent = "STANDBY";
+                    liveText.className = "text-xs font-bold text-slate-400 tracking-wide";
+                }
+                if (metricStatusVal) {
+                    metricStatusVal.textContent = "STANDBY";
+                    metricStatusVal.className = "text-slate-400";
+                }
+            }
+
+            // Highlight Active Card
+            document.querySelectorAll('.streamer-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            const activeCard = document.getElementById(`card-${username}`);
+            if (activeCard) {
+                activeCard.classList.add('active');
+            }
+        }
+
+        // Function to scroll to contact and prepare request for new streamer
+        function requestNewStreamer() {
+            scrollToSection('contacto');
+            const selectEl = document.getElementById('contact-service-select');
+            const messageEl = document.getElementById('contact-message-input');
+            
+            if (selectEl) {
+                selectEl.value = "Monitoreo Kick / Multi-Streamer";
+            }
+            if (messageEl) {
+                messageEl.value = "Hola 3R5 ProMaster, me gustaría solicitar la integración de mi canal de Kick a la plataforma de monitoreo. Canal: @";
+                messageEl.focus();
+            }
         }
 
         // Telemetry Micro-fluctuations Simulation (Bitrate, Latency & FPS live telemetry feed)
