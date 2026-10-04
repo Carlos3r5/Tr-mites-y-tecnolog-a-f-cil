@@ -44,7 +44,6 @@
                     <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">2. Cámaras & Grabación</a>
                     <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">3. Eventos & Traslados</a>
                     <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">4. Asistencia Técnica</a>
-                    <a href="#monitoreo-irl" class="nav-link hover:text-blue-400 transition text-[#00e701] font-bold">5. Monitoreo Kick</a>
                     <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
                 </div>
 
@@ -59,22 +58,21 @@
                 <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">2. Cámaras & Grabación</a>
                 <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">3. Eventos & Traslados</a>
                 <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">4. Asistencia Técnica</a>
-                <a href="#monitoreo-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">5. Monitoreo Kick</a>
                 <a href="#contacto" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold">Contacto</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section id="inicio" class="bg-slate-950 py-20 border-b border-slate-800">
+    <section id="inicio" class="bg-slate-950 py-16 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6 mt-4">
                 Infraestructura para <br><span class="text-blue-500">Streaming IRL y Eventos en Vivo</span>
             </h1>
             <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-10">
                 Soluciones integrales de transmisión en directo, conexión multicámara, coordinación de eventos e itinerarios de traslado.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-14">
                 <button onclick="scrollToSection('streaming-irl')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition shadow-lg shadow-blue-600/30">
                     Ver Servicios
                 </button>
@@ -82,6 +80,36 @@
                     Contactar
                 </button>
             </div>
+
+            <!-- NUEVO: Indicadores Numéricos con Colores e Iconos -->
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Calidad (Cámara) -->
+                <div class="flex items-center justify-center space-x-4 bg-slate-900 border border-blue-500/30 p-5 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                    <i class="fas fa-video text-3xl text-blue-500"></i>
+                    <div class="text-left">
+                        <div class="text-2xl font-black text-blue-400">1080p <span class="text-lg">60fps</span></div>
+                        <div class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Calidad de Video</div>
+                    </div>
+                </div>
+                <!-- Audio (Bocina) -->
+                <div class="flex items-center justify-center space-x-4 bg-slate-900 border border-purple-500/30 p-5 rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+                    <i class="fas fa-volume-up text-3xl text-purple-500"></i>
+                    <div class="text-left">
+                        <div class="text-2xl font-black text-purple-400">320 <span class="text-lg">kbps</span></div>
+                        <div class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Audio Digital</div>
+                    </div>
+                </div>
+                <!-- Red (Antena) -->
+                <div class="flex items-center justify-center space-x-4 bg-slate-900 border border-emerald-500/30 p-5 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                    <i class="fas fa-satellite-dish text-3xl text-emerald-500"></i>
+                    <div class="text-left">
+                        <div class="text-2xl font-black text-emerald-400">99.9<span class="text-lg">%</span></div>
+                        <div class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Red y Estabilidad</div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN: Indicadores -->
+
         </div>
     </section>
 
@@ -196,7 +224,6 @@
                 </div>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- Puntos Originales -->
                 <div class="bg-solid-card p-6 rounded-xl">
                     <i class="fas fa-user-shield text-2xl text-emerald-400 mb-3"></i>
                     <h4 class="text-lg font-bold text-white mb-2">Asistencia en Vivo</h4>
@@ -211,52 +238,6 @@
                     <i class="fas fa-sync text-2xl text-purple-400 mb-3"></i>
                     <h4 class="text-lg font-bold text-white mb-2">Redundancia de Señal</h4>
                     <p class="text-slate-400 text-sm">Configuración de enlaces de respaldo para evitar cortes por caída de internet local.</p>
-                </div>
-
-                <!-- Nuevos Puntos Integrados -->
-                <div class="bg-solid-card p-6 rounded-xl">
-                    <i class="fas fa-laptop-code text-2xl text-teal-400 mb-3"></i>
-                    <h4 class="text-lg font-bold text-white mb-2">Instalación de Software</h4>
-                    <p class="text-slate-400 text-sm">Instalación limpia de sistemas operativos, suite de oficina, programas de edición y herramientas esenciales de trabajo.</p>
-                </div>
-                <div class="bg-solid-card p-6 rounded-xl">
-                    <i class="fas fa-tools text-2xl text-orange-400 mb-3"></i>
-                    <h4 class="text-lg font-bold text-white mb-2">Diagnóstico de Hardware</h4>
-                    <p class="text-slate-400 text-sm">Revisión exhaustiva de componentes dañados (fuentes, GPUs, memorias RAM, discos) dentro y fuera de la oficina.</p>
-                </div>
-                <div class="bg-solid-card p-6 rounded-xl">
-                    <i class="fas fa-desktop text-2xl text-red-400 mb-3"></i>
-                    <h4 class="text-lg font-bold text-white mb-2">Armado y Asesoría PC</h4>
-                    <p class="text-slate-400 text-sm">Diseño y ensamblaje de equipos a la medida, y consejos tecnológicos básicos para el público en general.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. MONITOREO KICK IRL -->
-    <section id="monitoreo-irl" class="py-16 bg-[#0b0e14] border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col items-center mb-8">
-                <h2 class="text-3xl font-bold text-[#00e701] tracking-widest uppercase mb-2">3R5 Pro Master - Canal IRL</h2>
-                <p class="text-slate-400 text-sm">Transmisión en vivo de adrianozendejas32</p>
-            </div>
-            
-            <div class="grid lg:grid-cols-[1fr_340px] gap-6">
-                <!-- Reproductor de Kick -->
-                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800">
-                    <iframe 
-                        src="https://player.kick.com/adrianozendejas32" 
-                        allowfullscreen="true"
-                        class="w-full h-full border-none">
-                    </iframe>
-                </div>
-
-                <!-- Chat en vivo de Kick -->
-                <div class="w-full min-h-[480px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800">
-                    <iframe 
-                        src="https://kick.com/popout/adrianozendejas32/chat"
-                        class="w-full h-full border-none">
-                    </iframe>
                 </div>
             </div>
         </div>
@@ -281,8 +262,7 @@
                         <option>Streaming IRL</option>
                         <option>Grabación y Cámaras</option>
                         <option>Organización y Eventos</option>
-                        <option>Asistencia Técnica / PC</option>
-                        <option>Monitoreo Kick</option>
+                        <option>Asistencia Técnica</option>
                     </select>
                 </div>
                 <div>
