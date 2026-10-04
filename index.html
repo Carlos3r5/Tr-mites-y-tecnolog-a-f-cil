@@ -1,4 +1,1237 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3R5 ProMaster | Soporte Técnico, Streaming, Redes & Hardware</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --accent: #58a6ff;
+            --accent-green: #2ea043;
+            --text-main: #c9d1d9;
+            --text-heading: #ffffff;
+            --border: #30363d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(22, 27, 34, 0.9);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .btn-header {
+            background-color: var(--accent);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            color: var(--text-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent-green);
+            color: #fff;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .card ul li::before {
+            content: "✓";
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
+        }
+
+        .calculator-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .calculator-section input, .calculator-section select {
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-color);
+            color: var(--text-main);
+            margin: 0.5rem;
+            width: 200px;
+        }
+
+        .calculator-section button {
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent);
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">3R5 PROMASTER</a>
+        <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola,%20necesito%20soporte%20técnico" class="btn-header">Contacto Directo</a>
+    </header>
+
+    <section class="hero">
+        <h1>Soluciones Tecnológicas Integrales</h1>
+        <p>Expertos en streaming profesional, optimización de PC de alto rendimiento, configuración de redes LAN/VLAN y soporte técnico personalizado en directo.</p>
+        <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola,%20quisiera%20una%20consulta%20técnica" class="btn-whatsapp">
+            💬 Hablar con un Técnico Ahora
+        </a>
+    </section>
+
+    <main class="container">
+        <h2 style="text-align: center; color: var(--text-heading);">Nuestros Servicios Especializados</h2>
+        
+        <div class="services-grid">
+            <div class="card">
+                <h3>📹 Streaming & Studio Setup</h3>
+                <ul>
+                    <li>Configuración avanzada de OBS Studio / Streamlabs</li>
+                    <li>Optimización de codificación (NVENC / AV1 / x264)</li>
+                    <li>Configuración de audio multi-canal (Voicemeeter / GoXLR)</li>
+                    <li>Setups Dual-PC y capturadoras de video</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🌐 Redes LAN & VLANs</h3>
+                <ul>
+                    <li>Segmentación de red local por VLANs (Streaming / Trabajo / IoT)</li>
+                    <li>Priorización de tráfico (QoS) para cero pérdida de paquetes</li>
+                    <li>Apertura de puertos y optimización de latencia/ping</li>
+                    <li>Diagnóstico e instalación de switches y routers</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>💻 Optimización & Hardware PC</h3>
+                <ul>
+                    <li>Limpieza de software y optimización de Windows para gaming/stream</li>
+                    <li>Diagnóstico de temperaturas y cuellos de botella</li>
+                    <li>Asesoramiento y armado de PCs a la medida</li>
+                    <li>Mantenimiento preventivo y correctivo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>Calculadora Rápida de Bitrate para Streamers</h3>
+            <p>Ingresa tu velocidad de SUBIDA de internet para calcular el bitrate recomendado para tu emisión:</p>
+            <br>
+            <input type="number" id="uploadSpeed" placeholder="Velocidad Subida (Mbps)">
+            <select id="resolution">
+                <option value="1080p60">1080p 60fps</option>
+                <option value="1080p30">1080p 30fps</option>
+                <option value="720p60">720p 60fps</option>
+            </select>
+            <button onclick="calculateBitrate()">Calcular Bitrate</button>
+            <div class="result" id="calcResult"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 3R5 ProMaster. Todos los derechos reservados.</p>
+        <p>Soporte Técnico Especializado en Redes, Streaming y Hardware.</p>
+    </footer>
+
+    <script>
+        function calculateBitrate() {
+            const upload = parseFloat(document.getElementById('uploadSpeed').value);
+            const resolution = document.getElementById('resolution').value;
+            const resultDiv = document.getElementById('calcResult');
+
+            if (isNaN(upload) || upload <= 0) {
+                resultDiv.innerText = "Por favor ingresa un número de velocidad válido.";
+                return;
+            }
+
+            let maxBitrate = upload * 1000 * 0.7; // Usa el 70% de la banda ancha disponible
+            let recommended = 0;
+
+            if (resolution === "1080p60") recommended = 6000;
+            else if (resolution === "1080p30") recommended = 4500;
+            else if (resolution === "720p60") recommended = 4000;
+
+            if (maxBitrate < recommended) {
+                resultDiv.innerText = `Tu subida permite aprox. ${Math.round(maxBitrate)} Kbps. Se recomienda aumentar el ancho de banda para retransmitir a ${resolution}.`;
+            } else {
+                resultDiv.innerText = `Conexión óptima. Configura tu OBS a ${recommended} Kbps para retransmitir a ${resolution}.`;
+            }
+        }
+    </script>
+</body>
+</html>
+Instrucciones para instalar en 3r5promaster.site
+
+Guarda todo el código anterior en tu computadora en un archivo llamado index.html.
+
+Remplaza el texto TU_NUMERO_AQUI en los enlaces de WhatsApp por tu número de teléfono con la clave de país (ejemplo: 5215512345678).
+
+Ingresa al panel de control de tu hosting (cPanel, Plesk, Hostinger, Vercel, etc.).
+
+Abre el Administrador de Archivos e ingresa a la carpeta public_html (o raíz del dominio).
+
+Sube el archivo index.html allí y guarda los cambios. Tu sitio estará en vivo al entrar a https://3r5promaster.site.
+
+puedes agregar mas puntos al 4to tecnologia y asistencia tambien enfocado a necesidades basicas dentro de la tecnologia instalacion de programas asistencia tecnica en vivio asi como consejos y armado de pc o revision de componentes deñados dentro o fuera de la organizacion
+
+Aquí tienes la sección ampliando la Sección 04: Tecnología y Asistencia con las tarjetas existentes más los nuevos puntos enfocado en necesidades básicas, soporte en vivo, programas, diagnósticos de hardware y consultoría dentro/fuera de la organización.
+
+Código HTML/CSS ampliado para la Sección 04
+HTML
+<!-- SECCIÓN 04: TECNOLOGÍA Y ASISTENCIA -->
+<section class="section-container">
+    <div class="section-badge">SECCIÓN 04</div>
+    <h2 class="section-title">4. Tecnología y Asistencia</h2>
+
+    <div class="cards-grid">
+        <!-- Puntos Existentes -->
+        <div class="card">
+            <div class="card-icon">🎧</div>
+            <h3>Asistencia en Vivo</h3>
+            <p>Soporte remoto y presencial durante toda la emisión para resolver imprevistos técnicos al instante.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>Ajuste OBS & vMix</h3>
+            <p>Optimización de códecs NVENC, escenas, alertas, bitrate dinámico y transiciones profesionales.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>Redundancia de Señal</h3>
+            <p>Configuración de enlaces de respaldo para evitar cortes por caída de internet local.</p>
+        </div>
+
+        <!-- Nuevos Puntos Integrados -->
+        <div class="card">
+            <div class="card-icon">💻</div>
+            <h3>Instalación y Configuración de Software</h3>
+            <p>Instalación limpia de sistemas operativos, suite de oficina, programas de edición y herramientas esenciales de trabajo.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🛠️</div>
+            <h3>Diagnóstico de Componentes Dañados</h3>
+            <p>Revisión exhaustiva de hardware (fuentes, GPUs, memorias RAM, discos) tanto en sitio como en talleres externos.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🖥️</div>
+            <h3>Armado de PC y Asesoría Personalizada</h3>
+            <p>Diseño y ensamblaje de equipos a la medida, selección óptima de componentes según tu presupuesto y necesidades.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏢</div>
+            <h3>Soporte TI Intramuros y Extramuros</h3>
+            <p>Mantenimiento correctivo y preventivo de la infraestructura tecnológica dentro o fuera de tu organización.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💡</div>
+            <h3>Consejos y Asesoría Tecnológica Básica</h3>
+            <p>Resolución de dudas del día a día, recomendaciones de seguridad informática y guías sencillas para el público en general.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Estilos CSS (puedes agregarlos a tu hoja de estilos) -->
+<style>
+    .section-container {
+        padding: 2rem 1rem;
+        background-color: #0b0f19;
+        color: #ffffff;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .section-badge {
+        color: #10b981;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+    }
+
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .card {
+        background-color: #171e2e;
+        border: 1px solid #232d42;
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+        border-color: #3b82f6;
+        transform: translateY(-3px);
+    }
+
+    .card-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        line-height: 1.5;
+    }
+</style>
+Resumen de los nuevos bloques añadidos:
+Instalación y Configuración de Software: Cubre instalación de Windows/Linux, utilitarios, suites de trabajo y programas básicos.
+
+Diagnóstico de Componentes Dañados: Detección de fallas en piezas de hardware dentro y fuera de la oficina/empresa.
+
+Armado de PC y Asesoría Personalizada: Ensamblaje a la medida para streaming, gaming o estaciones de trabajo empresarial.
+
+Soporte TI Intramuros y Extramuros: Atención directa presencial y remota para organizaciones y usuarios particulares.
+
+Consejos y Asesoría Tecnológica Básica: Orientación técnica clara y directa para cualquier consulta o problema informático común.
+
+puedes agregar una pestalla al final de codigo con el nombre de adrianozendejas32- monitoreo streming in kick con este codigo adentro <!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3R5 Pro Master | En Vivo Adriano Zendejas IRL</title>
+
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', Roboto, sans-serif; }
+
+    body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 15px; }
+
+    
+
+    header { text-align: center; margin-bottom: 15px; }
+
+    h1 { font-size: 1.6rem; color: #00e701; text-transform: uppercase; letter-spacing: 1px; }
+
+    p { color: #9ca3af; font-size: 0.9rem; margin-top: 4px; }
+
+    
+
+    .main-container {
+
+      width: 100%;
+
+      max-width: 1400px;
+
+      display: grid;
+
+      grid-template-columns: 1fr 340px;
+
+      gap: 15px;
+
+      margin-top: 10px;
+
+    }
+
+
+
+    @media (max-width: 900px) {
+
+      .main-container { grid-template-columns: 1fr; }
+
+    }
+
+
+
+    .stream-wrapper {
+
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      background: #000;
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      box-shadow: 0 8px 25px rgba(0, 231, 1, 0.15);
+
+      border: 1px solid #1f2937;
+
+    }
+
+
+
+    .chat-wrapper {
+
+      width: 100%;
+
+      height: 100%;
+
+      min-height: 480px;
+
+      background: #141824;
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      border: 1px solid #1f2937;
+
+    }
+
+
+
+    iframe { width: 100%; height: 100%; border: none; }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <header>
+
+    <h1>3R5 Pro Master - Canal IRL</h1>
+
+    <p>Transmisión en vivo de adrianozendejas32</p>
+
+  </header>
+
+
+
+  <div class="main-container">
+
+    <!-- Reproductor de Kick -->
+
+    <div class="stream-wrapper">
+
+      <iframe 
+
+        src="https://player.kick.com/adrianozendejas32" 
+
+        allowfullscreen="true">
+
+      </iframe>
+
+    </div>
+
+
+
+    <!-- Chat en vivo de Kick -->
+
+    <div class="chat-wrapper">
+
+      <iframe 
+
+        src="https://kick.com/popout/adrianozendejas32/chat">
+
+      </iframe>
+
+    </div>
+
+  </div>
+
+
+
+</body>
+
+</html>
+
+Voy a generar el archivo completo index.html que integra la plataforma 3R5 Pro Master con navegación fluida por pestañas, todos los módulos de servicios ampliados y la pestaña de monitoreo en tiempo real de Kick para adrianozendejas32.
+
+3R5 ProMaster
+3 oct, 8:17 p.m.
+damelo pero bien con la estructura que tengo
+
+Prepararé el archivo index.html para que encaje perfectamente con la estructura de tu repositorio de GitHub (incluyendo los enlaces en el pie de página a tus archivos privacidad.html, terminos-de-uso.html y cookies.html).
+
+A continuación, generaré el código completo y unificado para que solo tengas que reemplazar el contenido de tu index.html actual.
+
+3R5 ProMaster
+3 oct, 8:17 p.m.
+He incluido los enlaces directos a privacidad.html, terminos-de-uso.html y cookies.html en el footer, basándome en los archivos de tu repositorio de GitHub. Solo debes copiar el código y hacer un nuevo commit en tu archivo index.html. ¡Quedó listo!
+
+<!DOCTYPE html>
+
+<html lang="es" class="dark">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>3R5 ProMaster - Streaming, Cámaras & Eventos</title>
+
+    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, organización de eventos e itinerarios y asistencia técnica.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+
+        body { background-color: #0f172a; color: #f8fafc; }
+
+        .bg-solid-card { background-color: #1e293b; border: 1px solid #334155; }
+
+        .bg-solid-card-hover:hover {
+
+            background-color: #334155;
+
+            border-color: #3b82f6;
+
+            transform: translateY(-2px);
+
+            transition: all 0.2s ease-in-out;
+
+        }
+
+        .cookie-banner {
+
+            position: fixed; bottom: 0; left: 0; right: 0;
+
+            background: #020617; padding: 1rem; z-index: 1000;
+
+            transform: translateY(100%); transition: transform 0.3s ease;
+
+            border-top: 1px solid #334155;
+
+        }
+
+        .cookie-banner.show { transform: translateY(0); }
+
+    </style>
+
+</head>
+
+<body class="bg-slate-900 text-slate-100 antialiased">
+
+
+
+    <!-- Navegación -->
+
+    <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex items-center justify-between h-16">
+
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('inicio')">
+
+                    <div class="bg-blue-600 p-2 rounded-lg text-white">
+
+                        <i class="fas fa-broadcast-tower text-xl"></i>
+
+                    </div>
+
+                    <span class="text-lg font-bold tracking-wide text-white">3R5 <span class="text-blue-500">PROMASTER</span></span>
+
+                </div>
+
+
+
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+
+                    <a href="#inicio" class="nav-link hover:text-blue-400 transition">Inicio</a>
+
+                    <a href="#streaming-irl" class="nav-link hover:text-blue-400 transition">1. Streaming IRL</a>
+
+                    <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">2. Cámaras & Grabación</a>
+
+                    <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">3. Eventos & Traslados</a>
+
+                    <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">4. Asistencia Técnica</a>
+
+                    <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
+
+                </div>
+
+
+
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-400 hover:text-white p-2">
+
+                    <i class="fas fa-bars text-2xl"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <div id="mobile-menu" class="lg:hidden hidden border-t border-slate-800 py-4 space-y-3">
+
+                <a href="#inicio" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Inicio</a>
+
+                <a href="#streaming-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">1. Streaming IRL</a>
+
+                <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">2. Cámaras & Grabación</a>
+
+                <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">3. Eventos & Traslados</a>
+
+                <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">4. Asistencia Técnica</a>
+
+                <a href="#contacto" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold">Contacto</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Hero -->
+
+    <section id="inicio" class="bg-slate-950 py-20 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4 text-center">
+
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
+
+                Infraestructura para <br><span class="text-blue-500">Streaming IRL y Eventos en Vivo</span>
+
+            </h1>
+
+            <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-10">
+
+                Soluciones integrales de transmisión en directo, conexión multicámara, coordinación de eventos e itinerarios de traslado.
+
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+                <button onclick="scrollToSection('streaming-irl')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition shadow-lg shadow-blue-600/30">
+
+                    Ver Servicios
+
+                </button>
+
+                <button onclick="scrollToSection('contacto')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold px-8 py-3 rounded-lg transition">
+
+                    Contactar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 1. STREAMING IRL -->
+
+    <section id="streaming-irl" class="py-16 bg-slate-900 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-red-600/20 text-red-500 rounded-lg">
+
+                    <i class="fas fa-video text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-red-500 tracking-widest uppercase">Sección 01</span>
+
+                    <h2 class="text-3xl font-bold text-white">1. Streaming IRL</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-wifi text-3xl text-blue-500 mb-4"></i>
+
+                    <h3 class="text-xl font-bold text-white mb-2">Bonding Multi-SIM</h3>
+
+                    <p class="text-slate-400 text-sm">Sistemas Belabox y LiveU con suma de enlaces 4G/5G para transmisiones estables en movimiento.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-server text-3xl text-emerald-500 mb-4"></i>
+
+                    <h3 class="text-xl font-bold text-white mb-2">Servidores SRT/RTMP</h3>
+
+                    <p class="text-slate-400 text-sm">Servidores dedicados de retransmisión con ultra baja latencia para Twitch, Kick y YouTube.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-suitcase-rolling text-3xl text-purple-500 mb-4"></i>
+
+                    <h3 class="text-xl font-bold text-white mb-2">Mochilas IRL Pro</h3>
+
+                    <p class="text-slate-400 text-sm">Equipamiento optimizado con baterías V-Mount, codificadores hardware y ventilación activa.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 2. GRABACIÓN Y CÁMARAS -->
+
+    <section id="grabacion-camaras" class="py-16 bg-slate-950 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-blue-600/20 text-blue-500 rounded-lg">
+
+                    <i class="fas fa-camera text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-blue-500 tracking-widest uppercase">Sección 02</span>
+
+                    <h2 class="text-3xl font-bold text-white">2. Grabación y Conexión de Cámaras</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-plug text-2xl text-blue-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Conexiones HDMI / SDI</h4>
+
+                    <p class="text-slate-400 text-xs">Captura directa de cámaras Mirrorless y profesionales con convertidores sin pérdida.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-layer-group text-2xl text-emerald-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Setups Multicámara</h4>
+
+                    <p class="text-slate-400 text-xs">Integración de switchers físicos (ATEM Mini) y software (vMix / OBS) para directo.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-sliders-h text-2xl text-amber-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Control de Color</h4>
+
+                    <p class="text-slate-400 text-xs">Sincronización de perfiles de color, FPS y temperatura de color en todas las tomas.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-microphone-alt text-2xl text-purple-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Audio Inalámbrico</h4>
+
+                    <p class="text-slate-400 text-xs">Sistemas de micrófonos lavalier y consolas de mezcla multicanal.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 3. ORGANIZACIÓN DE EVENTOS E ITINERARIOS -->
+
+    <section id="eventos-logistica" class="py-16 bg-slate-900 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-purple-600/20 text-purple-400 rounded-lg">
+
+                    <i class="fas fa-map-marked-alt text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-purple-400 tracking-widest uppercase">Sección 03</span>
+
+                    <h2 class="text-3xl font-bold text-white">3. Organización de Eventos e Itinerarios</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-purple-500">
+
+                    <h3 class="text-xl font-bold text-white mb-3">Itinerarios Minuto a Minuto</h3>
+
+                    <p class="text-slate-400 text-sm">Cronogramas de producción para pruebas de transmisión, llamadas a escena y tiempos de transmisión.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-blue-500">
+
+                    <h3 class="text-xl font-bold text-white mb-3">Traslados a la Zona</h3>
+
+                    <p class="text-slate-400 text-sm">Logística de transporte de equipo técnico y revisión previa de redes en recintos y venues.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-emerald-500">
+
+                    <h3 class="text-xl font-bold text-white mb-3">Coordinación de Campo</h3>
+
+                    <p class="text-slate-400 text-sm">Enlace directo con organizadores, personal de seguridad y staff técnico del evento.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 4. TECNOLOGÍA Y ASISTENCIA -->
+
+    <section id="tecnologia-asistencia" class="py-16 bg-slate-950 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-emerald-600/20 text-emerald-400 rounded-lg">
+
+                    <i class="fas fa-headset text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-emerald-400 tracking-widest uppercase">Sección 04</span>
+
+                    <h2 class="text-3xl font-bold text-white">4. Tecnología y Asistencia</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-user-shield text-2xl text-emerald-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Asistencia en Vivo</h4>
+
+                    <p class="text-slate-400 text-sm">Soporte remoto y presencial durante toda la emisión para resolver imprevistos técnicos.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-cogs text-2xl text-blue-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Ajuste OBS & vMix</h4>
+
+                    <p class="text-slate-400 text-sm">Optimización de códecs NVENC, escenas, alertas, bitrate dinámico y transiciones.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-sync text-2xl text-purple-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Redundancia de Señal</h4>
+
+                    <p class="text-slate-400 text-sm">Configuración de enlaces de respaldo para evitar cortes por caída de internet local.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Contacto -->
+
+    <section id="contacto" class="py-16 bg-slate-900">
+
+        <div class="max-w-4xl mx-auto px-4">
+
+            <h3 class="text-3xl font-bold text-center mb-10 text-white">Contacto y Solicitudes</h3>
+
+            <form id="contact-form" class="space-y-4 max-w-xl mx-auto">
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Nombre</label>
+
+                    <input type="text" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Correo Electrónico</label>
+
+                    <input type="email" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Servicio Requerido</label>
+
+                    <select class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+
+                        <option>Streaming IRL</option>
+
+                        <option>Grabación y Cámaras</option>
+
+                        <option>Organización y Eventos</option>
+
+                        <option>Asistencia Técnica</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Mensaje</label>
+
+                    <textarea required rows="4" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
+
+                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente.</div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer class="bg-slate-950 text-slate-500 text-sm py-10 border-t border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+
+            <p>&copy; H3R5 ProMaster. Todos los derechos reservados.</p>
+
+            <div class="flex justify-center space-x-6 text-xs">
+
+                <a href="privacidad.html" class="hover:text-slate-300 underline">Política de Privacidad</a>
+
+                <a href="terminos-de-uso.html" class="hover:text-slate-300 underline">Términos de Uso</a>
+
+                <a href="cookies.html" class="hover:text-slate-300 underline">Política de Cookies</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- Banner de Cookies -->
+
+    <div id="cookie-banner" class="cookie-banner">
+
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <p class="text-sm text-slate-300">Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline">Leer más</a>.</p>
+
+            <div class="flex space-x-3">
+
+                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-semibold">Aceptar</button>
+
+                <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded font-semibold">Rechazar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+
+        });
+
+        function scrollToSection(id) {
+
+            const el = document.getElementById(id);
+
+            if(el) {
+
+                el.scrollIntoView({ behavior: 'smooth' });
+
+                document.getElementById('mobile-menu').classList.add('hidden');
+
+            }
+
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+
+            link.addEventListener('click', function(e) {
+
+                e.preventDefault();
+
+                scrollToSection(this.getAttribute('href').substring(1));
+
+            });
+
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            const msg = document.getElementById('form-msg');
+
+            msg.classList.remove('hidden');
+
+            this.reset();
+
+            setTimeout(() => msg.classList.add('hidden'), 4000);
+
+        });
+
+        function acceptCookies() {
+
+            localStorage.setItem('cookieConsent', 'accepted');
+
+            document.getElementById('cookie-banner').classList.remove('show');
+
+        }
+
+        function rejectCookies() {
+
+            localStorage.setItem('cookieConsent', 'rejected');
+
+            document.getElementById('cookie-banner').classList.remove('show');
+
+        }
+
+        if (!localStorage.getItem('cookieConsent')) {
+
+            setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+integralo bien solo para copiarlo
+
+Aquí tienes el código completo y bien integrado en un solo archivo, listo para que lo copies y pegues directamente en tu proyecto.
+
+3R5 ProMaster
+
+
+rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .bg-solid-card { background-color: #1e293b; border: 1px solid #334155; }
+        .bg-solid-card-hover:hover {
+            background-color: #334155;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            transition: all 0.2s ease-in-out;
+        }
+
+Solo dale al botón de copiar en la esquina superior derecha del bloque y pégalo en tu archivo index.html. ¡Listo para subir al servidor! ¿Necesitas ayuda con algo más para la web?
+
+solo una cosa mas puede poner en numero y en color con 2 iconos uno con la camara que signica calidad audio otro de bocina y el final de red una antena
+
+¡Excelente idea! Esos indicadores le darán un aspecto mucho más técnico y profesional desde el primer vistazo.
+
+He agregado un bloque de "Métricas de Transmisión" justo debajo de los botones principales en la sección de inicio. Cada métrica tiene su número destacado, un color neón distintivo (azul, morado y verde) y los iconos exactos que pediste (cámara para calidad, bocina para audio y antena para red).
+
+Aquí tienes el código listo para copiar y pegar:
+
+HTML
+<!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
@@ -336,3 +1569,1127 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+
+<html lang="es" class="dark">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>3R5 ProMaster - Streaming, Cámaras & Eventos</title>
+
+    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, organización de eventos e itinerarios y asistencia técnica.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+
+        body { background-color: #0f172a; color: #f8fafc; }
+
+        .bg-solid-card { background-color: #1e293b; border: 1px solid #334155; }
+
+        .bg-solid-card-hover:hover {
+
+            background-color: #334155;
+
+            border-color: #3b82f6;
+
+            transform: translateY(-2px);
+
+            transition: all 0.2s ease-in-out;
+
+        }
+
+        .cookie-banner {
+
+            position: fixed; bottom: 0; left: 0; right: 0;
+
+            background: #020617; padding: 1rem; z-index: 1000;
+
+            transform: translateY(100%); transition: transform 0.3s ease;
+
+            border-top: 1px solid #334155;
+
+        }
+
+        .cookie-banner.show { transform: translateY(0); }
+
+    </style>
+
+</head>
+
+<body class="bg-slate-900 text-slate-100 antialiased">
+
+
+
+    <!-- Navegación -->
+
+    <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex items-center justify-between h-16">
+
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('inicio')">
+
+                    <div class="bg-blue-600 p-2 rounded-lg text-white">
+
+                        <i class="fas fa-broadcast-tower text-xl"></i>
+
+                    </div>
+
+                    <span class="text-lg font-bold tracking-wide text-white">3R5 <span class="text-blue-500">PROMASTER</span></span>
+
+                </div>
+
+
+
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+
+                    <a href="#inicio" class="nav-link hover:text-blue-400 transition">Inicio</a>
+
+                    <a href="#streaming-irl" class="nav-link hover:text-blue-400 transition">1. Streaming IRL</a>
+
+                    <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">2. Cámaras & Grabación</a>
+
+                    <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">3. Eventos & Traslados</a>
+
+                    <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">4. Asistencia Técnica</a>
+
+                    <a href="#monitoreo-irl" class="nav-link hover:text-blue-400 transition text-[#00e701] font-bold">5. Monitoreo Kick</a>
+
+                    <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
+
+                </div>
+
+
+
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-400 hover:text-white p-2">
+
+                    <i class="fas fa-bars text-2xl"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <div id="mobile-menu" class="lg:hidden hidden border-t border-slate-800 py-4 space-y-3">
+
+                <a href="#inicio" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Inicio</a>
+
+                <a href="#streaming-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">1. Streaming IRL</a>
+
+                <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">2. Cámaras & Grabación</a>
+
+                <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">3. Eventos & Traslados</a>
+
+                <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">4. Asistencia Técnica</a>
+
+                <a href="#monitoreo-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">5. Monitoreo Kick</a>
+
+                <a href="#contacto" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold">Contacto</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Hero -->
+
+    <section id="inicio" class="bg-slate-950 py-20 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4 text-center">
+
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
+
+                Infraestructura para <br><span class="text-blue-500">Streaming IRL y Eventos en Vivo</span>
+
+            </h1>
+
+            <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-10">
+
+                Soluciones integrales de transmisión en directo, conexión multicámara, coordinación de eventos e itinerarios de traslado.
+
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+                <button onclick="scrollToSection('streaming-irl')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition shadow-lg shadow-blue-600/30">
+
+                    Ver Servicios
+
+                </button>
+
+                <button onclick="scrollToSection('contacto')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold px-8 py-3 rounded-lg transition">
+
+                    Contactar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 1. STREAMING IRL -->
+
+    <section id="streaming-irl" class="py-16 bg-slate-900 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-red-600/20 text-red-500 rounded-lg">
+
+                    <i class="fas fa-video text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-red-500 tracking-widest uppercase">Sección 01</span>
+
+                    <h2 class="text-3xl font-bold text-white">1. Streaming IRL</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-wifi text-3xl text-blue-500 mb-4"></i>
+
+                    <h3 class="text-xl font-bold text-white mb-2">Bonding Multi-SIM</h3>
+
+                    <p class="text-slate-400 text-sm">Sistemas Belabox y LiveU con suma de enlaces 4G/5G para transmisiones estables en movimiento.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-server text-3xl text-emerald-500 mb-4"></i>
+
+                    <h3 class="text-xl font-bold text-white mb-2">Servidores SRT/RTMP</h3>
+
+                    <p class="text-slate-400 text-sm">Servidores dedicados de retransmisión con ultra baja latencia para Twitch, Kick y YouTube.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-suitcase-rolling text-3xl text-purple-500 mb-4"></i>
+
+                    <h3 class="text-xl font-bold text-white mb-2">Mochilas IRL Pro</h3>
+
+                    <p class="text-slate-400 text-sm">Equipamiento optimizado con baterías V-Mount, codificadores hardware y ventilación activa.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 2. GRABACIÓN Y CÁMARAS -->
+
+    <section id="grabacion-camaras" class="py-16 bg-slate-950 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-blue-600/20 text-blue-500 rounded-lg">
+
+                    <i class="fas fa-camera text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-blue-500 tracking-widest uppercase">Sección 02</span>
+
+                    <h2 class="text-3xl font-bold text-white">2. Grabación y Conexión de Cámaras</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-plug text-2xl text-blue-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Conexiones HDMI / SDI</h4>
+
+                    <p class="text-slate-400 text-xs">Captura directa de cámaras Mirrorless y profesionales con convertidores sin pérdida.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-layer-group text-2xl text-emerald-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Setups Multicámara</h4>
+
+                    <p class="text-slate-400 text-xs">Integración de switchers físicos (ATEM Mini) y software (vMix / OBS) para directo.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-sliders-h text-2xl text-amber-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Control de Color</h4>
+
+                    <p class="text-slate-400 text-xs">Sincronización de perfiles de color, FPS y temperatura de color en todas las tomas.</p>
+
+                </div>
+
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+
+                    <i class="fas fa-microphone-alt text-2xl text-purple-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Audio Inalámbrico</h4>
+
+                    <p class="text-slate-400 text-xs">Sistemas de micrófonos lavalier y consolas de mezcla multicanal.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 3. ORGANIZACIÓN DE EVENTOS E ITINERARIOS -->
+
+    <section id="eventos-logistica" class="py-16 bg-slate-900 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-purple-600/20 text-purple-400 rounded-lg">
+
+                    <i class="fas fa-map-marked-alt text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-purple-400 tracking-widest uppercase">Sección 03</span>
+
+                    <h2 class="text-3xl font-bold text-white">3. Organización de Eventos e Itinerarios</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-purple-500">
+
+                    <h3 class="text-xl font-bold text-white mb-3">Itinerarios Minuto a Minuto</h3>
+
+                    <p class="text-slate-400 text-sm">Cronogramas de producción para pruebas de transmisión, llamadas a escena y tiempos de transmisión.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-blue-500">
+
+                    <h3 class="text-xl font-bold text-white mb-3">Traslados a la Zona</h3>
+
+                    <p class="text-slate-400 text-sm">Logística de transporte de equipo técnico y revisión previa de redes en recintos y venues.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-emerald-500">
+
+                    <h3 class="text-xl font-bold text-white mb-3">Coordinación de Campo</h3>
+
+                    <p class="text-slate-400 text-sm">Enlace directo con organizadores, personal de seguridad y staff técnico del evento.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 4. TECNOLOGÍA Y ASISTENCIA -->
+
+    <section id="tecnologia-asistencia" class="py-16 bg-slate-950 border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-center space-x-3 mb-8">
+
+                <div class="p-3 bg-emerald-600/20 text-emerald-400 rounded-lg">
+
+                    <i class="fas fa-headset text-2xl"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xs font-bold text-emerald-400 tracking-widest uppercase">Sección 04</span>
+
+                    <h2 class="text-3xl font-bold text-white">4. Tecnología y Asistencia</h2>
+
+                </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <!-- Puntos Originales -->
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-user-shield text-2xl text-emerald-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Asistencia en Vivo</h4>
+
+                    <p class="text-slate-400 text-sm">Soporte remoto y presencial durante toda la emisión para resolver imprevistos técnicos.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-cogs text-2xl text-blue-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Ajuste OBS & vMix</h4>
+
+                    <p class="text-slate-400 text-sm">Optimización de códecs NVENC, escenas, alertas, bitrate dinámico y transiciones.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-sync text-2xl text-purple-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Redundancia de Señal</h4>
+
+                    <p class="text-slate-400 text-sm">Configuración de enlaces de respaldo para evitar cortes por caída de internet local.</p>
+
+                </div>
+
+
+
+                <!-- Nuevos Puntos Integrados -->
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-laptop-code text-2xl text-teal-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Instalación de Software</h4>
+
+                    <p class="text-slate-400 text-sm">Instalación limpia de sistemas operativos, suite de oficina, programas de edición y herramientas esenciales de trabajo.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-tools text-2xl text-orange-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Diagnóstico de Hardware</h4>
+
+                    <p class="text-slate-400 text-sm">Revisión exhaustiva de componentes dañados (fuentes, GPUs, memorias RAM, discos) dentro y fuera de la oficina.</p>
+
+                </div>
+
+                <div class="bg-solid-card p-6 rounded-xl">
+
+                    <i class="fas fa-desktop text-2xl text-red-400 mb-3"></i>
+
+                    <h4 class="text-lg font-bold text-white mb-2">Armado y Asesoría PC</h4>
+
+                    <p class="text-slate-400 text-sm">Diseño y ensamblaje de equipos a la medida, y consejos tecnológicos básicos para el público en general.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 5. MONITOREO KICK IRL -->
+
+    <section id="monitoreo-irl" class="py-16 bg-[#0b0e14] border-b border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex flex-col items-center mb-8">
+
+                <h2 class="text-3xl font-bold text-[#00e701] tracking-widest uppercase mb-2">3R5 Pro Master - Canal IRL</h2>
+
+                <p class="text-slate-400 text-sm">Transmisión en vivo de adrianozendejas32</p>
+
+            </div>
+
+           
+
+            <div class="grid lg:grid-cols-[1fr_340px] gap-6">
+
+                <!-- Reproductor de Kick -->
+
+                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800">
+
+                    <iframe
+
+                        src="https://player.kick.com/adrianozendejas32"
+
+                        allowfullscreen="true"
+
+                        class="w-full h-full border-none">
+
+                    </iframe>
+
+                </div>
+
+
+
+                <!-- Chat en vivo de Kick -->
+
+                <div class="w-full min-h-[480px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800">
+
+                    <iframe
+
+                        src="https://kick.com/popout/adrianozendejas32/chat"
+
+                        class="w-full h-full border-none">
+
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Contacto -->
+
+    <section id="contacto" class="py-16 bg-slate-900">
+
+        <div class="max-w-4xl mx-auto px-4">
+
+            <h3 class="text-3xl font-bold text-center mb-10 text-white">Contacto y Solicitudes</h3>
+
+            <form id="contact-form" class="space-y-4 max-w-xl mx-auto">
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Nombre</label>
+
+                    <input type="text" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Correo Electrónico</label>
+
+                    <input type="email" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Servicio Requerido</label>
+
+                    <select class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+
+                        <option>Streaming IRL</option>
+
+                        <option>Grabación y Cámaras</option>
+
+                        <option>Organización y Eventos</option>
+
+                        <option>Asistencia Técnica / PC</option>
+
+                        <option>Monitoreo Kick</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label class="block text-slate-300 text-sm mb-1">Mensaje</label>
+
+                    <textarea required rows="4" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
+
+                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente.</div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer class="bg-slate-950 text-slate-500 text-sm py-10 border-t border-slate-800">
+
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+
+            <p>&copy; 3R5 ProMaster. Todos los derechos reservados.</p>
+
+            <div class="flex justify-center space-x-6 text-xs">
+
+                <a href="privacidad.html" class="hover:text-slate-300 underline">Política de Privacidad</a>
+
+                <a href="terminos-de-uso.html" class="hover:text-slate-300 underline">Términos de Uso</a>
+
+                <a href="cookies.html" class="hover:text-slate-300 underline">Política de Cookies</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- Banner de Cookies -->
+
+    <div id="cookie-banner" class="cookie-banner">
+
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <p class="text-sm text-slate-300">Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline">Leer más</a>.</p>
+
+            <div class="flex space-x-3">
+
+                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-semibold">Aceptar</button>
+
+                <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded font-semibold">Rechazar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+
+        });
+
+        function scrollToSection(id) {
+
+            const el = document.getElementById(id);
+
+            if(el) {
+
+                el.scrollIntoView({ behavior: 'smooth' });
+
+                document.getElementById('mobile-menu').classList.add('hidden');
+
+            }
+
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+
+            link.addEventListener('click', function(e) {
+
+                e.preventDefault();
+
+                scrollToSection(this.getAttribute('href').substring(1));
+
+            });
+
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            const msg = document.getElementById('form-msg');
+
+            msg.classList.remove('hidden');
+
+            this.reset();
+
+            setTimeout(() => msg.classList.add('hidden'), 4000);
+
+        });
+
+        function acceptCookies() {
+
+            localStorage.setItem('cookieConsent', 'accepted');
+
+            document.getElementById('cookie-banner').classList.remove('show');
+
+        }
+
+        function rejectCookies() {
+
+            localStorage.setItem('cookieConsent', 'rejected');
+
+            document.getElementById('cookie-banner').classList.remove('show');
+
+        }
+
+        if (!localStorage.getItem('cookieConsent')) {
+
+            setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
+
+        }
+
+    </script>
+
+</body>
+
+</html> integralo bien con el codigo salio mal
+
+He corregido e integrado correctamente la sección de indicadores. El problema anterior ocurrió porque faltaba un contenedor (grid) para alinearlos de forma horizontal, y no estaban posicionados dentro de la estructura correcta debajo de los botones de la sección de inicio.
+
+Ahora el diseño es idéntico a tu imagen, con los bordes sutiles, iconos grandes, y los colores correctos para Calidad de Video (Azul), Audio Digital (Morado) y Red y Estabilidad (Verde).
+
+Tu archivo HTML completo está listo para descargar:
+
+Ícono de HTML
+index
+ HTML 
+Solo tienes que descargar este archivo index.html y abrirlo en tu navegador para ver la integración perfecta de los indicadores bajo los botones de acción del Hero.
+
+
+
+
+
+Los chats de Universidad Autónoma de Baja California no se usan para mejorar nuestros modelos. Gemini es una IA y puede cometer errores. Tu privacidad y GeminiSe abrirá en una ventana nueva
+
+Refining the Output
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3R5 ProMaster - Streaming, Cámaras & Eventos</title>
+    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, organización de eventos e itinerarios y asistencia técnica.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .bg-solid-card { background-color: #1e293b; border: 1px solid #334155; }
+        .bg-solid-card-hover:hover {
+            background-color: #334155;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            transition: all 0.2s ease-in-out;
+        }
+        .cookie-banner {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #020617; padding: 1rem; z-index: 1000;
+            transform: translateY(100%); transition: transform 0.3s ease;
+            border-top: 1px solid #334155;
+        }
+        .cookie-banner.show { transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 antialiased">
+
+    <!-- Navegación -->
+    <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('inicio')">
+                    <div class="bg-blue-600 p-2 rounded-lg text-white">
+                        <i class="fas fa-broadcast-tower text-xl"></i>
+                    </div>
+                    <span class="text-lg font-bold tracking-wide text-white">3R5 <span class="text-blue-500">PROMASTER</span></span>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#inicio" class="nav-link hover:text-blue-400 transition">Inicio</a>
+                    <a href="#streaming-irl" class="nav-link hover:text-blue-400 transition">1. Streaming IRL</a>
+                    <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">2. Cámaras & Grabación</a>
+                    <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">3. Eventos & Traslados</a>
+                    <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">4. Asistencia Técnica</a>
+                    <a href="#monitoreo-irl" class="nav-link hover:text-blue-400 transition text-[#00e701] font-bold">5. Monitoreo Kick</a>
+                    <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-400 hover:text-white p-2">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="lg:hidden hidden border-t border-slate-800 py-4 space-y-3">
+                <a href="#inicio" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Inicio</a>
+                <a href="#streaming-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">1. Streaming IRL</a>
+                <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">2. Cámaras & Grabación</a>
+                <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">3. Eventos & Traslados</a>
+                <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">4. Asistencia Técnica</a>
+                <a href="#monitoreo-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">5. Monitoreo Kick</a>
+                <a href="#contacto" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="inicio" class="bg-slate-950 py-20 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
+                Infraestructura para <br><span class="text-blue-500">Streaming IRL y Eventos en Vivo</span>
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-10">
+                Soluciones integrales de transmisión en directo, conexión multicámara, coordinación de eventos e itinerarios de traslado.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="scrollToSection('streaming-irl')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition shadow-lg shadow-blue-600/30">
+                    Ver Servicios
+                </button>
+                <button onclick="scrollToSection('contacto')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold px-8 py-3 rounded-lg transition">
+                    Contactar
+                </button>
+            </div>
+
+            <!-- NUEVO: Indicadores Numéricos Corregidos -->
+            <div class="mt-14 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Calidad (Cámara) -->
+                <div class="flex items-center justify-center space-x-4 bg-[#0f172a] border border-blue-500/30 p-6 rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.05)]">
+                    <i class="fas fa-video text-4xl text-blue-500"></i>
+                    <div class="text-left">
+                        <div class="text-2xl font-black text-blue-500">1080p <span class="text-lg text-blue-400">60fps</span></div>
+                        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mt-1">CALIDAD DE VIDEO</div>
+                    </div>
+                </div>
+                <!-- Audio (Bocina) -->
+                <div class="flex items-center justify-center space-x-4 bg-[#0f172a] border border-purple-500/30 p-6 rounded-xl shadow-[0_0_15px_rgba(168,85,247,0.05)]">
+                    <i class="fas fa-volume-up text-4xl text-purple-500"></i>
+                    <div class="text-left">
+                        <div class="text-2xl font-black text-purple-500">320 <span class="text-lg text-purple-400">kbps</span></div>
+                        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mt-1">AUDIO DIGITAL</div>
+                    </div>
+                </div>
+                <!-- Red (Antena) -->
+                <div class="flex items-center justify-center space-x-4 bg-[#0f172a] border border-emerald-500/30 p-6 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.05)]">
+                    <i class="fas fa-satellite-dish text-4xl text-emerald-500"></i>
+                    <div class="text-left">
+                        <div class="text-2xl font-black text-emerald-500">99.9<span class="text-lg text-emerald-400">%</span></div>
+                        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mt-1">RED Y ESTABILIDAD</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 1. STREAMING IRL -->
+    <section id="streaming-irl" class="py-16 bg-slate-900 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="p-3 bg-red-600/20 text-red-500 rounded-lg">
+                    <i class="fas fa-video text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-red-500 tracking-widest uppercase">Sección 01</span>
+                    <h2 class="text-3xl font-bold text-white">1. Streaming IRL</h2>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-wifi text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Bonding Multi-SIM</h3>
+                    <p class="text-slate-400 text-sm">Sistemas Belabox y LiveU con suma de enlaces 4G/5G para transmisiones estables en movimiento.</p>
+                </div>
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-server text-3xl text-emerald-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Servidores SRT/RTMP</h3>
+                    <p class="text-slate-400 text-sm">Servidores dedicados de retransmisión con ultra baja latencia para Twitch, Kick y YouTube.</p>
+                </div>
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-suitcase-rolling text-3xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Mochilas IRL Pro</h3>
+                    <p class="text-slate-400 text-sm">Equipamiento optimizado con baterías V-Mount, codificadores hardware y ventilación activa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. GRABACIÓN Y CÁMARAS -->
+    <section id="grabacion-camaras" class="py-16 bg-slate-950 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="p-3 bg-blue-600/20 text-blue-500 rounded-lg">
+                    <i class="fas fa-camera text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-blue-500 tracking-widest uppercase">Sección 02</span>
+                    <h2 class="text-3xl font-bold text-white">2. Grabación y Conexión de Cámaras</h2>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-plug text-2xl text-blue-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Conexiones HDMI / SDI</h4>
+                    <p class="text-slate-400 text-xs">Captura directa de cámaras Mirrorless y profesionales con convertidores sin pérdida.</p>
+                </div>
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-layer-group text-2xl text-emerald-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Setups Multicámara</h4>
+                    <p class="text-slate-400 text-xs">Integración de switchers físicos (ATEM Mini) y software (vMix / OBS) para directo.</p>
+                </div>
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-sliders-h text-2xl text-amber-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Control de Color</h4>
+                    <p class="text-slate-400 text-xs">Sincronización de perfiles de color, FPS y temperatura de color en todas las tomas.</p>
+                </div>
+                <div class="bg-solid-card bg-solid-card-hover p-6 rounded-xl">
+                    <i class="fas fa-microphone-alt text-2xl text-purple-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Audio Inalámbrico</h4>
+                    <p class="text-slate-400 text-xs">Sistemas de micrófonos lavalier y consolas de mezcla multicanal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ORGANIZACIÓN DE EVENTOS E ITINERARIOS -->
+    <section id="eventos-logistica" class="py-16 bg-slate-900 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="p-3 bg-purple-600/20 text-purple-400 rounded-lg">
+                    <i class="fas fa-map-marked-alt text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-purple-400 tracking-widest uppercase">Sección 03</span>
+                    <h2 class="text-3xl font-bold text-white">3. Organización de Eventos e Itinerarios</h2>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-purple-500">
+                    <h3 class="text-xl font-bold text-white mb-3">Itinerarios Minuto a Minuto</h3>
+                    <p class="text-slate-400 text-sm">Cronogramas de producción para pruebas de transmisión, llamadas a escena y tiempos de transmisión.</p>
+                </div>
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-blue-500">
+                    <h3 class="text-xl font-bold text-white mb-3">Traslados a la Zona</h3>
+                    <p class="text-slate-400 text-sm">Logística de transporte de equipo técnico y revisión previa de redes en recintos y venues.</p>
+                </div>
+                <div class="bg-solid-card p-6 rounded-xl border-l-4 border-l-emerald-500">
+                    <h3 class="text-xl font-bold text-white mb-3">Coordinación de Campo</h3>
+                    <p class="text-slate-400 text-sm">Enlace directo con organizadores, personal de seguridad y staff técnico del evento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. TECNOLOGÍA Y ASISTENCIA -->
+    <section id="tecnologia-asistencia" class="py-16 bg-slate-950 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="p-3 bg-emerald-600/20 text-emerald-400 rounded-lg">
+                    <i class="fas fa-headset text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-emerald-400 tracking-widest uppercase">Sección 04</span>
+                    <h2 class="text-3xl font-bold text-white">4. Tecnología y Asistencia</h2>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Puntos Originales -->
+                <div class="bg-solid-card p-6 rounded-xl">
+                    <i class="fas fa-user-shield text-2xl text-emerald-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Asistencia en Vivo</h4>
+                    <p class="text-slate-400 text-sm">Soporte remoto y presencial durante toda la emisión para resolver imprevistos técnicos.</p>
+                </div>
+                <div class="bg-solid-card p-6 rounded-xl">
+                    <i class="fas fa-cogs text-2xl text-blue-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Ajuste OBS & vMix</h4>
+                    <p class="text-slate-400 text-sm">Optimización de códecs NVENC, escenas, alertas, bitrate dinámico y transiciones.</p>
+                </div>
+                <div class="bg-solid-card p-6 rounded-xl">
+                    <i class="fas fa-sync text-2xl text-purple-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Redundancia de Señal</h4>
+                    <p class="text-slate-400 text-sm">Configuración de enlaces de respaldo para evitar cortes por caída de internet local.</p>
+                </div>
+
+                <!-- Nuevos Puntos Integrados -->
+                <div class="bg-solid-card p-6 rounded-xl">
+                    <i class="fas fa-laptop-code text-2xl text-teal-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Instalación de Software</h4>
+                    <p class="text-slate-400 text-sm">Instalación limpia de sistemas operativos, suite de oficina, programas de edición y herramientas esenciales de trabajo.</p>
+                </div>
+                <div class="bg-solid-card p-6 rounded-xl">
+                    <i class="fas fa-tools text-2xl text-orange-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Diagnóstico de Hardware</h4>
+                    <p class="text-slate-400 text-sm">Revisión exhaustiva de componentes dañados (fuentes, GPUs, memorias RAM, discos) dentro y fuera de la oficina.</p>
+                </div>
+                <div class="bg-solid-card p-6 rounded-xl">
+                    <i class="fas fa-desktop text-2xl text-red-400 mb-3"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Armado y Asesoría PC</h4>
+                    <p class="text-slate-400 text-sm">Diseño y ensamblaje de equipos a la medida, y consejos tecnológicos básicos para el público en general.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. MONITOREO KICK IRL -->
+    <section id="monitoreo-irl" class="py-16 bg-[#0b0e14] border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col items-center mb-8">
+                <h2 class="text-3xl font-bold text-[#00e701] tracking-widest uppercase mb-2">3R5 Pro Master - Canal IRL</h2>
+                <p class="text-slate-400 text-sm">Transmisión en vivo de adrianozendejas32</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-[1fr_340px] gap-6">
+                <!-- Reproductor de Kick -->
+                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800">
+                    <iframe 
+                        src="https://player.kick.com/adrianozendejas32" 
+                        allowfullscreen="true"
+                        class="w-full h-full border-none">
+                    </iframe>
+                </div>
+
+                <!-- Chat en vivo de Kick -->
+                <div class="w-full min-h-[480px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800">
+                    <iframe 
+                        src="https://kick.com/popout/adrianozendejas32/chat"
+                        class="w-full h-full border-none">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-16 bg-slate-900">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-10 text-white">Contacto y Solicitudes</h3>
+            <form id="contact-form" class="space-y-4 max-w-xl mx-auto">
+                <div>
+                    <label class="block text-slate-300 text-sm mb-1">Nombre</label>
+                    <input type="text" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm mb-1">Correo Electrónico</label>
+                    <input type="email" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm mb-1">Servicio Requerido</label>
+                    <select class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                        <option>Streaming IRL</option>
+                        <option>Grabación y Cámaras</option>
+                        <option>Organización y Eventos</option>
+                        <option>Asistencia Técnica / PC</option>
+                        <option>Monitoreo Kick</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm mb-1">Mensaje</label>
+                    <textarea required rows="4" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
+                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente.</div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-500 text-sm py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+            <p>&copy; 3R5 ProMaster. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-6 text-xs">
+                <a href="privacidad.html" class="hover:text-slate-300 underline">Política de Privacidad</a>
+                <a href="terminos-de-uso.html" class="hover:text-slate-300 underline">Términos de Uso</a>
+                <a href="cookies.html" class="hover:text-slate-300 underline">Política de Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Banner de Cookies -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-slate-300">Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline">Leer más</a>.</p>
+            <div class="flex space-x-3">
+                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-semibold">Aceptar</button>
+                <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded font-semibold">Rechazar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        }
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                scrollToSection(this.getAttribute('href').substring(1));
+            });
+        });
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('form-msg');
+            msg.classList.remove('hidden');
+            this.reset();
+            setTimeout(() => msg.classList.add('hidden'), 4000);
+        });
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookie-banner').classList.remove('show');
+        }
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            document.getElementById('cookie-banner').classList.remove('show');
+        }
+        if (!localStorage.getItem('cookieConsent')) {
+            setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
+        }
+    </script>
+</body>
+</html>
+index.html
+index.html
+Mostrando index.html.Cargando index.html.
