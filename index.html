@@ -2,90 +2,31 @@
 <html lang="es" class="dark">
 <head>
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-59RKH9ZT');</script>
-<!-- End Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-59RKH9ZT');</script>
+    
+    <!-- Política de Seguridad (CSP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://ui-avatars.com; frame-src https://player.kick.com https://kick.com;">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3R5 ProMaster - Streaming, Cámaras & Eventos</title>
-    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, organización de eventos e itinerarios y asistencia técnica.">
-    <!-- Tailwind CSS -->
+    <title>3R5 ProMaster</title>
+    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, y monitoreo exclusivo de Kick.">
+    
+    <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    
-    <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-        .bg-solid-card { background-color: #1e293b; border: 1px solid #334155; }
-        .bg-solid-card-hover:hover {
-            background-color: #334155;
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-            transition: all 0.2s ease-in-out;
-        }
-        .cookie-banner {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: #020617; padding: 1rem; z-index: 1000;
-            transform: translateY(100%); transition: transform 0.3s ease;
-            border-top: 1px solid #334155;
-        }
-        .cookie-banner.show { transform: translateY(0); }
-        
-        /* Pulse Animation for Live Indicator */
-        @keyframes pulse-live {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 231, 1, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 231, 1, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 231, 1, 0); }
-        }
-        .live-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #00e701;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse-live 1.8s infinite;
-        }
-
-        .offline-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #64748b;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        
-        /* Telemetry Card Glow Effect */
-        .metric-card {
-            background-color: #111827;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
-        }
-        .metric-card:hover {
-            border-color: rgba(0, 231, 1, 0.4);
-            box-shadow: 0 0 12px rgba(0, 231, 1, 0.1);
-        }
-
-        /* Streamer Card Active State */
-        .streamer-card {
-            transition: all 0.25s ease;
-            cursor: pointer;
-        }
-        .streamer-card.active {
-            border-color: #00e701 !important;
-            background-color: #162032 !important;
-            box-shadow: 0 0 18px rgba(0, 231, 1, 0.2);
-        }
-    </style>
+    <!-- Archivos Locales (Organizados) -->
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/app.js" defer></script>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased">
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59RKH9ZT"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59RKH9ZT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Navegación -->
     <nav class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
@@ -100,11 +41,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
                     <a href="#inicio" class="nav-link hover:text-blue-400 transition">Inicio</a>
-                    <a href="#streaming-irl" class="nav-link hover:text-blue-400 transition">1. Streaming IRL</a>
-                    <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">2. Cámaras & Grabación</a>
-                    <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">3. Eventos & Traslados</a>
-                    <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">4. Asistencia Técnica</a>
-                    <a href="#monitoreo-irl" class="nav-link hover:text-blue-400 transition text-[#00e701] font-bold">5. Monitoreo Kick</a>
+                    <a href="#streaming-irl" class="nav-link hover:text-blue-400 transition">Streaming IRL</a>
+                    <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">Cámaras & Grabación</a>
+                    <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">Eventos & Traslados</a>
+                    <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">Asistencia Técnica</a>
+                    <a href="#monitoreo-adriano" class="nav-link hover:text-blue-400 transition text-[#00e701] font-bold">Monitoreo Kick</a>
                     <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
                 </div>
 
@@ -115,11 +56,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div id="mobile-menu" class="lg:hidden hidden border-t border-slate-800 py-4 space-y-3">
                 <a href="#inicio" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Inicio</a>
-                <a href="#streaming-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">1. Streaming IRL</a>
-                <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">2. Cámaras & Grabación</a>
-                <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">3. Eventos & Traslados</a>
-                <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">4. Asistencia Técnica</a>
-                <a href="#monitoreo-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">5. Monitoreo Kick</a>
+                <a href="#streaming-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Streaming IRL</a>
+                <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Cámaras & Grabación</a>
+                <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Eventos & Traslados</a>
+                <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Asistencia Técnica</a>
+                <a href="#monitoreo-adriano" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">Monitoreo Kick</a>
                 <a href="#contacto" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold">Contacto</a>
             </div>
         </div>
@@ -153,8 +94,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <i class="fas fa-video text-2xl"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-red-500 tracking-widest uppercase">Sección 01</span>
-                    <h2 class="text-3xl font-bold text-white">1. Streaming IRL</h2>
+                    <h2 class="text-3xl font-bold text-white">Streaming IRL</h2>
                 </div>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
@@ -185,8 +125,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <i class="fas fa-camera text-2xl"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-blue-500 tracking-widest uppercase">Sección 02</span>
-                    <h2 class="text-3xl font-bold text-white">2. Grabación y Conexión de Cámaras</h2>
+                    <h2 class="text-3xl font-bold text-white">Grabación y Conexión de Cámaras</h2>
                 </div>
             </div>
             <div class="grid md:grid-cols-4 gap-6">
@@ -222,8 +161,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <i class="fas fa-map-marked-alt text-2xl"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-purple-400 tracking-widest uppercase">Sección 03</span>
-                    <h2 class="text-3xl font-bold text-white">3. Organización de Eventos e Itinerarios</h2>
+                    <h2 class="text-3xl font-bold text-white">Organización de Eventos e Itinerarios</h2>
                 </div>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
@@ -251,8 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <i class="fas fa-headset text-2xl"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-emerald-400 tracking-widest uppercase">Sección 04</span>
-                    <h2 class="text-3xl font-bold text-white">4. Tecnología y Asistencia</h2>
+                    <h2 class="text-3xl font-bold text-white">Tecnología y Asistencia</h2>
                 </div>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
@@ -294,298 +231,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- 5. MONITOREO KICK IRL -->
-    <section id="monitoreo-irl" class="py-16 bg-[#0b0e14] border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col items-center mb-8 text-center">
-                <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
-                    <i class="fas fa-tower-cell"></i>
-                    <span>TELEMETRÍA DE SEÑAL EN DIRECTO</span>
-                </div>
-                <!-- TITULO ACTUALIZADO -->
-                <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#00e701] tracking-wide uppercase mb-2">
-                    Monitoreo de señal DE ADRIANOZENDEJAS32 POR 3R5 PROMASTER.SITE
-                </h2>
-                <p class="text-slate-400 text-sm md:text-base">
-                    Monitoreo de señal, calidad e infraestructura en tiempo real • <span id="active-streamer-display" class="text-slate-200 font-semibold">adrianozendejas32</span>
-                </p>
-            </div>
+    <section id="monitoreo-adriano" class="py-16 bg-[#0b0e14] min-h-screen border-b border-slate-800 flex flex-col items-center">
+        <div class="max-w-6xl w-full mx-auto px-4">
             
-            <div class="grid lg:grid-cols-[1fr_340px] gap-6 items-start">
-                
-                <!-- Columna Izquierda: Telemetría de Calidad + Reproductor Kick -->
-                <div class="flex flex-col space-y-4 w-full">
-
-                    <!-- PANEL DE CALIDAD DE VIDEO Y METRICAS EN TIEMPO REAL -->
-                    <div class="bg-[#141824] border border-slate-800 rounded-xl p-4 md:p-5 shadow-2xl shadow-emerald-950/20">
-                        
-                        <!-- Header del Panel -->
-                        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-800">
-                            <div class="flex items-center space-x-3">
-                                <!-- Badge EN VIVO / ESTADO -->
-                                <div id="live-status-badge" class="flex items-center space-x-2 bg-emerald-950/80 border border-[#00e701]/40 px-3 py-1 rounded-md">
-                                    <span id="live-status-dot" class="live-dot"></span>
-                                    <span id="live-status-text" class="text-xs font-bold text-[#00e701] tracking-wide">EN VIVO</span>
-                                </div>
-                                <span class="text-sm font-semibold text-white tracking-wide">Panel de Calidad y Telemetría</span>
-                            </div>
-                            
-                            <!-- Badges de tecnología rápida -->
-                            <div class="flex items-center space-x-2 text-xs">
-                                <span class="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-2.5 py-1 rounded-md font-mono">
-                                    <i class="fas fa-server text-xs mr-1"></i>SRT Ultra Low Latency
-                                </span>
-                                <span class="hidden sm:inline-block bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-md font-mono">
-                                    Server: Primary-MX1
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Grid de Métrica de Calidad -->
-                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                            
-                            <!-- 1. Estado y Servidor -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Estado / Servidor</span>
-                                    <i class="fas fa-signal text-[#00e701]"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-white flex items-center gap-1.5">
-                                        <span id="metric-status-val" class="text-[#00e701]">EN VIVO</span>
-                                        <span class="text-slate-500 text-xs font-normal">(1.1s)</span>
-                                    </div>
-                                    <p class="text-[11px] text-slate-400 truncate">SRT Ultra baja latencia</p>
-                                </div>
-                            </div>
-
-                            <!-- 2. Resolución y Calidad -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Resolución</span>
-                                    <i class="fas fa-tv text-blue-400"></i>
-                                </div>
-                                <div>
-                                    <div id="metric-res-val" class="text-sm font-bold text-white">1080p60</div>
-                                    <p class="text-[11px] text-blue-400 font-medium">Full HD Alta Definición</p>
-                                </div>
-                            </div>
-
-                            <!-- 3. Bitrate Variable -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Tasa de Bits</span>
-                                    <i class="fas fa-tachometer-alt text-[#00e701]"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-white font-mono flex items-center gap-1">
-                                        <span id="live-bitrate">6,500</span> <span class="text-xs text-slate-400">Kbps</span>
-                                    </div>
-                                    <p class="text-[11px] text-emerald-400">Bitrate Variable / Estable</p>
-                                </div>
-                            </div>
-
-                            <!-- 4. Tasa de Cuadros -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Tasa de Cuadros</span>
-                                    <i class="fas fa-film text-purple-400"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-white font-mono flex items-center gap-1">
-                                        <span id="live-fps">60.0</span> <span class="text-xs text-slate-400">FPS</span>
-                                    </div>
-                                    <p class="text-[11px] text-purple-300">Fluidez 0% Caídas</p>
-                                </div>
-                            </div>
-
-                            <!-- 5. Códec y Procesamiento -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Códec Video</span>
-                                    <i class="fas fa-microchip text-amber-400"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-white">H.264</div>
-                                    <p class="text-[11px] text-amber-300">NVENC Hardware Encod.</p>
-                                </div>
-                            </div>
-
-                            <!-- 6. Latencia Medida -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Latencia Transmisión</span>
-                                    <i class="fas fa-clock text-emerald-400"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-white font-mono flex items-center gap-1">
-                                        <span id="live-latency">1.10</span> <span class="text-xs text-slate-400">seg</span>
-                                    </div>
-                                    <p class="text-[11px] text-slate-400">Sincronía SRT Directa</p>
-                                </div>
-                            </div>
-
-                            <!-- 7. Conexión de Red -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Conexión / Red</span>
-                                    <i class="fas fa-network-wired text-cyan-400"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-cyan-400">Bonding Multi-SIM</div>
-                                    <p class="text-[11px] text-slate-300">Redundancia 4G/5G Activa</p>
-                                </div>
-                            </div>
-
-                            <!-- 8. Audio Stream -->
-                            <div class="metric-card p-3 rounded-lg flex flex-col justify-between">
-                                <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
-                                    <span class="font-medium">Códec Audio</span>
-                                    <i class="fas fa-volume-up text-pink-400"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-white">Stereo 48 kHz</div>
-                                    <p class="text-[11px] text-pink-300">320 kbps High Fidelity</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Reproductor de Kick -->
-                    <div class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_25px_rgba(0,231,1,0.15)] border border-slate-800 relative">
-                        <iframe 
-                            id="kick-player-iframe"
-                            src="https://player.kick.com/adrianozendejas32" 
-                            allowfullscreen="true"
-                            title="Reproductor en vivo de Kick"
-                            class="w-full h-full border-none">
-                        </iframe>
-                    </div>
-
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+                    <i class="fas fa-tower-cell"></i> <span>SEÑAL EXCLUSIVA</span>
                 </div>
-
-                <!-- Chat en vivo de Kick -->
-                <div class="w-full h-[520px] lg:h-[650px] bg-[#141824] rounded-xl overflow-hidden border border-slate-800 shadow-xl">
-                    <div class="bg-[#1a2030] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fas fa-comments text-[#00e701]"></i> Chat en Vivo: <span id="chat-streamer-name" class="text-[#00e701]">adrianozendejas32</span>
-                        </span>
-                        <span class="text-[10px] bg-[#00e701]/20 text-[#00e701] border border-[#00e701]/30 px-2 py-0.5 rounded font-mono">Oficial</span>
-                    </div>
-                    <iframe 
-                        id="kick-chat-iframe"
-                        src="https://kick.com/popout/adrianozendejas32/chat"
-                        title="Chat en vivo de Kick"
-                        class="w-full h-[calc(100%-45px)] border-none">
-                    </iframe>
-                </div>
-
+                <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider">Monitoreo <span class="text-[#00e701]">Adrianozendejas32</span></h2>
+                <p class="text-slate-400 mt-2">Transmisión oficial e interacción en tiempo real.</p>
             </div>
 
-            <!-- NUEVA SECCIÓN: MÁS STREAMERS / CANALES DE MONITOREO (AGREGACIONES) -->
-            <div class="mt-12 pt-8 border-t border-slate-800/80">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-                    <div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-[#00e701] fa-users text-[#00e701]"></i>
-                            <h3 class="text-xl font-bold text-white">Más Streamers & Canales de Monitoreo</h3>
-                        </div>
-                        <p class="text-slate-400 text-xs md:text-sm mt-1">Selecciona una señal para cambiar la transmisión activa o solicita la integración de un nuevo canal.</p>
-                    </div>
-                    <button onclick="requestNewStreamer()" class="bg-[#00e701] hover:bg-[#00c401] text-black font-bold text-xs md:text-sm px-4 py-2.5 rounded-lg transition flex items-center space-x-2 shadow-lg shadow-[#00e701]/20">
-                        <i class="fas fa-plus"></i>
-                        <span>Solicitar Integración de Canal</span>
-                    </button>
+            <!-- Paso 1: Panel de Login (Evita carga automática de datos) -->
+            <div id="login-panel" class="max-w-md mx-auto bg-[#141824] border border-[#00e701]/30 rounded-xl p-8 shadow-[0_0_20px_rgba(0,231,1,0.1)] mt-8 text-center">
+                <div class="w-20 h-20 mx-auto bg-slate-900 border-2 border-[#00e701] rounded-full flex items-center justify-center mb-6 overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=Adriano+Zendejas&background=00e701&color=000" alt="Avatar">
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Iniciar Sesión para Monitoreo</h3>
+                <p class="text-sm text-slate-400 mb-6">Ingresa para activar el chat y el video. Este paso protege tu consumo de datos móviles (LTE/5G).</p>
+                
+                <input type="text" id="viewer-username" placeholder="Tu usuario de Kick (Opcional)" class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-lg mb-4 focus:outline-none focus:border-[#00e701]">
+                
+                <button id="btn-enter-stream" class="w-full bg-[#00e701] hover:bg-[#00c701] text-black font-bold py-3 rounded-lg transition shadow-lg flex justify-center items-center gap-2">
+                    <i class="fas fa-sign-in-alt"></i> Entrar a la Transmisión
+                </button>
+            </div>
+
+            <!-- Paso 2: Contenedor del Stream (Oculto inicialmente) -->
+            <div id="stream-workspace" class="hidden mt-6">
+                <!-- Controles de Ahorro de Datos -->
+                <div class="flex flex-wrap justify-center gap-3 mb-6">
+                    <button id="btn-load-video" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white text-xs font-bold transition"><i class="fas fa-video mr-1"></i>Video</button>
+                    <button id="btn-load-chat" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded text-white text-xs font-bold transition"><i class="fas fa-comments mr-1"></i>Chat</button>
+                    <button id="btn-stop-all" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white text-xs font-bold transition"><i class="fas fa-pause mr-1"></i>Pausar Todo (Ahorrar Datos)</button>
                 </div>
 
-                <!-- Grid de Tarjetas de Streamers y Canales -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    
-                    <!-- 1. Streamer Principal: Adriano Zendejas (Activo) -->
-                    <div id="card-adrianozendejas32" onclick="switchStreamer('adrianozendejas32', 'Adriano Zendejas', true, '1080p60')" class="streamer-card active bg-[#141824] border border-slate-700 p-4 rounded-xl flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="bg-[#00e701]/20 text-[#00e701] border border-[#00e701]/30 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5">
-                                    <span class="live-dot"></span> EN VIVO
-                                </span>
-                                <span class="text-[11px] text-slate-400 font-mono"><i class="fas fa-video text-blue-400 mr-1"></i>IRL Mochila</span>
-                            </div>
-                            <div class="flex items-center space-x-3 mb-2">
-                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-[#00e701] flex items-center justify-center text-[#00e701] font-bold text-lg">
-                                    A
-                                </div>
-                                <div class="overflow-hidden">
-                                    <h4 class="font-bold text-white text-sm truncate">adrianozendejas32</h4>
-                                    <p class="text-xs text-slate-400 truncate">Canal Principal IRL</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                            <span>Res: <strong class="text-slate-200">1080p60</strong></span>
-                            <span class="text-[#00e701] font-medium flex items-center gap-1"><i class="fas fa-circle-check"></i> Activo</span>
-                        </div>
+                <div class="grid lg:grid-cols-[1fr_350px] gap-6">
+                    <!-- Área de Video -->
+                    <div id="video-container" class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-slate-700 flex items-center justify-center">
+                        <span class="text-slate-500 font-medium">Video Pausado</span>
                     </div>
 
-                    <!-- 2. Canal Secundario Demostración / Cámara IRL 2 -->
-                    <div id="card-canal2_irl" onclick="switchStreamer('kick_irl_cam2', 'Cámara Respaldo Evento', false, '720p60')" class="streamer-card bg-[#141824] border border-slate-800 p-4 rounded-xl flex flex-col justify-between hover:border-slate-600">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="bg-slate-800 text-slate-400 border border-slate-700 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5">
-                                    <span class="offline-dot"></span> STANDBY
-                                </span>
-                                <span class="text-[11px] text-slate-400 font-mono"><i class="fas fa-camera text-purple-400 mr-1"></i>Cam Backstage</span>
-                            </div>
-                            <div class="flex items-center space-x-3 mb-2">
-                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-purple-400 font-bold text-lg">
-                                    <i class="fas fa-camera-rotate text-sm"></i>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <h4 class="font-bold text-white text-sm truncate">Cámara #2 - Eventos</h4>
-                                    <p class="text-xs text-slate-400 truncate">Señal Multicámara 3R5</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                            <span>Res: <strong class="text-slate-200">1080p</strong></span>
-                            <span class="text-slate-500">Haz clic para probar</span>
-                        </div>
+                    <!-- Área de Chat -->
+                    <div id="chat-container" class="w-full h-[520px] lg:h-full bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-xl flex items-center justify-center">
+                        <span class="text-slate-500 font-medium">Chat Pausado</span>
                     </div>
-
-                    <!-- 3. Reserva Próximo Streamer Integrado -->
-                    <div id="card-next_streamer" onclick="switchStreamer('promaster_stream3', 'Canal Reservado Pro', false, '1080p60')" class="streamer-card bg-[#141824] border border-slate-800 p-4 rounded-xl flex flex-col justify-between hover:border-slate-600">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="bg-blue-950/80 text-blue-400 border border-blue-800/40 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5">
-                                    <i class="fas fa-clock text-[9px]"></i> PRÓXIMO
-                                </span>
-                                <span class="text-[11px] text-slate-400 font-mono"><i class="fas fa-shield text-blue-400 mr-1"></i>3R5 Partner</span>
-                            </div>
-                            <div class="flex items-center space-x-3 mb-2">
-                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 font-bold text-lg">
-                                    <i class="fas fa-user-plus text-sm"></i>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <h4 class="font-bold text-white text-sm truncate">Próximo Streamer</h4>
-                                    <p class="text-xs text-slate-400 truncate">Espacio Disponible</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                            <span>Mochila: <strong class="text-slate-200">Belabox 5G</strong></span>
-                            <span class="text-blue-400">Reservar slot</span>
-                        </div>
-                    </div>
-
-                    <!-- 4. Tarjeta Botón "Añadir Nuevo Streamer / Canal" -->
-                    <div onclick="requestNewStreamer()" class="streamer-card bg-slate-900/60 border border-dashed border-[#00e701]/40 p-4 rounded-xl flex flex-col justify-center items-center text-center hover:bg-[#00e701]/5 hover:border-[#00e701] transition group cursor-pointer">
-                        <div class="w-12 h-12 rounded-full bg-[#00e701]/10 text-[#00e701] border border-[#00e701]/30 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i class="fas fa-plus text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-white text-sm mb-1">¿Eres Streamer IRL?</h4>
-                        <p class="text-slate-400 text-xs mb-3">Integra tu canal en el panel de telemetría de 3R5 PROMASTER</p>
-                        <span class="text-xs text-[#00e701] font-semibold underline underline-offset-4">Solicitar enlace aquí &rarr;</span>
-                    </div>
-
                 </div>
             </div>
 
@@ -601,27 +291,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <form id="contact-form" class="space-y-4 max-w-xl mx-auto">
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Nombre</label>
-                    <input type="text" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                    <input type="text" name="nombre" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Correo Electrónico</label>
-                    <input type="email" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                    <input type="email" name="email" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Servicio Requerido</label>
-                    <select id="contact-service-select" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
-                        <option>Streaming IRL</option>
-                        <option>Grabación y Cámaras</option>
-                        <option>Organización y Eventos</option>
-                        <option>Asistencia Técnica / PC</option>
-                        <option value="Monitoreo Kick / Multi-Streamer">Monitoreo Kick / Integración de Streamer</option>
+                    <select name="servicio" id="contact-service-select" class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
+                        <option value="Streaming IRL">Streaming IRL</option>
+                        <option value="Grabacion y Camaras">Grabación y Cámaras</option>
+                        <option value="Organizacion y Eventos">Organización y Eventos</option>
+                        <option value="Asistencia Tecnica">Asistencia Técnica / PC</option>
+                        <option value="Monitoreo Kick">Monitoreo Kick / Integración de Streamer</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Mensaje o Nombre de Usuario Kick</label>
-                    <textarea id="contact-message-input" required rows="4" placeholder="Indica los detalles de tu transmisión o el nombre de tu canal de Kick..." class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                    <textarea name="mensaje" id="contact-message-input" required rows="4" placeholder="Indica los detalles de tu transmisión..." class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
+                <button type="submit" id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
                 <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente. Nos pondremos en contacto pronto.</div>
             </form>
         </div>
@@ -650,153 +340,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
+    <!-- Script Limpio (Solo lógica de Cookies, el resto lo hace app.js) -->
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Smooth scroll handler
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if(el) {
                 el.scrollIntoView({ behavior: 'smooth' });
-                document.getElementById('mobile-menu').classList.add('hidden');
             }
         }
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                scrollToSection(this.getAttribute('href').substring(1));
-            });
-        });
-
-        // Form submission demo
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const msg = document.getElementById('form-msg');
-            msg.classList.remove('hidden');
-            this.reset();
-            setTimeout(() => msg.classList.add('hidden'), 4000);
-        });
-
-        // Cookie management
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
             document.getElementById('cookie-banner').classList.remove('show');
         }
-
         function rejectCookies() {
             localStorage.setItem('cookieConsent', 'rejected');
             document.getElementById('cookie-banner').classList.remove('show');
         }
-
         if (!localStorage.getItem('cookieConsent')) {
             setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
         }
-
-        // Dynamic Streamer Switcher function
-        function switchStreamer(username, displayName, isLive = true, resolution = '1080p60') {
-            const playerIframe = document.getElementById('kick-player-iframe');
-            const chatIframe = document.getElementById('kick-chat-iframe');
-            const displayUsername = document.getElementById('active-streamer-display');
-            const chatStreamerName = document.getElementById('chat-streamer-name');
-            const resVal = document.getElementById('metric-res-val');
-            
-            // Status Badges
-            const liveBadge = document.getElementById('live-status-badge');
-            const liveDot = document.getElementById('live-status-dot');
-            const liveText = document.getElementById('live-status-text');
-            const metricStatusVal = document.getElementById('metric-status-val');
-
-            // Update IFrames
-            if (playerIframe) {
-                playerIframe.src = `https://player.kick.com/${username}`;
-            }
-            if (chatIframe) {
-                chatIframe.src = `https://kick.com/popout/${username}/chat`;
-            }
-
-            // Update Labels
-            if (displayUsername) displayUsername.textContent = username;
-            if (chatStreamerName) chatStreamerName.textContent = username;
-            if (resVal) resVal.textContent = resolution;
-
-            // Update Live UI status
-            if (isLive) {
-                if (liveBadge) liveBadge.className = "flex items-center space-x-2 bg-emerald-950/80 border border-[#00e701]/40 px-3 py-1 rounded-md";
-                if (liveDot) liveDot.className = "live-dot";
-                if (liveText) {
-                    liveText.textContent = "EN VIVO";
-                    liveText.className = "text-xs font-bold text-[#00e701] tracking-wide";
-                }
-                if (metricStatusVal) {
-                    metricStatusVal.textContent = "EN VIVO";
-                    metricStatusVal.className = "text-[#00e701]";
-                }
-            } else {
-                if (liveBadge) liveBadge.className = "flex items-center space-x-2 bg-slate-800 border border-slate-700 px-3 py-1 rounded-md";
-                if (liveDot) liveDot.className = "offline-dot";
-                if (liveText) {
-                    liveText.textContent = "STANDBY";
-                    liveText.className = "text-xs font-bold text-slate-400 tracking-wide";
-                }
-                if (metricStatusVal) {
-                    metricStatusVal.textContent = "STANDBY";
-                    metricStatusVal.className = "text-slate-400";
-                }
-            }
-
-            // Highlight Active Card
-            document.querySelectorAll('.streamer-card').forEach(card => {
-                card.classList.remove('active');
-            });
-            const activeCard = document.getElementById(`card-${username}`);
-            if (activeCard) {
-                activeCard.classList.add('active');
-            }
-        }
-
-        // Function to scroll to contact and prepare request for new streamer
-        function requestNewStreamer() {
-            scrollToSection('contacto');
-            const selectEl = document.getElementById('contact-service-select');
-            const messageEl = document.getElementById('contact-message-input');
-            
-            if (selectEl) {
-                selectEl.value = "Monitoreo Kick / Multi-Streamer";
-            }
-            if (messageEl) {
-                messageEl.value = "Hola 3R5 ProMaster, me gustaría solicitar la integración de mi canal de Kick a la plataforma de monitoreo. Canal: @";
-                messageEl.focus();
-            }
-        }
-
-        // Telemetry Micro-fluctuations Simulation (Bitrate, Latency & FPS live telemetry feed)
-        setInterval(() => {
-            const bitrateEl = document.getElementById('live-bitrate');
-            const fpsEl = document.getElementById('live-fps');
-            const latencyEl = document.getElementById('live-latency');
-
-            if (bitrateEl) {
-                // Bitrate fluctuation around 6,500 Kbps (6,440 - 6,560)
-                const randomBitrate = Math.floor(6500 + (Math.random() * 120 - 60));
-                bitrateEl.textContent = randomBitrate.toLocaleString();
-            }
-
-            if (fpsEl) {
-                // Slight FPS variance 59.8 - 60.0
-                const randomFps = (59.8 + Math.random() * 0.2).toFixed(1);
-                fpsEl.textContent = randomFps;
-            }
-
-            if (latencyEl) {
-                // Latency variance 1.05s - 1.15s
-                const randomLatency = (1.08 + (Math.random() * 0.08 - 0.04)).toFixed(2);
-                latencyEl.textContent = randomLatency;
-            }
-        }, 2000);
     </script>
 </body>
 </html>
