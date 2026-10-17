@@ -10,12 +10,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* Fondo con Mural de Graffiti / Arte Urbano + Capa Oscura de Alto Contraste */
+        /* Fondo con Mural de Arte Urbano / Graffitis + Capa Oscura de Alto Contraste */
         body {
             background-color: #0b0e14;
             background-image: 
                 linear-gradient(to bottom, rgba(11, 14, 20, 0.88), rgba(11, 14, 20, 0.95)),
-                url('https://wallpapercat.com/w/full/c/d/c/1273601-2048x1152-desktop-hd-master-shifu-background-photo.jpg');
+                url('https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -74,7 +74,7 @@
 
             <h2 class="text-2xl font-bold text-white mb-3">Activar Transmisión</h2>
             <p class="text-slate-400 text-sm mb-8 leading-relaxed">
-                El video y el chat están en pausa para proteger tu consumo de datos móviles. Presiona el botón para conectar a los servidores de Kick.
+                El video y el chat están en pausa para proteger tu consumo de datos móviles (LTE/5G). Presiona el botón para conectar a los servidores de Kick.
             </p>
 
             <button id="btn-iniciar-monitoreo" onclick="activarStream()" class="w-full bg-[#00e701] hover:bg-[#00c701] text-black font-bold py-4 rounded-xl transition shadow-[0_0_20px_rgba(0,231,1,0.4)] hover:shadow-[0_0_30px_rgba(0,231,1,0.6)] flex justify-center items-center gap-3 text-lg">
@@ -82,29 +82,49 @@
             </button>
         </div>
 
-        <!-- Paso 2: Contenedor del Reproductor y Chat en Pantalla Completa (Oculto inicialmente) -->
+        <!-- Paso 2: Contenedor del Reproductor y Chat -->
         <div id="stream-display" class="hidden w-full max-w-6xl mt-2">
-            <!-- Barra superior de controles del stream -->
-            <div class="flex justify-between items-center mb-4 bg-slate-950/90 p-3 rounded-xl border border-slate-800">
+            
+            <!-- Barra Superior de Controles (Modo Ahorro de Datos Granular) -->
+            <div class="flex flex-wrap justify-between items-center gap-3 mb-4 bg-slate-950/90 p-3 rounded-xl border border-slate-800 shadow-xl">
+                
+                <!-- Estado En Vivo -->
                 <span class="text-xs text-[#00e701] font-bold uppercase tracking-wider flex items-center gap-2">
                     <span class="w-2.5 h-2.5 bg-[#00e701] rounded-full animate-ping"></span> TRANSMISIÓN EN VIVO
                 </span>
-                <button onclick="pausarStream()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition">
-                    <i class="fas fa-pause mr-1"></i> Pausar (Ahorrar Datos)
-                </button>
+
+                <!-- Botones de Control de Datos -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <!-- Control Individual de Video -->
+                    <button id="btn-toggle-video" onclick="toggleVideo()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
+                        <i class="fas fa-pause"></i> Pausar Video
+                    </button>
+
+                    <!-- Control Individual de Chat -->
+                    <button id="btn-toggle-chat" onclick="toggleChat()" class="bg-purple-600/80 hover:bg-purple-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
+                        <i class="fas fa-pause"></i> Pausar Chat
+                    </button>
+
+                    <!-- Pausar Todo (Cerrar Todo) -->
+                    <button onclick="pausarStream()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
+                        <i class="fas fa-power-off"></i> Pausar Todo (Ahorrar Datos)
+                    </button>
+                </div>
             </div>
 
             <!-- Grid de Video (16:9) + Chat -->
             <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 w-full">
                 <!-- Área de Video -->
-                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-2xl min-h-[320px] lg:min-h-[520px]">
-                    <div id="video-frame" class="w-full h-full"></div>
+                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-2xl min-h-[320px] lg:min-h-[520px] flex items-center justify-center">
+                    <div id="video-frame" class="w-full h-full flex items-center justify-center"></div>
                 </div>
+
                 <!-- Área de Chat -->
-                <div class="w-full h-[520px] lg:h-auto min-h-[520px] bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
-                    <div id="chat-frame" class="w-full h-full"></div>
+                <div class="w-full h-[520px] lg:h-auto min-h-[520px] bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-2xl flex items-center justify-center">
+                    <div id="chat-frame" class="w-full h-full flex items-center justify-center"></div>
                 </div>
             </div>
+
         </div>
 
     </main>
@@ -131,40 +151,109 @@
         </div>
     </div>
 
-    <!-- Script de Control -->
+    <!-- Script de Control con Ahorro de Datos Real -->
     <script>
+        const channelName = 'adrianozendejas32';
+        let isVideoActive = false;
+        let isChatActive = false;
+
         function activarStream() {
             const card = document.getElementById('activation-card');
             const display = document.getElementById('stream-display');
-            const vFrame = document.getElementById('video-frame');
-            const cFrame = document.getElementById('chat-frame');
             
-            // Oculta la tarjeta y muestra el reproductor grande
             if(card) card.classList.add('hidden');
             if(display) display.classList.remove('hidden');
 
-            // Carga los iframes
+            // Cargar ambos al iniciar
+            loadVideo();
+            loadChat();
+        }
+
+        /* --- CONTROL DE VIDEO --- */
+        function loadVideo() {
+            const vFrame = document.getElementById('video-frame');
+            const btnVideo = document.getElementById('btn-toggle-video');
             if(vFrame) {
-                vFrame.innerHTML = `<iframe src="https://player.kick.com/adrianozendejas32" class="w-full h-full border-0" allowfullscreen="true"></iframe>`;
+                vFrame.innerHTML = `<iframe src="https://player.kick.com/${channelName}" class="w-full h-full border-0" allowfullscreen="true"></iframe>`;
             }
-            if(cFrame) {
-                cFrame.innerHTML = `<iframe src="https://kick.com/popout/adrianozendejas32/chat" class="w-full h-full border-0"></iframe>`;
+            if(btnVideo) {
+                btnVideo.innerHTML = `<i class="fas fa-pause"></i> Pausar Video`;
+                btnVideo.className = "bg-blue-600/80 hover:bg-blue-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow";
+            }
+            isVideoActive = true;
+        }
+
+        function unloadVideo() {
+            const vFrame = document.getElementById('video-frame');
+            const btnVideo = document.getElementById('btn-toggle-video');
+            if(vFrame) {
+                // Se vacía el iframe destruyendo la conexión de red
+                vFrame.innerHTML = `<div class="text-slate-500 text-center p-6 flex flex-col items-center justify-center gap-2"><i class="fas fa-video-slash text-4xl text-slate-600"></i><span class="font-semibold text-sm text-slate-400">Video Pausado (Datos Protegidos)</span></div>`;
+            }
+            if(btnVideo) {
+                btnVideo.innerHTML = `<i class="fas fa-play"></i> Cargar Video`;
+                btnVideo.className = "bg-emerald-600/80 hover:bg-emerald-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow";
+            }
+            isVideoActive = false;
+        }
+
+        function toggleVideo() {
+            if (isVideoActive) {
+                unloadVideo();
+            } else {
+                loadVideo();
             }
         }
 
+        /* --- CONTROL DE CHAT --- */
+        function loadChat() {
+            const cFrame = document.getElementById('chat-frame');
+            const btnChat = document.getElementById('btn-toggle-chat');
+            if(cFrame) {
+                cFrame.innerHTML = `<iframe src="https://kick.com/popout/${channelName}/chat" class="w-full h-full border-0"></iframe>`;
+            }
+            if(btnChat) {
+                btnChat.innerHTML = `<i class="fas fa-pause"></i> Pausar Chat`;
+                btnChat.className = "bg-purple-600/80 hover:bg-purple-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow";
+            }
+            isChatActive = true;
+        }
+
+        function unloadChat() {
+            const cFrame = document.getElementById('chat-frame');
+            const btnChat = document.getElementById('btn-toggle-chat');
+            if(cFrame) {
+                // Se vacía el iframe desconectando el chat en tiempo real
+                cFrame.innerHTML = `<div class="text-slate-500 text-center p-6 flex flex-col items-center justify-center gap-2"><i class="fas fa-comment-slash text-4xl text-slate-600"></i><span class="font-semibold text-sm text-slate-400">Chat Pausado</span></div>`;
+            }
+            if(btnChat) {
+                btnChat.innerHTML = `<i class="fas fa-play"></i> Cargar Chat`;
+                btnChat.className = "bg-emerald-600/80 hover:bg-emerald-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow";
+            }
+            isChatActive = false;
+        }
+
+        function toggleChat() {
+            if (isChatActive) {
+                unloadChat();
+            } else {
+                loadChat();
+            }
+        }
+
+        /* --- PAUSAR TODO --- */
         function pausarStream() {
             const card = document.getElementById('activation-card');
             const display = document.getElementById('stream-display');
-            const vFrame = document.getElementById('video-frame');
-            const cFrame = document.getElementById('chat-frame');
 
-            if(vFrame) vFrame.innerHTML = '';
-            if(cFrame) cFrame.innerHTML = '';
+            unloadVideo();
+            unloadChat();
+
             if(display) display.classList.add('hidden');
             if(card) card.classList.remove('hidden');
         }
 
-        // Control del Banner de Cookies
+        /* --- BANNER DE COOKIES --- */
         function hideCookieBanner() {
             const banner = document.getElementById('cookie-banner');
             if (banner) banner.classList.remove('active');
