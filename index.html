@@ -14,13 +14,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3R5 ProMaster</title>
-    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, y monitoreo exclusivo de Kick.">
+    <meta name="description" content="Soporte de streaming IRL, conexión de cámaras, y monitoreo exclusivo.">
     
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Archivos Locales (Organizados) -->
+    <!-- Archivos Locales -->
     <link href="css/styles.css" rel="stylesheet">
     <script src="js/app.js" defer></script>
 </head>
@@ -39,14 +39,20 @@
                     <span class="text-lg font-bold tracking-wide text-white">3R5 <span class="text-blue-500">PROMASTER</span></span>
                 </div>
 
-                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
-                    <a href="#inicio" class="nav-link hover:text-blue-400 transition">Inicio</a>
-                    <a href="#streaming-irl" class="nav-link hover:text-blue-400 transition">Streaming IRL</a>
-                    <a href="#grabacion-camaras" class="nav-link hover:text-blue-400 transition">Cámaras & Grabación</a>
-                    <a href="#eventos-logistica" class="nav-link hover:text-blue-400 transition">Eventos & Traslados</a>
-                    <a href="#tecnologia-asistencia" class="nav-link hover:text-blue-400 transition">Asistencia Técnica</a>
-                    <a href="#monitoreo-adriano" class="nav-link hover:text-blue-400 transition text-[#00e701] font-bold">Monitoreo Kick</a>
-                    <a href="#contacto" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold">Contacto</a>
+                <div class="hidden lg:flex items-center space-x-5 text-sm font-medium">
+                    <a onclick="scrollToSection('inicio')" class="cursor-pointer nav-link hover:text-blue-400 transition">Inicio</a>
+                    <a onclick="scrollToSection('streaming-irl')" class="cursor-pointer nav-link hover:text-blue-400 transition">Streaming IRL</a>
+                    <a onclick="scrollToSection('grabacion-camaras')" class="cursor-pointer nav-link hover:text-blue-400 transition">Cámaras & Grabación</a>
+                    <a onclick="scrollToSection('eventos-logistica')" class="cursor-pointer nav-link hover:text-blue-400 transition">Eventos & Traslados</a>
+                    <a onclick="scrollToSection('tecnologia-asistencia')" class="cursor-pointer nav-link hover:text-blue-400 transition">Asistencia Técnica</a>
+                    <a onclick="scrollToSection('monitor-canales')" class="cursor-pointer nav-link hover:text-blue-400 transition text-[#00e701] font-bold">Monitor Shifu</a>
+                    
+                    <div class="flex items-center space-x-2 pl-3 border-l border-slate-800">
+                        <button onclick="scrollToSection('contacto')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-lg transition font-semibold">Contacto</button>
+                        <a href="login.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                            <i class="fas fa-user-shield"></i> Login
+                        </a>
+                    </div>
                 </div>
 
                 <button id="mobile-menu-btn" class="lg:hidden text-slate-400 hover:text-white p-2" aria-label="Abrir menú">
@@ -55,13 +61,18 @@
             </div>
 
             <div id="mobile-menu" class="lg:hidden hidden border-t border-slate-800 py-4 space-y-3">
-                <a href="#inicio" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Inicio</a>
-                <a href="#streaming-irl" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Streaming IRL</a>
-                <a href="#grabacion-camaras" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Cámaras & Grabación</a>
-                <a href="#eventos-logistica" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Eventos & Traslados</a>
-                <a href="#tecnologia-asistencia" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Asistencia Técnica</a>
-                <a href="#monitoreo-adriano" class="block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">Monitoreo Kick</a>
-                <a href="#contacto" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold">Contacto</a>
+                <a onclick="scrollToSection('inicio')" class="cursor-pointer block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Inicio</a>
+                <a onclick="scrollToSection('streaming-irl')" class="cursor-pointer block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Streaming IRL</a>
+                <a onclick="scrollToSection('grabacion-camaras')" class="cursor-pointer block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Cámaras & Grabación</a>
+                <a onclick="scrollToSection('eventos-logistica')" class="cursor-pointer block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Eventos & Traslados</a>
+                <a onclick="scrollToSection('tecnologia-asistencia')" class="cursor-pointer block px-3 py-2 rounded-md hover:bg-slate-800 text-slate-300">Asistencia Técnica</a>
+                <a onclick="scrollToSection('monitor-canales')" class="cursor-pointer block px-3 py-2 rounded-md hover:bg-slate-800 text-[#00e701] font-bold">Monitor Shifu</a>
+                <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+                    <button onclick="scrollToSection('contacto')" class="block w-full px-3 py-2 bg-slate-800 text-center rounded-md text-white font-semibold border border-slate-700">Contacto</button>
+                    <a href="login.html" class="block px-3 py-2 bg-blue-600 text-center rounded-md text-white font-semibold flex justify-center items-center gap-2">
+                        <i class="fas fa-user-shield"></i> Login
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -193,7 +204,6 @@
                 </div>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- Puntos Originales -->
                 <div class="bg-solid-card p-6 rounded-xl">
                     <i class="fas fa-user-shield text-2xl text-emerald-400 mb-3"></i>
                     <h4 class="text-lg font-bold text-white mb-2">Asistencia en Vivo</h4>
@@ -209,8 +219,6 @@
                     <h4 class="text-lg font-bold text-white mb-2">Redundancia de Señal</h4>
                     <p class="text-slate-400 text-sm">Configuración de enlaces de respaldo para evitar cortes por caída de internet local.</p>
                 </div>
-
-                <!-- Nuevos Puntos Integrados -->
                 <div class="bg-solid-card p-6 rounded-xl">
                     <i class="fas fa-laptop-code text-2xl text-teal-400 mb-3"></i>
                     <h4 class="text-lg font-bold text-white mb-2">Instalación de Software</h4>
@@ -230,54 +238,61 @@
         </div>
     </section>
 
-    <!-- 5. MONITOREO KICK IRL -->
-    <section id="monitoreo-adriano" class="py-16 bg-[#0b0e14] min-h-screen border-b border-slate-800 flex flex-col items-center">
-        <div class="max-w-6xl w-full mx-auto px-4">
+    <!-- 5. MONITOR DE CANALES -->
+    <section id="monitor-canales" class="py-20 bg-[#0b0e14] min-h-[75vh] border-b border-slate-800 flex flex-col items-center justify-center">
+        <div class="max-w-4xl w-full mx-auto px-4 text-center">
             
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
-                    <i class="fas fa-tower-cell"></i> <span>SEÑAL EXCLUSIVA</span>
-                </div>
-                <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider">Monitoreo <span class="text-[#00e701]">Adrianozendejas32</span></h2>
-                <p class="text-slate-400 mt-2">Transmisión oficial e interacción en tiempo real.</p>
+            <div class="inline-flex items-center space-x-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+                <i class="fas fa-shield-alt"></i> <span>Área Segura y Privada</span>
             </div>
+            
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white uppercase tracking-wider mb-4">
+                Monitor de <span class="text-blue-500">Canales</span>
+            </h2>
+            
+            <p class="text-slate-400 mb-12 max-w-2xl mx-auto text-lg">
+                Plataforma centralizada para gestionar y monitorear múltiples streams en vivo. Diseñada para proteger tu consumo de datos móviles en campo.
+            </p>
 
-            <!-- Paso 1: Panel de Login (Evita carga automática de datos) -->
-            <div id="login-panel" class="max-w-md mx-auto bg-[#141824] border border-[#00e701]/30 rounded-xl p-8 shadow-[0_0_20px_rgba(0,231,1,0.1)] mt-8 text-center">
-                <div class="w-20 h-20 mx-auto bg-slate-900 border-2 border-[#00e701] rounded-full flex items-center justify-center mb-6 overflow-hidden">
-                    <img src="https://ui-avatars.com/api/?name=Adriano+Zendejas&background=00e701&color=000" alt="Avatar">
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Iniciar Sesión para Monitoreo</h3>
-                <p class="text-sm text-slate-400 mb-6">Ingresa para activar el chat y el video. Este paso protege tu consumo de datos móviles (LTE/5G).</p>
-                
-                <input type="text" id="viewer-username" placeholder="Tu usuario de Kick (Opcional)" class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-lg mb-4 focus:outline-none focus:border-[#00e701]">
-                
-                <button id="btn-enter-stream" class="w-full bg-[#00e701] hover:bg-[#00c701] text-black font-bold py-3 rounded-lg transition shadow-lg flex justify-center items-center gap-2">
-                    <i class="fas fa-sign-in-alt"></i> Entrar a la Transmisión
-                </button>
-            </div>
+            <div class="bg-[#141824] border border-slate-800 rounded-3xl p-10 md:p-14 mb-10 shadow-2xl flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-90 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-[#00e701]"></div>
 
-            <!-- Paso 2: Contenedor del Stream (Oculto inicialmente) -->
-            <div id="stream-workspace" class="hidden mt-6">
-                <!-- Controles de Ahorro de Datos -->
-                <div class="flex flex-wrap justify-center gap-3 mb-6">
-                    <button id="btn-load-video" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white text-xs font-bold transition"><i class="fas fa-video mr-1"></i>Video</button>
-                    <button id="btn-load-chat" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded text-white text-xs font-bold transition"><i class="fas fa-comments mr-1"></i>Chat</button>
-                    <button id="btn-stop-all" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white text-xs font-bold transition"><i class="fas fa-pause mr-1"></i>Pausar Todo (Ahorrar Datos)</button>
-                </div>
-
-                <div class="grid lg:grid-cols-[1fr_350px] gap-6">
-                    <!-- Área de Video -->
-                    <div id="video-container" class="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-slate-700 flex items-center justify-center">
-                        <span class="text-slate-500 font-medium">Video Pausado</span>
+                <!-- KICK -->
+                <div class="flex flex-col items-center justify-center gap-3 transition hover:scale-110">
+                    <div class="w-20 h-20 bg-[#00e701]/10 rounded-2xl flex items-center justify-center text-[#00e701] text-4xl shadow-[0_0_20px_rgba(0,231,1,0.15)] border border-[#00e701]/30">
+                        <strong>K</strong>
                     </div>
-
-                    <!-- Área de Chat -->
-                    <div id="chat-container" class="w-full h-[520px] lg:h-full bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-xl flex items-center justify-center">
-                        <span class="text-slate-500 font-medium">Chat Pausado</span>
+                    <span class="text-xs text-slate-500 font-bold tracking-widest">KICK</span>
+                </div>
+                
+                <!-- TWITCH -->
+                <div class="flex flex-col items-center justify-center gap-3 transition hover:scale-110">
+                    <div class="w-20 h-20 bg-purple-600/10 rounded-2xl flex items-center justify-center text-purple-500 text-4xl shadow-[0_0_20px_rgba(168,85,247,0.15)] border border-purple-500/30">
+                        <i class="fab fa-twitch"></i>
                     </div>
+                    <span class="text-xs text-slate-500 font-bold tracking-widest">TWITCH</span>
+                </div>
+
+                <!-- YOUTUBE -->
+                <div class="flex flex-col items-center justify-center gap-3 transition hover:scale-110">
+                    <div class="w-20 h-20 bg-red-600/10 rounded-2xl flex items-center justify-center text-red-500 text-4xl shadow-[0_0_20px_rgba(239,68,68,0.15)] border border-red-500/30">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <span class="text-xs text-slate-500 font-bold tracking-widest">YOUTUBE</span>
+                </div>
+
+                <!-- TIKTOK -->
+                <div class="flex flex-col items-center justify-center gap-3 transition hover:scale-110">
+                    <div class="w-20 h-20 bg-white/5 rounded-2xl flex items-center justify-center text-white text-4xl shadow-[0_0_20px_rgba(255,255,255,0.1)] border border-slate-600/50">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <span class="text-xs text-slate-500 font-bold tracking-widest">TIKTOK</span>
                 </div>
             </div>
+
+            <a href="login.html" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-xl transition shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] gap-3 text-lg">
+                <i class="fas fa-sign-in-alt"></i> Ingresar al Panel de Shifu
+            </a>
 
         </div>
     </section>
@@ -312,7 +327,7 @@
                     <textarea name="mensaje" id="contact-message-input" required rows="4" placeholder="Indica los detalles de tu transmisión..." class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
                 </div>
                 <button type="submit" id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Enviar Mensaje</button>
-                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center">Mensaje enviado exitosamente. Nos pondremos en contacto pronto.</div>
+                <div id="form-msg" class="hidden p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center mt-3">Mensaje enviado exitosamente. Nos pondremos en contacto pronto.</div>
             </form>
         </div>
     </section>
@@ -340,24 +355,33 @@
         </div>
     </div>
 
-    <!-- Script Limpio (Solo lógica de Cookies, el resto lo hace app.js) -->
+    <!-- Script de navegación y cookies -->
     <script>
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if(el) {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
                 el.scrollIntoView({ behavior: 'smooth' });
             }
         }
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
-            document.getElementById('cookie-banner').classList.remove('show');
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.remove('show');
         }
         function rejectCookies() {
             localStorage.setItem('cookieConsent', 'rejected');
-            document.getElementById('cookie-banner').classList.remove('show');
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.remove('show');
         }
         if (!localStorage.getItem('cookieConsent')) {
-            setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 1000);
+            setTimeout(() => {
+                const banner = document.getElementById('cookie-banner');
+                if(banner) banner.classList.add('show');
+            }, 1000);
         }
     </script>
 </body>
