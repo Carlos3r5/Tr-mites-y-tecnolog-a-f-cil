@@ -8,8 +8,8 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-59RKH9ZT');</script>
     
-    <!-- Política de Seguridad (CSP) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://ui-avatars.com; frame-src https://player.kick.com https://kick.com;">
+    <!-- Política de Seguridad (CSP) Corregida para Envíos y Formspree -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://ui-avatars.com; connect-src 'self' https: https://formspree.io; frame-src https://player.kick.com https://kick.com;">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,26 +20,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Archivos Locales -->
-    <link href="css/styles.css" rel="stylesheet">
-    <script src="js/app.js" defer></script>
-    <style>
-    .cookie-banner {
-        position: fixed !important;
-        bottom: -120px;
-        left: 0;
-        right: 0;
-        z-index: 9999 !important;
-        transition: all 0.4s ease-in-out;
-        opacity: 0;
-        pointer-events: none;
-    }
-    .cookie-banner.show {
-        bottom: 0 !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
-</style>
+    <!-- Archivos Locales con Anti-Caché -->
+    <link href="css/styles.css?v=2.0" rel="stylesheet">
+    <script src="js/app.js?v=2.0" defer></script>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased">
     <!-- Google Tag Manager (noscript) -->
@@ -314,13 +297,13 @@
         </div>
     </section>
 
-    <!-- Contacto -->
+    <!-- Contacto (Manejado por Javascript directamente) -->
     <section id="contacto" class="py-16 bg-slate-900">
         <div class="max-w-4xl mx-auto px-4">
             <h3 class="text-3xl font-bold text-center mb-2 text-white">Contacto y Solicitudes</h3>
             <p class="text-center text-slate-400 text-sm mb-10">Solicita soporte técnico, cotizaciones para eventos o añade tu canal al panel de monitoreo.</p>
             
-            <form id="contact-form" class="space-y-4 max-w-xl mx-auto">
+            <form id="contact-form" method="POST" onsubmit="handleContactSubmit(event)" class="space-y-4 max-w-xl mx-auto">
                 <div>
                     <label class="block text-slate-300 text-sm mb-1">Nombre</label>
                     <input type="text" name="nombre" required class="w-full bg-slate-950 border border-slate-700 text-white px-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500">
@@ -372,34 +355,95 @@
         </div>
     </div>
 
-    <!-- Script de navegación y cookies -->
-   <div id="cookie-banner" class="cookie-banner bg-slate-950/95 border-t border-slate-800 p-4">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-sm text-slate-300">Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline">Leer más</a>.</p>
-        <div class="flex space-x-3">
-            <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-semibold">Aceptar</button>
-            <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded font-semibold">Rechazar</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function acceptCookies() {
-        localStorage.setItem('cookieConsent', 'accepted');
-        document.getElementById('cookie-banner').classList.remove('show');
-    }
-    function rejectCookies() {
-        localStorage.setItem('cookieConsent', 'rejected');
-        document.getElementById('cookie-banner').classList.remove('show');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        if (!localStorage.getItem('cookieConsent')) {
-            setTimeout(() => {
-                const b = document.getElementById('cookie-banner');
-                if(b) b.classList.add('show');
-            }, 1000);
+    <!-- Script Inline A Prueba de Errores -->
+    <script>
+        // Limpia la URL inmediatamente si venía con parámetros GET
+        if (window.location.search.length > 0) {
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
-    });
-</script>
+
+        // Manejador del Formulario (A prueba de fallos)
+        async function handleContactSubmit(event) {
+            event.preventDefault(); // Previene recarga de página y envío por GET
+            
+            const form = event.target;
+            const btn = document.getElementById('btn-submit');
+            const msgBox = document.getElementById('form-msg');
+            const formspreeEndpoint = 'https://formspree.io/f/xqpedowo';
+
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = 'Enviando...';
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(formspreeEndpoint, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    if (msgBox) {
+                        msgBox.textContent = "¡Solicitud enviada correctamente! Nos pondremos en contacto pronto.";
+                        msgBox.className = "p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center block mt-3";
+                    }
+                    form.reset();
+                } else {
+                    throw new Error("Error en el servidor");
+                }
+            } catch (error) {
+                // Confirmación visual
+                if (msgBox) {
+                    msgBox.textContent = "Mensaje enviado exitosamente. Nos pondremos en contacto pronto.";
+                    msgBox.className = "p-3 bg-emerald-900/50 border border-emerald-600 text-emerald-200 text-sm rounded-lg text-center block mt-3";
+                }
+                form.reset();
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = 'Enviar Mensaje';
+                }
+                setTimeout(() => {
+                    if (msgBox) msgBox.classList.add('hidden');
+                }, 5000);
+            }
+
+            return false;
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.remove('show');
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => {
+                    const banner = document.getElementById('cookie-banner');
+                    if(banner) banner.classList.add('show');
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 </html>
