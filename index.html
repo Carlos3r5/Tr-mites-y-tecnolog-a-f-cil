@@ -23,6 +23,23 @@
     <!-- Archivos Locales -->
     <link href="css/styles.css" rel="stylesheet">
     <script src="js/app.js" defer></script>
+    <style>
+    .cookie-banner {
+        position: fixed !important;
+        bottom: -120px;
+        left: 0;
+        right: 0;
+        z-index: 9999 !important;
+        transition: all 0.4s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .cookie-banner.show {
+        bottom: 0 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+</style>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased">
     <!-- Google Tag Manager (noscript) -->
@@ -356,33 +373,33 @@
     </div>
 
     <!-- Script de navegación y cookies -->
-    <script>
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if(el) {
-                const mobileMenu = document.getElementById('mobile-menu');
-                if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-                el.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-        function acceptCookies() {
-            localStorage.setItem('cookieConsent', 'accepted');
-            const banner = document.getElementById('cookie-banner');
-            if(banner) banner.classList.remove('show');
-        }
-        function rejectCookies() {
-            localStorage.setItem('cookieConsent', 'rejected');
-            const banner = document.getElementById('cookie-banner');
-            if(banner) banner.classList.remove('show');
-        }
+   <div id="cookie-banner" class="cookie-banner bg-slate-950/95 border-t border-slate-800 p-4">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-300">Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline">Leer más</a>.</p>
+        <div class="flex space-x-3">
+            <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-semibold">Aceptar</button>
+            <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded font-semibold">Rechazar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function acceptCookies() {
+        localStorage.setItem('cookieConsent', 'accepted');
+        document.getElementById('cookie-banner').classList.remove('show');
+    }
+    function rejectCookies() {
+        localStorage.setItem('cookieConsent', 'rejected');
+        document.getElementById('cookie-banner').classList.remove('show');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
         if (!localStorage.getItem('cookieConsent')) {
             setTimeout(() => {
-                const banner = document.getElementById('cookie-banner');
-                if(banner) banner.classList.add('show');
+                const b = document.getElementById('cookie-banner');
+                if(b) b.classList.add('show');
             }, 1000);
         }
-    </script>
+    });
+</script>
 </body>
 </html>
