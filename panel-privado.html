@@ -10,19 +10,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-    /* Fondo con Mural de Arte Urbano / Graffitis + Capa Oscura de Alto Contraste */
-    body {
-        background-color: #0b0e14;
-        background-image: 
-            linear-gradient(to bottom, rgba(11, 14, 20, 0.5), rgba(11, 14, 20, 0.7)),
-            url('css/shifu.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-    }
+        body {
+            background-color: #0b0e14;
+            background-image: 
+                linear-gradient(to bottom, rgba(11, 14, 20, 0.5), rgba(11, 14, 20, 0.7)),
+                url('css/shifu.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
 
-        /* Banner de Cookies Flotante Corregido */
         #cookie-banner {
             position: fixed;
             bottom: -120px;
@@ -66,7 +64,7 @@
             </h1>
         </div>
 
-        <!-- Paso 1: Card de Activación (Se oculta al hacer clic) -->
+        <!-- Paso 1: Card de Activación -->
         <div id="activation-card" class="max-w-md w-full bg-[#141824]/90 border border-[#00e701]/30 rounded-2xl p-8 md:p-10 shadow-[0_0_40px_rgba(0,231,1,0.2)] backdrop-blur-lg text-center my-6">
             <div class="w-24 h-24 mx-auto bg-[#00e701] text-black font-black text-3xl rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[#00e701]/20">
                 AD
@@ -82,44 +80,42 @@
             </button>
         </div>
 
-        <!-- Paso 2: Contenedor del Reproductor y Chat -->
+        <!-- Paso 2: Contenedor del Stream -->
         <div id="stream-display" class="hidden w-full max-w-6xl mt-2">
             
-            <!-- Barra Superior de Controles (Modo Ahorro de Datos Granular) -->
+            <!-- Barra Superior de Controles -->
             <div class="flex flex-wrap justify-between items-center gap-3 mb-4 bg-slate-950/90 p-3 rounded-xl border border-slate-800 shadow-xl">
                 
-                <!-- Estado En Vivo -->
                 <span class="text-xs text-[#00e701] font-bold uppercase tracking-wider flex items-center gap-2">
                     <span class="w-2.5 h-2.5 bg-[#00e701] rounded-full animate-ping"></span> TRANSMISIÓN EN VIVO
                 </span>
 
-                <!-- Botones de Control de Datos -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <!-- Control Individual de Video -->
+                    <!-- BOTÓN ACTIVAR MODO RÁFAGA (TECLA P) -->
+                    <button id="btn-rafaga" onclick="iniciarModoRafaga()" class="bg-amber-500 hover:bg-amber-600 text-black text-xs px-3.5 py-1.5 rounded font-black transition flex items-center gap-1.5 shadow">
+                        <i class="fas fa-camera"></i> 📸 Activar Ráfaga (Tecla P)
+                    </button>
+
                     <button id="btn-toggle-video" onclick="toggleVideo()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
                         <i class="fas fa-pause"></i> Pausar Video
                     </button>
 
-                    <!-- Control Individual de Chat -->
                     <button id="btn-toggle-chat" onclick="toggleChat()" class="bg-purple-600/80 hover:bg-purple-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
                         <i class="fas fa-pause"></i> Pausar Chat
                     </button>
 
-                    <!-- Pausar Todo (Cerrar Todo) -->
                     <button onclick="pausarStream()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
-                        <i class="fas fa-power-off"></i> Pausar Todo (Ahorrar Datos)
+                        <i class="fas fa-power-off"></i> Pausar Todo
                     </button>
                 </div>
             </div>
 
-            <!-- Grid de Video (16:9) + Chat -->
+            <!-- Grid de Video y Chat -->
             <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 w-full">
-                <!-- Área de Video -->
-                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-2xl min-h-[320px] lg:min-h-[520px] flex items-center justify-center">
+                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-2xl min-h-[320px] lg:min-h-[520px] flex items-center justify-center relative">
                     <div id="video-frame" class="w-full h-full flex items-center justify-center"></div>
                 </div>
 
-                <!-- Área de Chat -->
                 <div class="w-full h-[520px] lg:h-auto min-h-[520px] bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-2xl flex items-center justify-center">
                     <div id="chat-frame" class="w-full h-full flex items-center justify-center"></div>
                 </div>
@@ -129,7 +125,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-950/90 text-slate-500 text-xs py-4 text-center border-t border-slate-800">
         <p>&copy; 3R5 ProMaster. Todos los derechos reservados.</p>
     </footer>
@@ -151,11 +146,16 @@
         </div>
     </div>
 
-    <!-- Script de Control con Ahorro de Datos Real -->
+    <!-- Script de Captura Instantánea por Tecla P -->
     <script>
         const channelName = 'adrianozendejas32';
         let isVideoActive = false;
         let isChatActive = false;
+        
+        let hiddenVideo = document.createElement('video');
+        hiddenVideo.autoplay = true;
+        hiddenVideo.muted = true;
+        let photoCounter = 0;
 
         function activarStream() {
             const card = document.getElementById('activation-card');
@@ -164,10 +164,60 @@
             if(card) card.classList.add('hidden');
             if(display) display.classList.remove('hidden');
 
-            // Cargar ambos al iniciar
             loadVideo();
             loadChat();
         }
+
+        /* --- MODO RÁFAGA (TECLA P) --- */
+        async function iniciarModoRafaga() {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { displaySurface: "browser" },
+                    audio: false
+                });
+                hiddenVideo.srcObject = stream;
+                
+                const btn = document.getElementById('btn-rafaga');
+                if(btn) {
+                    btn.innerHTML = `<i class="fas fa-check-circle"></i> ¡Ráfaga Lista! Presiona 'P'`;
+                    btn.className = "bg-emerald-500 text-black text-xs px-3.5 py-1.5 rounded font-black transition flex items-center gap-1.5 shadow animate-pulse";
+                }
+            } catch (err) {
+                console.log("Captura cancelada o no permitida.");
+            }
+        }
+
+        function tomarFotoInstantanea() {
+            if (!hiddenVideo.srcObject) {
+                iniciarModoRafaga();
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = hiddenVideo.videoWidth || 1920;
+            canvas.height = hiddenVideo.videoHeight || 1080;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(hiddenVideo, 0, 0, canvas.width, canvas.height);
+
+            photoCounter++;
+            const now = new Date();
+            const timeStamp = now.toTimeString().split(' ')[0].replace(/:/g, '-');
+            
+            const link = document.createElement('a');
+            link.download = `Toma_${photoCounter}_${timeStamp}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        /* ATAJO TECLADO: Presiona 'P' para capturar fotos ilimitadas */
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.key.toLowerCase() === 'p') {
+                e.preventDefault();
+                tomarFotoInstantanea();
+            }
+        });
 
         /* --- CONTROL DE VIDEO --- */
         function loadVideo() {
@@ -187,7 +237,6 @@
             const vFrame = document.getElementById('video-frame');
             const btnVideo = document.getElementById('btn-toggle-video');
             if(vFrame) {
-                // Se vacía el iframe destruyendo la conexión de red
                 vFrame.innerHTML = `<div class="text-slate-500 text-center p-6 flex flex-col items-center justify-center gap-2"><i class="fas fa-video-slash text-4xl text-slate-600"></i><span class="font-semibold text-sm text-slate-400">Video Pausado (Datos Protegidos)</span></div>`;
             }
             if(btnVideo) {
@@ -198,11 +247,8 @@
         }
 
         function toggleVideo() {
-            if (isVideoActive) {
-                unloadVideo();
-            } else {
-                loadVideo();
-            }
+            if (isVideoActive) unloadVideo();
+            else loadVideo();
         }
 
         /* --- CONTROL DE CHAT --- */
@@ -223,7 +269,6 @@
             const cFrame = document.getElementById('chat-frame');
             const btnChat = document.getElementById('btn-toggle-chat');
             if(cFrame) {
-                // Se vacía el iframe desconectando el chat en tiempo real
                 cFrame.innerHTML = `<div class="text-slate-500 text-center p-6 flex flex-col items-center justify-center gap-2"><i class="fas fa-comment-slash text-4xl text-slate-600"></i><span class="font-semibold text-sm text-slate-400">Chat Pausado</span></div>`;
             }
             if(btnChat) {
@@ -234,11 +279,8 @@
         }
 
         function toggleChat() {
-            if (isChatActive) {
-                unloadChat();
-            } else {
-                loadChat();
-            }
+            if (isChatActive) unloadChat();
+            else loadChat();
         }
 
         /* --- PAUSAR TODO --- */
