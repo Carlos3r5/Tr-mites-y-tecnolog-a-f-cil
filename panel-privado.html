@@ -36,9 +36,21 @@
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Efecto Flash al tomar foto */
+        .flash-effect {
+            animation: flash 0.15s ease-out;
+        }
+        @keyframes flash {
+            0% { opacity: 1; background-color: white; }
+            100% { opacity: 0; }
+        }
     </style>
 </head>
-<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between">
+<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative">
+
+    <!-- Capa de destello para fotos -->
+    <div id="camera-flash" class="fixed inset-0 z-[10000] pointer-events-none opacity-0"></div>
 
     <!-- Navbar Superior -->
     <nav class="bg-slate-950/90 border-b border-slate-800 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
@@ -93,7 +105,7 @@
                 <div class="flex flex-wrap items-center gap-2">
                     <!-- BOTÓN ACTIVAR MODO RÁFAGA (TECLA P) -->
                     <button id="btn-rafaga" onclick="iniciarModoRafaga()" class="bg-amber-500 hover:bg-amber-600 text-black text-xs px-3.5 py-1.5 rounded font-black transition flex items-center gap-1.5 shadow">
-                        <i class="fas fa-camera"></i> 📸 Activar Ráfaga (Tecla P)
+                        <i class="fas fa-camera"></i> 📸 Activar Captura Rápida (Tecla P)
                     </button>
 
                     <button id="btn-toggle-video" onclick="toggleVideo()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
@@ -146,7 +158,7 @@
         </div>
     </div>
 
-    <!-- Script de Captura Instantánea por Tecla P -->
+    <!-- Script de Captura Instantánea -->
     <script>
         const channelName = 'adrianozendejas32';
         let isVideoActive = false;
@@ -172,25 +184,41 @@
         async function iniciarModoRafaga() {
             try {
                 const stream = await navigator.mediaDevices.getDisplayMedia({
-                    video: { displaySurface: "browser" },
-                    audio: false
+                    video: {
+                        displaySurface: "browser",
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 },
+                        frameRate: { ideal: 30 }
+                    },
+                    audio: false,
+                    preferCurrentTab: true
                 });
-                hiddenVideo.srcObject = stream;
                 
+                hiddenVideo.srcObject = stream;
+                await hiddenVideo.play();
+
                 const btn = document.getElementById('btn-rafaga');
                 if(btn) {
-                    btn.innerHTML = `<i class="fas fa-check-circle"></i> ¡Ráfaga Lista! Presiona 'P'`;
+                    btn.innerHTML = `<i class="fas fa-check-circle"></i> ¡Listo! Presiona 'P' para Fotos`;
                     btn.className = "bg-emerald-500 text-black text-xs px-3.5 py-1.5 rounded font-black transition flex items-center gap-1.5 shadow animate-pulse";
                 }
             } catch (err) {
-                console.log("Captura cancelada o no permitida.");
+                console.log("Selección de pestaña cancelada.");
             }
         }
 
         function tomarFotoInstantanea() {
-            if (!hiddenVideo.srcObject) {
+            if (!hiddenVideo.srcObject || hiddenVideo.readyState < 2) {
                 iniciarModoRafaga();
                 return;
+            }
+
+            // Efecto Flash
+            const flash = document.getElementById('camera-flash');
+            if (flash) {
+                flash.classList.remove('flash-effect');
+                void flash.offsetWidth; // Force Reflow
+                flash.classList.add('flash-effect');
             }
 
             const canvas = document.createElement('canvas');
@@ -204,12 +232,12 @@
             const timeStamp = now.toTimeString().split(' ')[0].replace(/:/g, '-');
             
             const link = document.createElement('a');
-            link.download = `Toma_${photoCounter}_${timeStamp}.png`;
+            link.download = `Captura_${photoCounter}_${timeStamp}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
 
-        /* ATAJO TECLADO: Presiona 'P' para capturar fotos ilimitadas */
+        /* ATAJO TECLADO: Presiona 'P' para capturar */
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
