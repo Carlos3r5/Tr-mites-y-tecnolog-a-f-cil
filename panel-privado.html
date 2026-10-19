@@ -49,7 +49,7 @@
 </head>
 <body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative">
 
-    <!-- Capa de destello para fotos -->
+    <!-- Capa de destello visual -->
     <div id="camera-flash" class="fixed inset-0 z-[10000] pointer-events-none opacity-0"></div>
 
     <!-- Navbar Superior -->
@@ -103,9 +103,8 @@
                 </span>
 
                 <div class="flex flex-wrap items-center gap-2">
-                    <!-- BOTÓN ACTIVAR MODO RÁFAGA (TECLA P) -->
                     <button id="btn-rafaga" onclick="iniciarModoRafaga()" class="bg-amber-500 hover:bg-amber-600 text-black text-xs px-3.5 py-1.5 rounded font-black transition flex items-center gap-1.5 shadow">
-                        <i class="fas fa-camera"></i> 📸 Activar Captura Rápida (Tecla P)
+                        <i class="fas fa-camera"></i> 📸 Activar Captura de Video (Tecla P)
                     </button>
 
                     <button id="btn-toggle-video" onclick="toggleVideo()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs px-3 py-1.5 rounded font-semibold transition flex items-center gap-1.5 shadow">
@@ -158,7 +157,7 @@
         </div>
     </div>
 
-    <!-- Script de Captura Instantánea -->
+    <!-- Script con Recorte Exclusivo del Recuadro de Video -->
     <script>
         const channelName = 'adrianozendejas32';
         let isVideoActive = false;
@@ -180,7 +179,7 @@
             loadChat();
         }
 
-        /* --- MODO RÁFAGA (TECLA P) --- */
+        /* --- INICIALIZAR CAPTURA DE PESTAÑA --- */
         async function iniciarModoRafaga() {
             try {
                 const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -199,45 +198,64 @@
 
                 const btn = document.getElementById('btn-rafaga');
                 if(btn) {
-                    btn.innerHTML = `<i class="fas fa-check-circle"></i> ¡Listo! Presiona 'P' para Fotos`;
+                    btn.innerHTML = `<i class="fas fa-check-circle"></i> ¡Listo! Presiona 'P' para Fotos del Video`;
                     btn.className = "bg-emerald-500 text-black text-xs px-3.5 py-1.5 rounded font-black transition flex items-center gap-1.5 shadow animate-pulse";
                 }
             } catch (err) {
-                console.log("Selección de pestaña cancelada.");
+                console.log("Permiso de pantalla no otorgado.");
             }
         }
 
+        /* --- CAPTURA RECORTADA SOLO DEL VIDEO --- */
         function tomarFotoInstantanea() {
             if (!hiddenVideo.srcObject || hiddenVideo.readyState < 2) {
                 iniciarModoRafaga();
                 return;
             }
 
+            const vFrame = document.getElementById('video-frame');
+            if (!vFrame) return;
+
+            // Obtener posición exacta del recuadro del video en la ventana
+            const rect = vFrame.getBoundingClientRect();
+
+            // Calcular escala entre los píxeles reales capturados y el tamaño del navegador
+            const scaleX = hiddenVideo.videoWidth / window.innerWidth;
+            const scaleY = hiddenVideo.videoHeight / window.innerHeight;
+
+            const cropX = rect.left * scaleX;
+            const cropY = rect.top * scaleY;
+            const cropW = rect.width * scaleX;
+            const cropH = rect.height * scaleY;
+
             // Efecto Flash
             const flash = document.getElementById('camera-flash');
             if (flash) {
                 flash.classList.remove('flash-effect');
-                void flash.offsetWidth; // Force Reflow
+                void flash.offsetWidth;
                 flash.classList.add('flash-effect');
             }
 
+            // Lienzo exclusivo con el área recortada del video
             const canvas = document.createElement('canvas');
-            canvas.width = hiddenVideo.videoWidth || 1920;
-            canvas.height = hiddenVideo.videoHeight || 1080;
+            canvas.width = cropW;
+            canvas.height = cropH;
             const ctx = canvas.getContext('2d');
-            ctx.drawImage(hiddenVideo, 0, 0, canvas.width, canvas.height);
+
+            // Dibujar SOLO el recuadro del video
+            ctx.drawImage(hiddenVideo, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
 
             photoCounter++;
             const now = new Date();
             const timeStamp = now.toTimeString().split(' ')[0].replace(/:/g, '-');
             
             const link = document.createElement('a');
-            link.download = `Captura_${photoCounter}_${timeStamp}.png`;
+            link.download = `Foto_Video_${photoCounter}_${timeStamp}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
 
-        /* ATAJO TECLADO: Presiona 'P' para capturar */
+        /* ATAJO TECLADO: Tecla 'P' */
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
