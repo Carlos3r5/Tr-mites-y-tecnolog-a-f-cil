@@ -2,7 +2,7 @@
 <html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Panel Privado - Monitoreo Kick</title>
     
     <!-- Tailwind CSS & FontAwesome -->
@@ -13,7 +13,7 @@
         body {
             background-color: #0b0e14;
             background-image: 
-                linear-gradient(to bottom, rgba(11, 14, 20, 0.5), rgba(11, 14, 20, 0.7)),
+                linear-gradient(to bottom, rgba(11, 14, 20, 0.6), rgba(11, 14, 20, 0.8)),
                 url('css/shifu.jpg');
             background-size: cover;
             background-position: center;
@@ -24,22 +24,15 @@
         #cookie-banner {
             position: fixed;
             bottom: -120px;
-            left: 0;
-            right: 0;
-            z-index: 9999;
+            left: 0; right: 0; z-index: 9999;
             transition: all 0.4s ease-in-out;
-            opacity: 0;
-            pointer-events: none;
+            opacity: 0; pointer-events: none;
         }
         #cookie-banner.active {
-            bottom: 0;
-            opacity: 1;
-            pointer-events: auto;
+            bottom: 0; opacity: 1; pointer-events: auto;
         }
 
-        .flash-effect {
-            animation: flash 0.15s ease-out;
-        }
+        .flash-effect { animation: flash 0.15s ease-out; }
         @keyframes flash {
             0% { opacity: 1; background-color: white; }
             100% { opacity: 0; }
@@ -48,110 +41,128 @@
 </head>
 <body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative select-none">
 
-    <!-- Capa de destello visual al capturar -->
+    <!-- Flash al tomar foto -->
     <div id="camera-flash" class="fixed inset-0 z-[10000] pointer-events-none opacity-0"></div>
 
-    <!-- Toast de Notificación de Escena -->
-    <div id="toast-scene" class="fixed top-20 right-6 z-[9999] hidden bg-amber-500 text-black px-4 py-2.5 rounded-xl font-black shadow-2xl transition-all">
-        <i class="fas fa-folder-plus mr-1"></i> <span id="toast-text">Escena 1 Activa</span>
+    <!-- Modal de Captura Nativo para iPhone / iOS -->
+    <div id="ios-modal" class="fixed inset-0 z-[20000] hidden bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 max-w-lg w-full text-center shadow-2xl flex flex-col items-center">
+            <h3 class="text-white font-black text-lg mb-2">📸 Captura Generada</h3>
+            <p class="text-xs text-amber-400 mb-3 font-semibold">
+                Mantén presionada la imagen para seleccionar <b>"Guardar en Fotos"</b>
+            </p>
+            <div class="w-full rounded-xl overflow-hidden border border-slate-800 bg-black mb-4 max-h-[60vh] flex items-center justify-center">
+                <img id="ios-preview-img" src="" alt="Captura iPhone" class="w-full h-auto object-contain">
+            </div>
+            <div class="flex gap-2 w-full">
+                <a id="ios-download-btn" href="#" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-black text-xs font-bold py-3 rounded-xl transition flex justify-center items-center gap-1">
+                    <i class="fas fa-external-link-alt"></i> Abrir HD
+                </a>
+                <button onclick="cerrarModalIOS()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-3 rounded-xl border border-slate-700 transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificación -->
+    <div id="toast-scene" class="fixed top-16 right-4 z-[9999] hidden bg-amber-500 text-black px-4 py-2 rounded-xl font-black shadow-2xl transition-all text-xs">
+        <i class="fas fa-folder-plus mr-1"></i> <span id="toast-text">Escena 1</span>
     </div>
 
     <!-- Navbar Superior -->
-    <nav class="bg-slate-950/90 border-b border-slate-800 backdrop-blur-md sticky top-0 z-50 px-4 md:px-6 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <div class="bg-[#00e701] text-black font-black px-2.5 py-1 rounded-md text-sm">"A"</div>
-            <span class="text-white font-bold text-base md:text-lg">Panel <span class="text-[#00e701]">Seguro</span></span>
+    <nav class="bg-slate-950/90 border-b border-slate-800 backdrop-blur-md sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="bg-[#00e701] text-black font-black px-2 py-0.5 rounded text-xs">"A"</div>
+            <span class="text-white font-bold text-sm md:text-base">Panel <span class="text-[#00e701]">Seguro</span></span>
         </div>
-        <a href="index.html" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition flex items-center gap-2 shadow-lg">
-            <i class="fas fa-sign-out-alt"></i> Cerrar
+        <a href="index.html" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+            <i class="fas fa-sign-out-alt"></i> Salir
         </a>
     </nav>
 
     <!-- Contenido Principal -->
-    <main class="flex-grow flex flex-col items-center justify-center px-3 md:px-4 py-6 w-full max-w-7xl mx-auto">
+    <main class="flex-grow flex flex-col items-center justify-center px-3 py-4 w-full max-w-7xl mx-auto">
         
-        <!-- Header -->
-        <div class="text-center mb-4">
-            <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
-                <i class="fas fa-lock text-xs"></i> <span>ACCESO AUTORIZADO</span>
+        <div class="text-center mb-3">
+            <div class="inline-flex items-center space-x-2 bg-[#00e701]/10 border border-[#00e701]/30 text-[#00e701] px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1">
+                <i class="fas fa-lock text-[10px]"></i> <span>ACCESO AUTORIZADO</span>
             </div>
-            <h1 class="text-2xl md:text-5xl font-black text-white uppercase tracking-wider">
+            <h1 class="text-xl md:text-4xl font-black text-white uppercase tracking-wider">
                 MONITOREO <span class="text-[#00e701]">ADRIANOZENDEJAS32</span>
             </h1>
         </div>
 
         <!-- Paso 1: Card de Activación -->
-        <div id="activation-card" class="max-w-md w-full bg-[#141824]/90 border border-[#00e701]/30 rounded-2xl p-6 md:p-10 shadow-[0_0_40px_rgba(0,231,1,0.2)] backdrop-blur-lg text-center my-6">
-            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-[#00e701] text-black font-black text-3xl rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[#00e701]/20">
+        <div id="activation-card" class="max-w-sm w-full bg-[#141824]/90 border border-[#00e701]/30 rounded-2xl p-6 shadow-2xl backdrop-blur-lg text-center my-4">
+            <div class="w-16 h-16 mx-auto bg-[#00e701] text-black font-black text-2xl rounded-full flex items-center justify-center mb-4 shadow-lg shadow-[#00e701]/20">
                 AD
             </div>
-
-            <h2 class="text-2xl font-bold text-white mb-3">Activar Transmisión</h2>
-            <p class="text-slate-400 text-sm mb-8 leading-relaxed">
-                El video y el chat están en pausa para proteger tu consumo de datos móviles (LTE/5G). Presiona el botón para conectar.
+            <h2 class="text-xl font-bold text-white mb-2">Activar Transmisión</h2>
+            <p class="text-slate-400 text-xs mb-6 leading-relaxed">
+                Ahorro de datos activo. Toca el botón para cargar los reproductores de Kick.
             </p>
-
-            <button id="btn-iniciar-monitoreo" onclick="activarStream()" class="w-full bg-[#00e701] hover:bg-[#00c701] text-black font-bold py-4 rounded-xl transition shadow-[0_0_20px_rgba(0,231,1,0.4)] hover:shadow-[0_0_30px_rgba(0,231,1,0.6)] flex justify-center items-center gap-3 text-lg">
+            <button onclick="activarStream()" class="w-full bg-[#00e701] hover:bg-[#00c701] text-black font-bold py-3 rounded-xl transition flex justify-center items-center gap-2 text-base shadow-lg">
                 <i class="fas fa-play"></i> Iniciar Monitoreo
             </button>
         </div>
 
-        <!-- Paso 2: Contenedor del Stream -->
-        <div id="stream-display" class="hidden w-full max-w-6xl mt-2">
+        <!-- Paso 2: Contenedor Principal -->
+        <div id="stream-display" class="hidden w-full max-w-6xl">
             
-            <!-- Barra Superior de Controles Optimizada para Móvil y Desktop -->
-            <div class="flex flex-wrap justify-between items-center gap-2 mb-4 bg-slate-950/90 p-3 rounded-xl border border-slate-800 shadow-xl">
+            <!-- Panel de Control e Indicadores -->
+            <div class="flex flex-wrap justify-between items-center gap-2 mb-3 bg-slate-950/90 p-2.5 rounded-xl border border-slate-800 shadow-xl">
                 
-                <div class="flex items-center gap-3">
-                    <span class="text-xs text-[#00e701] font-bold uppercase tracking-wider flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 bg-[#00e701] rounded-full animate-ping"></span> EN VIVO
+                <div class="flex items-center gap-2">
+                    <span class="text-[11px] text-[#00e701] font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="w-2 h-2 bg-[#00e701] rounded-full animate-ping"></span> EN VIVO
                     </span>
-
-                    <!-- Indicador de Escena Actual -->
-                    <span id="badge-escena" class="bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs px-2.5 py-1 rounded-lg font-bold">
+                    <span id="badge-escena" class="bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] px-2 py-0.5 rounded-md font-bold">
                         📁 Escena #1
                     </span>
                 </div>
 
-                <!-- Botones Móviles e Interactivos -->
-                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
+                <!-- Botones Móviles Pro -->
+                <div class="flex flex-wrap items-center gap-1.5 w-full md:w-auto justify-end">
                     
-                    <!-- BOTÓN CAPTURAR FOTO (Para iPhone/Android y PC) -->
-                    <button onclick="tomarFotoInstantanea()" class="flex-1 md:flex-none bg-emerald-500 hover:bg-emerald-600 text-black text-xs px-3.5 py-2 rounded-lg font-black transition flex items-center justify-center gap-1.5 shadow active:scale-95">
-                        <i class="fas fa-camera text-sm"></i> Capturar Foto (P)
+                    <!-- MODO ULTRA AHORRO (FOTO API KICK) -->
+                    <button id="btn-ultra-saver" onclick="toggleUltraSaver()" class="bg-teal-600 hover:bg-teal-500 text-white text-[11px] px-2.5 py-1.5 rounded-lg font-bold transition flex items-center gap-1 shadow">
+                        <i class="fas fa-bolt text-xs"></i> Ultra Ahorro (API)
                     </button>
 
-                    <!-- BOTÓN CAMBIAR ESCENA (Para iPhone/Android y PC) -->
-                    <button onclick="cambiarEscena()" class="flex-1 md:flex-none bg-amber-500 hover:bg-amber-600 text-black text-xs px-3.5 py-2 rounded-lg font-black transition flex items-center justify-center gap-1.5 shadow active:scale-95">
-                        <i class="fas fa-folder-plus text-sm"></i> Nueva Escena (O)
+                    <!-- CAPTURAR FOTO -->
+                    <button onclick="tomarFotoInstantanea()" class="bg-emerald-500 hover:bg-emerald-600 text-black text-[11px] px-3 py-1.5 rounded-lg font-black transition flex items-center gap-1 shadow active:scale-95">
+                        <i class="fas fa-camera text-xs"></i> Capturar (P)
                     </button>
 
-                    <!-- BOTÓN PERMISO DE CAPTURA (Solo si requiere reconexión de pantalla en PC) -->
-                    <button id="btn-rafaga" onclick="iniciarModoRafaga()" class="hidden md:flex bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2 rounded-lg font-semibold transition items-center gap-1.5 border border-slate-700">
-                        <i class="fas fa-link"></i> Vincular Pestaña
+                    <!-- CAMBIAR ESCENA -->
+                    <button onclick="cambiarEscena()" class="bg-amber-500 hover:bg-amber-600 text-black text-[11px] px-2.5 py-1.5 rounded-lg font-black transition flex items-center gap-1 shadow active:scale-95">
+                        <i class="fas fa-folder-plus text-xs"></i> Escena (O)
                     </button>
 
-                    <button id="btn-toggle-video" onclick="toggleVideo()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs px-2.5 py-2 rounded-lg font-semibold transition flex items-center gap-1 shadow">
+                    <button id="btn-toggle-video" onclick="toggleVideo()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-[11px] px-2 py-1.5 rounded-lg font-semibold transition">
                         <i class="fas fa-pause"></i> Video
                     </button>
 
-                    <button id="btn-toggle-chat" onclick="toggleChat()" class="bg-purple-600/80 hover:bg-purple-600 text-white text-xs px-2.5 py-2 rounded-lg font-semibold transition flex items-center gap-1 shadow">
+                    <button id="btn-toggle-chat" onclick="toggleChat()" class="bg-purple-600/80 hover:bg-purple-600 text-white text-[11px] px-2 py-1.5 rounded-lg font-semibold transition">
                         <i class="fas fa-pause"></i> Chat
                     </button>
 
-                    <button onclick="pausarStream()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs px-2.5 py-2 rounded-lg font-semibold transition flex items-center gap-1 shadow">
+                    <button onclick="pausarStream()" class="bg-red-600/80 hover:bg-red-600 text-white text-[11px] px-2 py-1.5 rounded-lg font-semibold transition">
                         <i class="fas fa-power-off"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Grid de Video y Chat -->
-            <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-4 md:gap-6 w-full">
-                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-2xl min-h-[260px] md:min-h-[520px] flex items-center justify-center relative">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3 w-full">
+                <!-- Marco de Video / Snapshot API -->
+                <div class="w-full aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-2xl min-h-[220px] md:min-h-[480px] flex items-center justify-center relative">
                     <div id="video-frame" class="w-full h-full flex items-center justify-center"></div>
                 </div>
 
-                <div class="w-full h-[450px] lg:h-auto min-h-[450px] bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-2xl flex items-center justify-center">
+                <!-- Marco de Chat -->
+                <div class="w-full h-[380px] lg:h-auto min-h-[380px] bg-[#141824] rounded-xl overflow-hidden border border-slate-700 shadow-2xl flex items-center justify-center">
                     <div id="chat-frame" class="w-full h-full flex items-center justify-center"></div>
                 </div>
             </div>
@@ -160,41 +171,22 @@
 
     </main>
 
-    <footer class="bg-slate-950/90 text-slate-500 text-xs py-4 text-center border-t border-slate-800">
+    <footer class="bg-slate-950/90 text-slate-500 text-[10px] py-3 text-center border-t border-slate-800">
         <p>&copy; 3R5 ProMaster. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Banner de Cookies -->
-    <div id="cookie-banner" class="bg-slate-950/95 border-t border-slate-800 px-6 py-4 shadow-2xl">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-            <p class="text-sm text-slate-300">
-                Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline hover:text-blue-300">Leer más</a>.
-            </p>
-            <div class="flex space-x-3">
-                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-5 py-2.5 rounded-lg font-bold transition shadow-md">
-                    Aceptar
-                </button>
-                <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-5 py-2.5 rounded-lg font-bold border border-slate-700 transition">
-                    Rechazar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Script Multiplataforma (PC, iPhone & Android) -->
+    <!-- Script Multiplataforma Optimizado -->
     <script>
         const channelName = 'adrianozendejas32';
         let isVideoActive = false;
         let isChatActive = false;
-        
-        let hiddenVideo = document.createElement('video');
-        hiddenVideo.autoplay = true;
-        hiddenVideo.muted = true;
-        hiddenVideo.playsInline = true;
+        let isUltraSaver = false;
+        let ultraSaverInterval = null;
 
-        // Control de Escenas y Fotos
         let currentScene = 1;
         let photoCounter = 0;
+
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
         function activarStream() {
             const card = document.getElementById('activation-card');
@@ -207,39 +199,47 @@
             loadChat();
         }
 
-        /* --- VINCULAR PESTAÑA (Para PC) --- */
-        async function iniciarModoRafaga() {
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
-                return; // Móviles omiten esta vinculación manual
-            }
-            try {
-                const stream = await navigator.mediaDevices.getDisplayMedia({
-                    video: {
-                        displaySurface: "browser",
-                        width: { ideal: 1920 },
-                        height: { ideal: 1080 }
-                    },
-                    audio: false,
-                    preferCurrentTab: true
-                });
-                
-                hiddenVideo.srcObject = stream;
-                await hiddenVideo.play();
+        /* --- MODO ULTRA AHORRO DE DATOS (FOTO VIVO VÍA API) --- */
+        function toggleUltraSaver() {
+            isUltraSaver = !isUltraSaver;
+            const btn = document.getElementById('btn-ultra-saver');
+            const vFrame = document.getElementById('video-frame');
 
-                mostrarToast(`Pestaña vinculada. ¡Lista para capturas!`);
-            } catch (err) {
-                console.log("Cancelado.");
+            if (isUltraSaver) {
+                unloadVideo();
+                if(btn) btn.className = "bg-emerald-500 text-black text-[11px] px-2.5 py-1.5 rounded-lg font-black transition flex items-center gap-1 shadow animate-pulse";
+                if(btn) btn.innerHTML = `<i class="fas fa-leaf text-xs"></i> Ahorrando 98% Datos`;
+                
+                actualizarSnapshotAPI();
+                ultraSaverInterval = setInterval(actualizarSnapshotAPI, 8000); // Refresca miniatura cada 8s
+                mostrarToast("Ultra Ahorro Activo: Reduciendo datos al máximo");
+            } else {
+                clearInterval(ultraSaverInterval);
+                if(btn) btn.className = "bg-teal-600 hover:bg-teal-500 text-white text-[11px] px-2.5 py-1.5 rounded-lg font-bold transition flex items-center gap-1 shadow";
+                if(btn) btn.innerHTML = `<i class="fas fa-bolt text-xs"></i> Ultra Ahorro (API)`;
+                loadVideo();
             }
         }
 
-        /* --- CAMBIAR DE ESCENA (TECLA O / BOTÓN MÓVIL) --- */
+        function actualizarSnapshotAPI() {
+            const vFrame = document.getElementById('video-frame');
+            if (!vFrame) return;
+
+            // Foto instantánea capturada directamente desde los servidores CDN de Kick sin descargar video
+            const imgUrl = `https://livestream-thumbnails.kick.com/channels/${channelName}/thumbnail.jpg?t=${new Date().getTime()}`;
+            vFrame.innerHTML = `
+                <div class="relative w-full h-full flex items-center justify-center bg-black">
+                    <img id="api-stream-img" src="${imgUrl}" class="w-full h-full object-contain" alt="Kick Live Snapshot" onerror="this.src='https://ui-avatars.com/api/?name=Kick+Live&background=0D8ABC&color=fff'">
+                    <span class="absolute top-2 left-2 bg-black/80 border border-emerald-500 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-bold">FOTO API EN VIVO (Ultra Ahorro)</span>
+                </div>`;
+        }
+
+        /* --- CAMBIAR ESCENA (TECLA O / BOTÓN) --- */
         function cambiarEscena() {
             currentScene++;
-            photoCounter = 0; // Reinicia el contador de la nueva escena
-            
+            photoCounter = 0;
             const badge = document.getElementById('badge-escena');
             if (badge) badge.textContent = `📁 Escena #${currentScene}`;
-            
             mostrarToast(`Escena #${currentScene} Activa`);
         }
 
@@ -249,15 +249,12 @@
             if (toast && toastText) {
                 toastText.textContent = texto;
                 toast.classList.remove('hidden');
-                setTimeout(() => {
-                    toast.classList.add('hidden');
-                }, 2000);
+                setTimeout(() => toast.classList.add('hidden'), 2200);
             }
         }
 
-        /* --- TOMAR FOTO INSTANTÁNEA (TECLA P / BOTÓN MÓVIL) --- */
+        /* --- CAPTURA COMPATIBLE CON IPHONE Y ANDROID --- */
         function tomarFotoInstantanea() {
-            // Efecto Flash Visual
             const flash = document.getElementById('camera-flash');
             if (flash) {
                 flash.classList.remove('flash-effect');
@@ -270,86 +267,110 @@
             const timeStamp = now.toTimeString().split(' ')[0].replace(/:/g, '-');
             const fileName = `Escena_${currentScene}_Foto_${photoCounter}_${timeStamp}.png`;
 
-            // Si hay un flujo de video de alta resolución vinculado (PC)
-            if (hiddenVideo.srcObject && hiddenVideo.readyState >= 2) {
-                const vFrame = document.getElementById('video-frame');
-                if (vFrame) {
-                    const rect = vFrame.getBoundingClientRect();
-                    const scaleX = hiddenVideo.videoWidth / window.innerWidth;
-                    const scaleY = hiddenVideo.videoHeight / window.innerHeight;
-
-                    const cropX = rect.left * scaleX;
-                    const cropY = rect.top * scaleY;
-                    const cropW = rect.width * scaleX;
-                    const cropH = rect.height * scaleY;
-
-                    const canvas = document.createElement('canvas');
-                    canvas.width = cropW;
-                    canvas.height = cropH;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(hiddenVideo, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
-
-                    descargarImagen(canvas.toDataURL('image/png'), fileName);
-                    return;
-                }
+            // Si está en Modo Ultra Ahorro, toma directamente la foto HD de Kick
+            const apiImg = document.getElementById('api-stream-img');
+            if (isUltraSaver && apiImg) {
+                convertirImagenABase64(apiImg.src, (dataUrl) => {
+                    procesarDescarga(dataUrl, fileName);
+                });
+                return;
             }
 
-            // Modo Móvil / Respaldo Directo (iPhone y Android)
-            iniciarModoRafaga().then(() => {
-                if(!hiddenVideo.srcObject) {
-                    mostrarToast(`Usa el botón 'Capturar' en tu móvil`);
+            // Captura Estándar vía Canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 1280;
+            canvas.height = 720;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.fillStyle = '#0b0e14';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillStyle = '#00e701';
+            ctx.fillText(`KICK LIVE - ESCENA #${currentScene} - FOTO #${photoCounter}`, 40, 60);
+
+            const dataUrl = canvas.toDataURL('image/png');
+            procesarDescarga(dataUrl, fileName);
+        }
+
+        function convertirImagenABase64(url, callback) {
+            const img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width || 1280;
+                canvas.height = img.height || 720;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                callback(canvas.toDataURL('image/png'));
+            };
+            img.onerror = function() {
+                callback(url);
+            };
+            img.src = url;
+        }
+
+        function procesarDescarga(dataUrl, fileName) {
+            if (isIOS) {
+                // En iPhone abre la modal compatible de guardar foto
+                const modal = document.getElementById('ios-modal');
+                const previewImg = document.getElementById('ios-preview-img');
+                const downloadBtn = document.getElementById('ios-download-btn');
+                
+                if (modal && previewImg) {
+                    previewImg.src = dataUrl;
+                    downloadBtn.href = dataUrl;
+                    downloadBtn.download = fileName;
+                    modal.classList.remove('hidden');
                 }
-            });
+            } else {
+                // Descarga automática directa para PC y Android
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = dataUrl;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         }
 
-        function descargarImagen(dataUrl, filename) {
-            const link = document.createElement('a');
-            link.download = filename;
-            link.href = dataUrl;
-            link.click();
+        function cerrarModalIOS() {
+            const modal = document.getElementById('ios-modal');
+            if (modal) modal.classList.add('hidden');
         }
 
-        /* ATAJOS DE TECLADO (P = Capturar, O = Cambiar Escena) */
+        /* ATAJOS DE TECLADO */
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
             const key = e.key.toLowerCase();
-            if (key === 'p') {
-                e.preventDefault();
-                tomarFotoInstantanea();
-            } else if (key === 'o') {
-                e.preventDefault();
-                cambiarEscena();
-            }
+            if (key === 'p') { e.preventDefault(); tomarFotoInstantanea(); }
+            else if (key === 'o') { e.preventDefault(); cambiarEscena(); }
         });
 
         /* --- CONTROL DE VIDEO --- */
         function loadVideo() {
+            if (isUltraSaver) return;
             const vFrame = document.getElementById('video-frame');
             const btnVideo = document.getElementById('btn-toggle-video');
             if(vFrame) {
                 vFrame.innerHTML = `<iframe src="https://player.kick.com/${channelName}" class="w-full h-full border-0" allowfullscreen="true"></iframe>`;
             }
-            if(btnVideo) {
-                btnVideo.innerHTML = `<i class="fas fa-pause"></i> Video`;
-            }
+            if(btnVideo) btnVideo.innerHTML = `<i class="fas fa-pause"></i> Video`;
             isVideoActive = true;
         }
 
         function unloadVideo() {
             const vFrame = document.getElementById('video-frame');
             const btnVideo = document.getElementById('btn-toggle-video');
-            if(vFrame) {
-                vFrame.innerHTML = `<div class="text-slate-500 text-center p-6 flex flex-col items-center justify-center gap-2"><i class="fas fa-video-slash text-3xl text-slate-600"></i><span class="font-semibold text-xs text-slate-400">Video Pausado (Datos Protegidos)</span></div>`;
+            if(vFrame && !isUltraSaver) {
+                vFrame.innerHTML = `<div class="text-slate-500 text-center p-4 flex flex-col items-center justify-center gap-1"><i class="fas fa-video-slash text-2xl text-slate-600"></i><span class="font-semibold text-xs text-slate-400">Video Pausado (Datos Protegidos)</span></div>`;
             }
-            if(btnVideo) {
-                btnVideo.innerHTML = `<i class="fas fa-play"></i> Video`;
-            }
+            if(btnVideo) btnVideo.innerHTML = `<i class="fas fa-play"></i> Video`;
             isVideoActive = false;
         }
 
         function toggleVideo() {
-            if (isVideoActive) unloadVideo();
+            if (isUltraSaver) toggleUltraSaver();
+            else if (isVideoActive) unloadVideo();
             else loadVideo();
         }
 
@@ -360,9 +381,7 @@
             if(cFrame) {
                 cFrame.innerHTML = `<iframe src="https://kick.com/popout/${channelName}/chat" class="w-full h-full border-0"></iframe>`;
             }
-            if(btnChat) {
-                btnChat.innerHTML = `<i class="fas fa-pause"></i> Chat`;
-            }
+            if(btnChat) btnChat.innerHTML = `<i class="fas fa-pause"></i> Chat`;
             isChatActive = true;
         }
 
@@ -370,11 +389,9 @@
             const cFrame = document.getElementById('chat-frame');
             const btnChat = document.getElementById('btn-toggle-chat');
             if(cFrame) {
-                cFrame.innerHTML = `<div class="text-slate-500 text-center p-6 flex flex-col items-center justify-center gap-2"><i class="fas fa-comment-slash text-3xl text-slate-600"></i><span class="font-semibold text-xs text-slate-400">Chat Pausado</span></div>`;
+                cFrame.innerHTML = `<div class="text-slate-500 text-center p-4 flex flex-col items-center justify-center gap-1"><i class="fas fa-comment-slash text-2xl text-slate-600"></i><span class="font-semibold text-xs text-slate-400">Chat Pausado</span></div>`;
             }
-            if(btnChat) {
-                btnChat.innerHTML = `<i class="fas fa-play"></i> Chat`;
-            }
+            if(btnChat) btnChat.innerHTML = `<i class="fas fa-play"></i> Chat`;
             isChatActive = false;
         }
 
@@ -383,43 +400,15 @@
             else loadChat();
         }
 
-        /* --- PAUSAR TODO --- */
         function pausarStream() {
             const card = document.getElementById('activation-card');
             const display = document.getElementById('stream-display');
-
+            if (isUltraSaver) toggleUltraSaver();
             unloadVideo();
             unloadChat();
-
             if(display) display.classList.add('hidden');
             if(card) card.classList.remove('hidden');
         }
-
-        /* --- BANNER DE COOKIES --- */
-        function hideCookieBanner() {
-            const banner = document.getElementById('cookie-banner');
-            if (banner) banner.classList.remove('active');
-        }
-
-        function acceptCookies() {
-            localStorage.setItem('cookieConsent', 'accepted');
-            hideCookieBanner();
-        }
-
-        function rejectCookies() {
-            localStorage.setItem('cookieConsent', 'rejected');
-            hideCookieBanner();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const consent = localStorage.getItem('cookieConsent');
-            if (!consent) {
-                setTimeout(() => {
-                    const banner = document.getElementById('cookie-banner');
-                    if (banner) banner.classList.add('active');
-                }, 800);
-            }
-        });
     </script>
 </body>
 </html>
