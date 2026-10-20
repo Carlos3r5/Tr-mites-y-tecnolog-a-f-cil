@@ -43,38 +43,35 @@
             -webkit-touch-callout: default !important;
             -webkit-user-select: auto !important;
             user-select: auto !important;
+            pointer-events: auto !important;
         }
     </style>
 </head>
-<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative select-none">
+<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative">
 
     <!-- Flash al tomar foto -->
     <div id="camera-flash" class="fixed inset-0 z-[10000] pointer-events-none opacity-0"></div>
 
-    <!-- Modal de Captura Nativo para iPhone / iOS -->
+    <!-- Modal de Captura Nativo para iPhone / iOS / Android -->
     <div id="ios-modal" class="fixed inset-0 z-[20000] hidden bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 max-w-lg w-full text-center shadow-2xl flex flex-col items-center">
             
             <div class="flex justify-between items-center w-full mb-2">
-                <span id="modal-title" class="text-white font-black text-sm">📸 Captura en Vivo HD</span>
+                <span id="modal-title" class="text-white font-black text-sm">📸 Captura HD en Vivo</span>
                 <span id="modal-badge" class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-bold">Escena #1</span>
             </div>
 
             <p class="text-[11px] text-amber-400 mb-3 font-semibold">
-                Toca <b>"Guardar en Fotos"</b> o mantén presionada la imagen.
+                Toca <b>"Guardar en Fotos"</b> o mantén presionada la foto.
             </p>
 
-            <div class="w-full rounded-xl overflow-hidden border border-slate-800 bg-black mb-4 min-h-[200px] max-h-[55vh] flex items-center justify-center relative">
-                <div id="modal-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950 text-slate-400 text-xs gap-2">
-                    <i class="fas fa-spinner fa-spin text-2xl text-[#00e701]"></i>
-                    <span>Obteniendo captura HD...</span>
-                </div>
-                <img id="ios-preview-img" src="" alt="Captura HD" class="w-full h-auto object-contain ios-touch-img opacity-0 transition-opacity duration-300">
+            <div class="w-full rounded-xl overflow-hidden border border-slate-800 bg-black mb-4 min-h-[220px] max-h-[55vh] flex items-center justify-center relative">
+                <img id="ios-preview-img" src="" alt="Captura HD" class="w-full h-auto object-contain ios-touch-img transition-opacity duration-300">
             </div>
 
             <div class="flex gap-2 w-full">
-                <!-- Botón Compartir / Guardar en Fotos nativo de Apple -->
-                <button id="btn-share-ios" onclick="compartirEnFotosIOS()" class="flex-1 bg-[#00e701] hover:bg-[#00c701] text-black text-xs font-black py-3 rounded-xl transition flex justify-center items-center gap-1.5 shadow-lg active:scale-95">
+                <!-- Botón Compartir / Guardar en Fotos nativo -->
+                <button id="btn-share-ios" onclick="guardarEnFotosIOS()" class="flex-1 bg-[#00e701] hover:bg-[#00c701] text-black text-xs font-black py-3 rounded-xl transition flex justify-center items-center gap-1.5 shadow-lg active:scale-95">
                     <i class="fas fa-arrow-up-from-bracket"></i> 📲 Guardar en Fotos
                 </button>
 
@@ -142,7 +139,7 @@
                     </span>
                 </div>
 
-                <!-- Botones Móviles Pro -->
+                <!-- Botones Móviles e Interactivos -->
                 <div class="flex flex-wrap items-center gap-1.5 w-full md:w-auto justify-end">
                     
                     <!-- MODO ULTRA AHORRO (API KICK) -->
@@ -195,7 +192,24 @@
         <p>&copy; 3R5 ProMaster. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script Multiplataforma con API de Kick Real -->
+    <!-- Banner de Cookies -->
+    <div id="cookie-banner" class="bg-slate-950/95 border-t border-slate-800 px-6 py-4 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <p class="text-sm text-slate-300">
+                Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline hover:text-blue-300">Leer más</a>.
+            </p>
+            <div class="flex space-x-3">
+                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-5 py-2.5 rounded-lg font-bold transition shadow-md">
+                    Aceptar
+                </button>
+                <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-5 py-2.5 rounded-lg font-bold border border-slate-700 transition">
+                    Rechazar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Multiplataforma Optimizado -->
     <script>
         const channelName = 'adrianozendejas32';
         let isVideoActive = false;
@@ -205,8 +219,8 @@
 
         let currentScene = 1;
         let photoCounter = 0;
-        let lastBlobForShare = null;
-        let lastFileNameForShare = "";
+        let currentImageUrl = "";
+        let currentFileName = "";
 
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -221,7 +235,12 @@
             loadChat();
         }
 
-        /* --- MODO ULTRA AHORRO DE DATOS (99% AHORRO) --- */
+        /* --- OBTENER URL DE MINIATURA DIRECTA DE KICK --- */
+        function getKickThumbnailUrl() {
+            return `https://livestream-thumbnails.kick.com/channels/${channelName}/thumbnail.jpg?t=${new Date().getTime()}`;
+        }
+
+        /* --- MODO ULTRA AHORRO DE DATOS (99% AHORRO DE RED) --- */
         function toggleUltraSaver() {
             isUltraSaver = !isUltraSaver;
             const btn = document.getElementById('btn-ultra-saver');
@@ -233,7 +252,7 @@
                     btn.innerHTML = `<i class="fas fa-leaf text-xs"></i> Ahorrando 99% Datos`;
                 }
                 actualizarSnapshotAPI();
-                ultraSaverInterval = setInterval(actualizarSnapshotAPI, 7000);
+                ultraSaverInterval = setInterval(actualizarSnapshotAPI, 5000); // Refresca cada 5s
                 mostrarToast("Ultra Ahorro Activo: Reduciendo datos al máximo");
             } else {
                 clearInterval(ultraSaverInterval);
@@ -245,53 +264,16 @@
             }
         }
 
-        /* --- OBTENER FOTO REAL DE KICK API --- */
-        async function obtenerKickLiveImage() {
-            const proxies = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://kick.com/api/v1/channels/${channelName}`)}`,
-                `https://corsproxy.io/?${encodeURIComponent(`https://kick.com/api/v1/channels/${channelName}`)}`
-            ];
-
-            for (let url of proxies) {
-                try {
-                    const res = await fetch(url);
-                    if (res.ok) {
-                        const data = await res.json();
-                        if (data.livestream && data.livestream.thumbnail && data.livestream.thumbnail.url) {
-                            return data.livestream.thumbnail.url;
-                        }
-                    }
-                } catch (e) {
-                    console.log("Error intentando proxy de Kick API:", e);
-                }
-            }
-            return null;
-        }
-
-        async function actualizarSnapshotAPI() {
+        function actualizarSnapshotAPI() {
             const vFrame = document.getElementById('video-frame');
             if (!vFrame) return;
 
+            const liveUrl = getKickThumbnailUrl();
             vFrame.innerHTML = `
-                <div class="relative w-full h-full flex items-center justify-center bg-slate-950 text-slate-400 text-xs">
-                    <i class="fas fa-spinner fa-spin text-2xl text-[#00e701]"></i>
-                    <span class="ml-2">Cargando foto en vivo...</span>
+                <div class="relative w-full h-full flex items-center justify-center bg-black">
+                    <img id="api-stream-img" src="${liveUrl}" class="w-full h-full object-contain" alt="Kick Live HD" onerror="this.src='https://ui-avatars.com/api/?name=Kick+Live&background=0b0e14&color=00e701'">
+                    <span class="absolute top-2 left-2 bg-black/80 border border-emerald-500 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-bold">FOTO API EN VIVO (Ultra Ahorro)</span>
                 </div>`;
-
-            const imgUrl = await obtenerKickLiveImage();
-            
-            if (imgUrl) {
-                vFrame.innerHTML = `
-                    <div class="relative w-full h-full flex items-center justify-center bg-black">
-                        <img id="api-stream-img" src="${imgUrl}" class="w-full h-full object-contain" alt="Kick Live HD">
-                        <span class="absolute top-2 left-2 bg-black/80 border border-emerald-500 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-bold">FOTO API EN VIVO (Ultra Ahorro)</span>
-                    </div>`;
-            } else {
-                vFrame.innerHTML = `
-                    <div class="relative w-full h-full flex items-center justify-center bg-black p-4 text-center">
-                        <span class="text-amber-400 text-xs font-semibold">Servidor en directo. Presiona "Capturar" para obtener la toma actual.</span>
-                    </div>`;
-            }
         }
 
         /* --- CAMBIAR ESCENA --- */
@@ -314,7 +296,7 @@
         }
 
         /* --- CAPTURA DE FOTO HD (IPHONE, ANDROID & PC) --- */
-        async function tomarFotoInstantanea() {
+        function tomarFotoInstantanea() {
             const flash = document.getElementById('camera-flash');
             if (flash) {
                 flash.classList.remove('flash-effect');
@@ -325,81 +307,48 @@
             photoCounter++;
             const now = new Date();
             const timeStamp = now.toTimeString().split(' ')[0].replace(/:/g, '-');
-            const fileName = `Escena_${currentScene}_Foto_${photoCounter}_${timeStamp}.png`;
+            currentFileName = `Escena_${currentScene}_Foto_${photoCounter}_${timeStamp}.png`;
+            currentImageUrl = getKickThumbnailUrl();
 
-            // Abrir Modal de Carga en iPhone
             const modal = document.getElementById('ios-modal');
             const previewImg = document.getElementById('ios-preview-img');
-            const loader = document.getElementById('modal-loader');
             const badge = document.getElementById('modal-badge');
 
-            if (modal) modal.classList.remove('hidden');
-            if (loader) loader.classList.remove('hidden');
-            if (previewImg) previewImg.classList.add('opacity-0');
             if (badge) badge.textContent = `Escena #${currentScene} - Foto #${photoCounter}`;
+            if (previewImg) previewImg.src = currentImageUrl;
+            if (modal) modal.classList.remove('hidden');
 
-            // Obtener foto HD real desde Kick
-            let realImgUrl = await obtenerKickLiveImage();
-
-            if (!realImgUrl) {
-                // Fallback de respaldo si Kick no reporta thumbnail directo
-                realImgUrl = `https://ui-avatars.com/api/?name=Escena+${currentScene}+Foto+${photoCounter}&background=0b0e14&color=00e701&size=512`;
-            }
-
-            // Descargar como Blob para iOS Share Sheet / Android Directo
-            try {
-                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(realImgUrl)}`;
-                const response = await fetch(proxyUrl);
-                const blob = await response.blob();
-                
-                lastBlobForShare = new File([blob], fileName, { type: 'image/png' });
-                lastFileNameForShare = fileName;
-
-                const objectUrl = URL.createObjectURL(blob);
-                
-                if (previewImg) {
-                    previewImg.src = objectUrl;
-                    previewImg.onload = () => {
-                        if (loader) loader.classList.add('hidden');
-                        previewImg.classList.remove('opacity-0');
-                    };
-                }
-
-                if (!isIOS) {
-                    // Descarga directa en Android / PC
-                    const link = document.createElement('a');
-                    link.download = fileName;
-                    link.href = objectUrl;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
-
-            } catch (err) {
-                if (previewImg) {
-                    previewImg.src = realImgUrl;
-                    previewImg.onload = () => {
-                        if (loader) loader.classList.add('hidden');
-                        previewImg.classList.remove('opacity-0');
-                    };
-                }
+            if (!isIOS) {
+                // Descarga automática directa en Android y PC
+                const link = document.createElement('a');
+                link.download = currentFileName;
+                link.href = currentImageUrl;
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
         }
 
-        /* --- COMPARTIR / GUARDAR EN FOTOS EN IPHONE --- */
-        async function compartirEnFotosIOS() {
-            if (navigator.share && lastBlobForShare) {
+        /* --- GUARDAR / COMPARTIR EN IPHONE --- */
+        async function guardarEnFotosIOS() {
+            if (navigator.share) {
                 try {
+                    // Intenta descargar la imagen y compartirla mediante el menú oficial de iOS
+                    const response = await fetch(currentImageUrl);
+                    const blob = await response.blob();
+                    const file = new File([blob], currentFileName, { type: 'image/jpeg' });
+                    
                     await navigator.share({
-                        files: [lastBlobForShare],
+                        files: [file],
                         title: `Escena #${currentScene}`,
-                        text: `Captura de Monitoreo Kick 3R5`
+                        text: `Foto de monitoreo`
                     });
-                } catch (err) {
-                    console.log("Menú compartir cerrado.");
+                } catch (e) {
+                    window.open(currentImageUrl, '_blank');
                 }
             } else {
-                alert("Mantén presionada la imagen para seleccionar 'Guardar en Fotos'");
+                window.open(currentImageUrl, '_blank');
             }
         }
 
@@ -479,6 +428,32 @@
             if(display) display.classList.add('hidden');
             if(card) card.classList.remove('hidden');
         }
+
+        /* BANNER DE COOKIES */
+        function hideCookieBanner() {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.classList.remove('active');
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideCookieBanner();
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            hideCookieBanner();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                setTimeout(() => {
+                    const banner = document.getElementById('cookie-banner');
+                    if (banner) banner.classList.add('active');
+                }, 800);
+            }
+        });
     </script>
 </body>
 </html>
