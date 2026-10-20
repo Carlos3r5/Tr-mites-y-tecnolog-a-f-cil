@@ -13,7 +13,7 @@
         body {
             background-color: #0b0e14;
             background-image: 
-                linear-gradient(to bottom, rgba(11, 14, 20, 0.6), rgba(11, 14, 20, 0.8)),
+                linear-gradient(to bottom, rgba(11, 14, 20, 0.65), rgba(11, 14, 20, 0.85)),
                 url('css/shifu.jpg');
             background-size: cover;
             background-position: center;
@@ -32,57 +32,46 @@
             bottom: 0; opacity: 1; pointer-events: auto;
         }
 
-        .flash-effect { animation: flash 0.15s ease-out; }
+        .flash-effect { animation: flash 0.2s ease-out; }
         @keyframes flash {
             0% { opacity: 1; background-color: white; }
             100% { opacity: 0; }
         }
-
-        .ios-touch-img {
-            -webkit-touch-callout: default !important;
-            -webkit-user-select: auto !important;
-            user-select: auto !important;
-            pointer-events: auto !important;
-        }
     </style>
 </head>
-<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative">
+<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between relative select-none">
 
-    <!-- Flash visual al capturar -->
+    <!-- Flash visual de cámara al tomar foto -->
     <div id="camera-flash" class="fixed inset-0 z-[10000] pointer-events-none opacity-0"></div>
 
-    <!-- Modal de Captura HD para iPhone, Android y PC -->
-    <div id="ios-modal" class="fixed inset-0 z-[20000] hidden bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 max-w-lg w-full text-center shadow-2xl flex flex-col items-center">
-            
-            <div class="flex justify-between items-center w-full mb-2">
-                <span id="modal-title" class="text-white font-black text-sm">📸 Captura HD en Vivo</span>
-                <span id="modal-badge" class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-bold">Escena #1</span>
-            </div>
-
-            <p class="text-[11px] text-amber-400 mb-3 font-semibold">
-                Toca <b>"Guardar en Fotos"</b> o mantén presionada la imagen.
-            </p>
-
-            <div class="w-full rounded-xl overflow-hidden border border-slate-800 bg-black mb-4 min-h-[220px] max-h-[55vh] flex items-center justify-center relative">
-                <img id="ios-preview-img" src="" alt="Captura HD Kick" class="w-full h-auto object-contain ios-touch-img">
-            </div>
-
-            <div class="flex gap-2 w-full">
-                <button id="btn-share-ios" onclick="guardarEnFotosIOS()" class="flex-1 bg-[#00e701] hover:bg-[#00c701] text-black text-xs font-black py-3 rounded-xl transition flex justify-center items-center gap-1.5 shadow-lg active:scale-95">
-                    <i class="fas fa-arrow-up-from-bracket"></i> 📲 Guardar en Fotos
-                </button>
-
-                <button onclick="cerrarModalIOS()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold px-4 py-3 rounded-xl border border-slate-700 transition">
-                    Cerrar
-                </button>
-            </div>
-        </div>
+    <!-- Toast de Notificación de Escenas y Fotos -->
+    <div id="toast-scene" class="fixed top-16 right-4 z-[9999] hidden bg-amber-500 text-black px-4 py-2 rounded-xl font-black shadow-2xl transition-all text-xs flex items-center gap-2">
+        <i class="fas fa-camera text-sm"></i> <span id="toast-text">Escena #1</span>
     </div>
 
-    <!-- Toast de Notificación -->
-    <div id="toast-scene" class="fixed top-16 right-4 z-[9999] hidden bg-amber-500 text-black px-3.5 py-1.5 rounded-xl font-black shadow-2xl transition-all text-xs">
-        <i class="fas fa-folder-plus mr-1"></i> <span id="toast-text">Escena 1</span>
+    <!-- Modal para Móvil (Enfoque Limpio para Capturas en iPhone) -->
+    <div id="photo-modal" class="fixed inset-0 z-[20000] hidden bg-black/95 backdrop-blur-md flex flex-col items-center justify-between p-4">
+        <div class="flex justify-between items-center w-full max-w-lg pt-2 px-2">
+            <span id="modal-badge" class="bg-[#00e701] text-black text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                📁 Escena #1 - Foto #1
+            </span>
+            <button onclick="cerrarModalFoto()" class="bg-red-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg shadow">
+                <i class="fas fa-times"></i> Salir
+            </button>
+        </div>
+
+        <div class="w-full max-w-xl aspect-video bg-black rounded-2xl overflow-hidden border-2 border-[#00e701] shadow-[0_0_30px_rgba(0,231,1,0.3)] my-auto relative flex items-center justify-center">
+            <div id="modal-stream-container" class="w-full h-full"></div>
+            <div class="absolute bottom-3 left-3 bg-black/80 backdrop-blur-md border border-slate-700 px-3 py-1 rounded-lg text-[10px] text-amber-400 font-bold">
+                📸 Listo para captura en tu teléfono (Encendido + Vol Arriba)
+            </div>
+        </div>
+
+        <div class="w-full max-w-lg text-center pb-4">
+            <button onclick="cerrarModalFoto()" class="w-full bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-3 rounded-xl border border-slate-700 shadow">
+                Volver al Panel Principal
+            </button>
+        </div>
     </div>
 
     <!-- Navbar Superior -->
@@ -115,14 +104,14 @@
             </div>
             <h2 class="text-xl font-bold text-white mb-2">Activar Transmisión</h2>
             <p class="text-slate-400 text-xs mb-6 leading-relaxed">
-                Modo ahorro disponible. Presiona para conectar al reproductor de Kick.
+                Ahorro de datos activo. Toca el botón para conectar al reproductor de Kick.
             </p>
             <button onclick="activarStream()" class="w-full bg-[#00e701] hover:bg-[#00c701] text-black font-bold py-3 rounded-xl transition flex justify-center items-center gap-2 text-base shadow-lg">
                 <i class="fas fa-play"></i> Iniciar Monitoreo
             </button>
         </div>
 
-        <!-- Paso 2: Contenedor Principal -->
+        <!-- Paso 2: Contenedor del Stream -->
         <div id="stream-display" class="hidden w-full max-w-6xl">
             
             <!-- Panel de Control e Indicadores -->
@@ -137,20 +126,20 @@
                     </span>
                 </div>
 
-                <!-- Botones de Control -->
+                <!-- Botones Móviles e Interactivos -->
                 <div class="flex flex-wrap items-center gap-1.5 w-full md:w-auto justify-end">
                     
-                    <!-- BOTÓN MODO AHORRO (VIDEO BAJA RESOLUCIÓN 160P) -->
+                    <!-- AHORRO DE DATOS (REDUCCIÓN DE RESOLUCIÓN A 160P) -->
                     <button id="btn-data-saver" onclick="toggleLowQualityVideo()" class="bg-teal-600 hover:bg-teal-500 text-white text-[11px] px-2.5 py-1.5 rounded-lg font-bold transition flex items-center gap-1 shadow">
                         <i class="fas fa-compress-alt text-xs"></i> Ahorro Video (160p)
                     </button>
 
-                    <!-- CAPTURAR FOTO -->
+                    <!-- CAPTURAR FOTO (TECLA P / BOTÓN) -->
                     <button onclick="tomarFotoInstantanea()" class="bg-emerald-500 hover:bg-emerald-600 text-black text-[11px] px-3 py-1.5 rounded-lg font-black transition flex items-center gap-1 shadow active:scale-95">
-                        <i class="fas fa-camera text-xs"></i> Capturar (P)
+                        <i class="fas fa-camera text-xs"></i> Capturar Foto (P)
                     </button>
 
-                    <!-- CAMBIAR ESCENA -->
+                    <!-- CAMBIAR ESCENA (TECLA O / BOTÓN) -->
                     <button onclick="cambiarEscena()" class="bg-amber-500 hover:bg-amber-600 text-black text-[11px] px-2.5 py-1.5 rounded-lg font-black transition flex items-center gap-1 shadow active:scale-95">
                         <i class="fas fa-folder-plus text-xs"></i> Escena (O)
                     </button>
@@ -190,7 +179,24 @@
         <p>&copy; 3R5 ProMaster. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script de Monitoreo Optimizado -->
+    <!-- Banner de Cookies -->
+    <div id="cookie-banner" class="bg-slate-950/95 border-t border-slate-800 px-6 py-4 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <p class="text-sm text-slate-300">
+                Este sitio utiliza cookies para análisis y funcionamiento técnico. <a href="cookies.html" class="text-blue-400 underline hover:text-blue-300">Leer más</a>.
+            </p>
+            <div class="flex space-x-3">
+                <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-5 py-2.5 rounded-lg font-bold transition shadow-md">
+                    Aceptar
+                </button>
+                <button onclick="rejectCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-5 py-2.5 rounded-lg font-bold border border-slate-700 transition">
+                    Rechazar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Control + Captura por Teclas P y O -->
     <script>
         const channelName = 'adrianozendejas32';
         let isVideoActive = false;
@@ -199,7 +205,14 @@
 
         let currentScene = 1;
         let photoCounter = 0;
-        let currentFileName = "";
+
+        let screenCaptureStream = null;
+        let hiddenCaptureVideo = document.createElement('video');
+        hiddenCaptureVideo.autoplay = true;
+        hiddenCaptureVideo.muted = true;
+        hiddenCaptureVideo.playsInline = true;
+
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         function activarStream() {
             const card = document.getElementById('activation-card');
@@ -212,7 +225,7 @@
             loadChat();
         }
 
-        /* --- MODO AHORRO DE VIDEO (RESOLUCIÓN 160P SIN APAGAR EL VIDEO) --- */
+        /* --- MODO AHORRO DE VIDEO (160P / BAJA RESOLUCIÓN) --- */
         function toggleLowQualityVideo() {
             isLowQuality = !isLowQuality;
             const btn = document.getElementById('btn-data-saver');
@@ -222,18 +235,18 @@
                     btn.className = "bg-emerald-500 text-black text-[11px] px-2.5 py-1.5 rounded-lg font-black transition flex items-center gap-1 shadow animate-pulse";
                     btn.innerHTML = `<i class="fas fa-check-circle text-xs"></i> Ahorro Video (160p)`;
                 }
-                mostrarToast("Ahorro Activo: Video en baja resolución (160p)");
+                mostrarToast("Ahorro Activo: Transmisión en baja resolución (160p)");
             } else {
                 if(btn) {
                     btn.className = "bg-teal-600 hover:bg-teal-500 text-white text-[11px] px-2.5 py-1.5 rounded-lg font-bold transition flex items-center gap-1 shadow";
                     btn.innerHTML = `<i class="fas fa-compress-alt text-xs"></i> Ahorro Video (160p)`;
                 }
-                mostrarToast("Calidad HD Restaurada");
+                mostrarToast("Calidad de Video HD Restaurada");
             }
             loadVideo();
         }
 
-        /* --- CAMBIAR ESCENA (TECLA O / BOTÓN) --- */
+        /* --- CAMBIAR DE ESCENA (TECLA O / BOTÓN) --- */
         function cambiarEscena() {
             currentScene++;
             photoCounter = 0;
@@ -252,8 +265,29 @@
             }
         }
 
-        /* --- CAPTURA DE FOTO EN VIVO RÁPIDA Y SIN ERRORES --- */
-        function tomarFotoInstantanea() {
+        /* --- VINCULACIÓN DE CAPTURA EN PC --- */
+        async function vincularCapturaPC() {
+            if (screenCaptureStream && screenCaptureStream.active) return true;
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) return false;
+
+            try {
+                screenCaptureStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { displaySurface: "browser" },
+                    audio: false,
+                    preferCurrentTab: true
+                });
+                hiddenCaptureVideo.srcObject = screenCaptureStream;
+                await hiddenCaptureVideo.play();
+                return true;
+            } catch (err) {
+                console.log("Vinculación de pestaña cancelada.");
+                return false;
+            }
+        }
+
+        /* --- SISTEMA DE CAPTURA DE FOTOS --- */
+        async function tomarFotoInstantanea() {
+            // Efecto Flash
             const flash = document.getElementById('camera-flash');
             if (flash) {
                 flash.classList.remove('flash-effect');
@@ -264,61 +298,62 @@
             photoCounter++;
             const now = new Date();
             const timeStamp = now.toTimeString().split(' ')[0].replace(/:/g, '-');
-            currentFileName = `Escena_${currentScene}_Foto_${photoCounter}_${timeStamp}.png`;
+            const fileName = `Escena_${currentScene}_Foto_${photoCounter}_${timeStamp}.png`;
 
-            const modal = document.getElementById('ios-modal');
-            const previewImg = document.getElementById('ios-preview-img');
-            const badge = document.getElementById('modal-badge');
+            // SI ES EN PC: Usa Captura de Pantalla recortada directamente al video
+            if (!isMobile && navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+                const vinculado = await vincularCapturaPC();
+                if (vinculado && hiddenCaptureVideo.readyState >= 2) {
+                    const vFrame = document.getElementById('video-frame');
+                    if (vFrame) {
+                        const rect = vFrame.getBoundingClientRect();
+                        const scaleX = hiddenCaptureVideo.videoWidth / window.innerWidth;
+                        const scaleY = hiddenCaptureVideo.videoHeight / window.innerHeight;
 
-            if (badge) badge.textContent = `Escena #${currentScene} - Foto #${photoCounter}`;
+                        const cropX = rect.left * scaleX;
+                        const cropY = rect.top * scaleY;
+                        const cropW = rect.width * scaleX;
+                        const cropH = rect.height * scaleY;
 
-            // Carga directa del fotograma desde los servidores CDN oficiales de Kick
-            const timestamp = Date.now();
-            const thumbUrlPrimary = `https://v2.kick.com/channel/${channelName}/thumbnail?t=${timestamp}`;
-            const thumbUrlFallback = `https://livestream-thumbnails.kick.com/channels/${channelName}/thumbnail.jpg?t=${timestamp}`;
+                        const canvas = document.createElement('canvas');
+                        canvas.width = cropW;
+                        canvas.height = cropH;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(hiddenCaptureVideo, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
 
-            if (previewImg) {
-                previewImg.src = thumbUrlPrimary;
-                previewImg.onerror = function() {
-                    if (this.src !== thumbUrlFallback) {
-                        this.src = thumbUrlFallback;
+                        const link = document.createElement('a');
+                        link.download = fileName;
+                        link.href = canvas.toDataURL('image/png');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                        mostrarToast(`📸 Foto #${photoCounter} Guardada en Descargas`);
+                        return;
                     }
-                };
+                }
             }
 
+            // SI ES EN IPHONE O MÓVIL: Modo Enfoque en Pantalla Completa
+            const modal = document.getElementById('photo-modal');
+            const modalContainer = document.getElementById('modal-stream-container');
+            const modalBadge = document.getElementById('modal-badge');
+
+            if (modalBadge) modalBadge.textContent = `📁 Escena #${currentScene} - Foto #${photoCounter}`;
+            if (modalContainer) {
+                modalContainer.innerHTML = `<iframe src="https://player.kick.com/${channelName}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe>`;
+            }
             if (modal) modal.classList.remove('hidden');
         }
 
-        /* --- GUARDAR FOTO EN IPHONE / ANDROID / PC --- */
-        async function guardarEnFotosIOS() {
-            const previewImg = document.getElementById('ios-preview-img');
-            const imgUrl = previewImg ? previewImg.src : '';
-
-            if (navigator.share && imgUrl) {
-                try {
-                    const response = await fetch(imgUrl);
-                    const blob = await response.blob();
-                    const file = new File([blob], currentFileName, { type: 'image/jpeg' });
-                    
-                    await navigator.share({
-                        files: [file],
-                        title: `Escena #${currentScene}`,
-                        text: `Foto de monitoreo`
-                    });
-                } catch (e) {
-                    window.open(imgUrl, '_blank');
-                }
-            } else if (imgUrl) {
-                window.open(imgUrl, '_blank');
-            }
-        }
-
-        function cerrarModalIOS() {
-            const modal = document.getElementById('ios-modal');
+        function cerrarModalFoto() {
+            const modal = document.getElementById('photo-modal');
+            const modalContainer = document.getElementById('modal-stream-container');
+            if (modalContainer) modalContainer.innerHTML = '';
             if (modal) modal.classList.add('hidden');
         }
 
-        /* ATAJOS DE TECLADO (P = Capturar, O = Escena) */
+        /* ATAJOS DE TECLADO (P = Capturar, O = Cambiar Escena) */
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
             const key = e.key.toLowerCase();
@@ -326,16 +361,18 @@
             else if (key === 'o') { e.preventDefault(); cambiarEscena(); }
         });
 
-        /* --- CONTROL DE REPRODUCTOR KICK --- */
+        /* --- CONTROL DEL REPRODUCTOR DE KICK --- */
         function loadVideo() {
             const vFrame = document.getElementById('video-frame');
             const btnVideo = document.getElementById('btn-toggle-video');
             
-            // Si está activo el ahorro, solicita la fuente en 160p a Kick
-            const qualityParam = isLowQuality ? '?quality=160p&autoplay=true' : '?quality=1080p&autoplay=true';
+            // Fuerza la menor resolución en el iframe si el ahorro está activo
+            const srcUrl = isLowQuality 
+                ? `https://player.kick.com/${channelName}?autoplay=true&muted=true&quality=160p`
+                : `https://player.kick.com/${channelName}?autoplay=true`;
 
             if(vFrame) {
-                vFrame.innerHTML = `<iframe src="https://player.kick.com/${channelName}${qualityParam}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe>`;
+                vFrame.innerHTML = `<iframe src="${srcUrl}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe>`;
             }
             if(btnVideo) btnVideo.innerHTML = `<i class="fas fa-pause"></i> Video`;
             isVideoActive = true;
@@ -356,7 +393,7 @@
             else loadVideo();
         }
 
-        /* --- CONTROL DE CHAT --- */
+        /* --- CONTROL DEL CHAT --- */
         function loadChat() {
             const cFrame = document.getElementById('chat-frame');
             const btnChat = document.getElementById('btn-toggle-chat');
@@ -390,7 +427,32 @@
             if(display) display.classList.add('hidden');
             if(card) card.classList.remove('hidden');
         }
+
+        /* BANNER DE COOKIES */
+        function hideCookieBanner() {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.classList.remove('active');
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideCookieBanner();
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            hideCookieBanner();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                setTimeout(() => {
+                    const banner = document.getElementById('cookie-banner');
+                    if (banner) banner.classList.add('active');
+                }, 800);
+            }
+        });
     </script>
 </body>
 </html>
-
